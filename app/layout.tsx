@@ -13,6 +13,22 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <head>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📡</text></svg>" />
+      {/* PWA Meta Tags */}
+      <meta name="theme-color" content="#C4622D" />
+      {/* Open Graph */}
+      <meta property="og:site_name" content="Research Hub" />
+      <meta property="og:type" content="website" />
+      <meta property="og:title" content="Research Hub — Sebastian Chandy" />
+      <meta property="og:description" content="Deep research on cars, farms, strategy, and faith. Real decisions, researched properly." />
+      <meta property="og:image" content="/icons/icon-512.png" />
+
+      <meta name="mobile-web-app-capable" content="yes" />
+      <meta name="apple-mobile-web-app-capable" content="yes" />
+      <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+      <meta name="apple-mobile-web-app-title" content="Research Hub" />
+      <link rel="manifest" href="/manifest.json" />
+      <link rel="apple-touch-icon" href="/icons/icon-192.png" />
+
       </head>
       <body>
         <header className="site-header">
@@ -33,6 +49,27 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <p>Built with curiosity.</p>
           </div>
         </footer>
+
+      {/* Service Worker Registration */}
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `
+            if ('serviceWorker' in navigator) {
+              window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/sw.js').then(
+                  function(registration) {
+                    console.log('SW registered:', registration.scope);
+                  },
+                  function(err) {
+                    console.log('SW registration failed:', err);
+                  }
+                );
+              });
+            }
+          `,
+        }}
+      />
+
       </body>
     </html>
   )
