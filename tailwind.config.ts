@@ -32,6 +32,8 @@ const config: Config = {
       fontFamily: {
         display: ['Merriweather', 'Georgia', 'serif'],
         body: ['Raleway', 'system-ui', 'sans-serif'],
+        serif: ['var(--font-serif)', 'Georgia', 'serif'],
+        sans: ['var(--font-sans)', 'system-ui', 'sans-serif'],
       },
       spacing: {
         // 8px grid
