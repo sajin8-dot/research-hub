@@ -56,93 +56,97 @@ export default function VenueUpgradeArticle() {
           {/* RANKING SUMMARY */}
           <section id="ranking">
             <h2>The Rankings</h2>
+            <p className="table-note">Weighted scoring: Space (weight 8), City Drivability (weight 7), Features (weight 6), Cost (weight 5). Each factor scored 1–5. Maximum possible score: 80.</p>
             <table className="data-table">
               <thead>
                 <tr>
                   <th className="num">#</th>
                   <th>Car</th>
-                  <th className="num">Price</th>
-                  <th>Why It Ranks Here</th>
+                  <th className="num">Score</th>
+                  <th>Space</th>
+                  <th>City Drive</th>
+                  <th>Features</th>
+                  <th>Cost</th>
                 </tr>
               </thead>
               <tbody>
                 <tr className="highlight">
                   <td className="num">1</td>
                   <td><strong>Kia Seltos 2026 GTX Turbo DCT</strong></td>
-                  <td className="num">₹17–20L</td>
-                  <td>Best Venue upgrade — same fun-to-drive character, more space, 5-star BNCAP, Level 2 ADAS. Ends the search.</td>
+                  <td className="num">36.6</td>
+                  <td className="num">4</td><td className="num">4</td><td className="num">4</td><td className="num">3</td>
                 </tr>
                 <tr>
                   <td className="num">2</td>
-                  <td><strong>Toyota Innova Hycross ZX Hybrid</strong></td>
-                  <td className="num">₹27–33L</td>
-                  <td>Maximum space and highway efficiency. Trade-off: size and drivability vs Venue.</td>
+                  <td><strong>Kia Carens Luxury Plus</strong></td>
+                  <td className="num">36.6</td>
+                  <td className="num">5</td><td className="num">4</td><td className="num">3</td><td className="num">4</td>
                 </tr>
                 <tr>
                   <td className="num">3</td>
                   <td><strong>Tata Sierra ICE Pure+</strong></td>
-                  <td className="num">₹11.5–21L</td>
-                  <td>Best value — 622L boot, 5-star BNCAP, triple-screen cabin. Available now.</td>
+                  <td className="num">36.6</td>
+                  <td className="num">5</td><td className="num">3</td><td className="num">4</td><td className="num">4</td>
                 </tr>
                 <tr>
                   <td className="num">4</td>
-                  <td>Kia Carens Luxury Plus</td>
-                  <td className="num">₹18–22L</td>
-                  <td>Most interior volume per rupee. 7-seater with low loading height — great for Luka.</td>
+                  <td>Toyota Innova Hycross ZX Hybrid</td>
+                  <td className="num">35.4</td>
+                  <td className="num">5</td><td className="num">2</td><td className="num">4</td><td className="num">1</td>
                 </tr>
                 <tr>
                   <td className="num">5</td>
                   <td>Tata Harrier ICE XZ+</td>
-                  <td className="num">₹13–25L</td>
-                  <td>5-star BNCAP, strongest diesel highway drivetrain below XUV700. OMEGARC platform.</td>
+                  <td className="num">35.4</td>
+                  <td className="num">4</td><td className="num">3</td><td className="num">4</td><td className="num">4</td>
                 </tr>
                 <tr>
                   <td className="num">6</td>
                   <td>Hyundai Creta Epsilon</td>
-                  <td className="num">₹11–24L</td>
-                  <td>Most recognised compact SUV in India. Same brand as Venue. Creta EV coming late 2026.</td>
+                  <td className="num">31.5</td>
+                  <td className="num">3</td><td className="num">4</td><td className="num">4</td><td className="num">3</td>
                 </tr>
                 <tr>
                   <td className="num">7</td>
-                  <td>Mahindra XUV700 AX7</td>
-                  <td className="num">₹24–27L</td>
-                  <td>Best SUV driving dynamics and ADAS in list. Meaningful premium over Seltos.</td>
+                  <td>Tata Harrier EV XZ+ AWD</td>
+                  <td className="num">31.5</td>
+                  <td className="num">4</td><td className="num">3</td><td className="num">4</td><td className="num">2</td>
                 </tr>
                 <tr>
                   <td className="num">8</td>
-                  <td>Tata Harrier EV XZ+ AWD</td>
-                  <td className="num">₹21–29L</td>
-                  <td>Harrier platform + EV refinement. Available now. For committed EV buyers.</td>
+                  <td>Mahindra XUV700 AX7</td>
+                  <td className="num">31.2</td>
+                  <td className="num">4</td><td className="num">3</td><td className="num">5</td><td className="num">1</td>
                 </tr>
                 <tr>
                   <td className="num">9</td>
-                  <td>Maruti XL6 Alpha CNG</td>
-                  <td className="num">₹15–17L</td>
-                  <td>Smart budget choice — CNG reduces running costs to ⅓ of petrol. Maruti service network.</td>
+                  <td>Kia Syros EV</td>
+                  <td className="num">28.8</td>
+                  <td className="num">3</td><td className="num">3</td><td className="num">4</td><td className="num">3</td>
                 </tr>
                 <tr>
                   <td className="num">10</td>
-                  <td>Kia Syros EV</td>
-                  <td className="num">₹14–30L</td>
-                  <td>Worth watching mid-2026. EV running costs. More complete vehicle today: Seltos petrol.</td>
+                  <td>Hyundai Creta EV</td>
+                  <td className="num">28.8</td>
+                  <td className="num">3</td><td className="num">3</td><td className="num">4</td><td className="num">3</td>
                 </tr>
                 <tr>
                   <td className="num">11</td>
-                  <td>Hyundai Creta EV</td>
-                  <td className="num">₹18–22L</td>
-                  <td>Coming late 2026. Wait only if committed to Creta platform + EV.</td>
+                  <td>Tata Curvv EV</td>
+                  <td className="num">28.8</td>
+                  <td className="num">3</td><td className="num">3</td><td className="num">4</td><td className="num">3</td>
                 </tr>
                 <tr>
                   <td className="num">12</td>
-                  <td>Tata Curvv EV</td>
-                  <td className="num">₹15–24L</td>
-                  <td>Coming 2026. Tata's proven EV drivetrain. Worth watching.</td>
+                  <td>Renault Duster 7-Seater</td>
+                  <td className="num">25.9</td>
+                  <td className="num">3</td><td className="num">3</td><td className="num">2</td><td className="num">5</td>
                 </tr>
                 <tr>
                   <td className="num">13</td>
-                  <td>Renault Duster 7-Seater</td>
-                  <td className="num">₹10–20L</td>
-                  <td>Late 2026 wildcard. Potentially cheapest 7-seater if pricing holds.</td>
+                  <td>Maruti XL6 Alpha CNG</td>
+                  <td className="num">24.6</td>
+                  <td className="num">2</td><td className="num">4</td><td className="num">2</td><td className="num">5</td>
                 </tr>
               </tbody>
             </table>
