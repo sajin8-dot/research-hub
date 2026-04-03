@@ -114,68 +114,68 @@ export default function VenueUpgradeArticle() {
             <h2>The 13 Candidates</h2>
             <p>Thirteen cars across segments and price bands — petrol, diesel, CNG, hybrid, and electric.</p>
 
-            <h3>1. Kia Seltos 2026 — The Honest Upgrade</h3>
+            <h3>#1 · Kia Seltos 2026 — The Honest Upgrade</h3>
             <p className="candidate-price">₹11–20L · 160bhp turbo · 447L boot · ⭐5 BNCAP</p>
             <p><strong>The car that ends this search.</strong> The Seltos 2026 launched January 2 with a comprehensive redesign — new platform, new engines, a significantly larger cabin, and a 5-star BNCAP safety rating.</p>
             <p>Key numbers vs the Venue: Length +95mm (4,460mm), Wheelbase +80mm (2,690mm), Boot 447L (+97L), 160bhp turbo DCT (+40bhp). The turbo petrol DCT is the variant to prioritse — it gives the Seltos the performance feel that made the Venue enjoyable, at a higher level.</p>
             <p>The dual 12.3-inch curved display, Level 2 ADAS, Bose audio, and 5-star safety make this a generational leap over the Venue at every meaningful dimension. At ₹17–20L for the GTX turbo DCT, it is priced correctly for what it delivers.</p>
 
-            <h3>2. Hyundai Creta — The Familiar Step Up</h3>
+            <h3>#4 · Hyundai Creta — The Familiar Step Up</h3>
             <p className="candidate-price">₹11–24L · 115bhp petrol · 433L boot · ⭐4 BNCAP</p>
             <p>India's best-selling SUV for years, refreshed with updated interior technology and feature content. The Creta EV is expected in late 2026 — worth waiting for if electric is the direction.</p>
             <p>Versus the Venue: wider cabin, more rear seat legroom, larger boot, stronger diesel option. The Hyundai ecosystem is a continuation of the Venue ownership experience — same service network, same brand trust.</p>
 
-            <h3>3. Toyota Innova Hycross — The Class Jump</h3>
+            <h3>#2 · Toyota Innova Hycross — The Class Jump</h3>
             <p className="candidate-price candidate-highlight">₹27–33L · 186bhp hybrid · 340L+ boot · ⭐5 BNCAP</p>
             <p>Not a compact SUV — a mid-size MPV that competes with vehicles twice its price. The space upgrade from the Venue is transformational, not incremental.</p>
             <p>The 2.0-litre self-charging hybrid produces approximately 186 bhp combined while returning 18–20 kmpl real-world — the most efficient vehicle in this list on 5-hour highway runs. The cabin width accommodates three adults in the second row with real armroom. The third row, folded flat, creates a cargo area that Luka the Jack Russell could sleep in.</p>
             <p>The trade-off is size: 4.7 metres long, harder to park in Bangalore than the Venue. That difference is real and daily.</p>
 
-            <h3>4. Kia Carens — The Value MPV</h3>
+            <h3>#5 · Kia Carens — The Value MPV</h3>
             <p className="candidate-price">₹18–22L · 116bhp diesel · 445L boot · ⭐3 BNCAP</p>
             <p>Consistently underestimated. The low loading height — closer to the ground than an SUV floor — is a genuine practical advantage for a large dog. The 7-seater with captain's seats on higher variants makes the second row genuinely comfortable for adults.</p>
             <p>At approximately ₹22–26L for a well-equipped 7-seater, the Carens undercuts the Creta and delivers more interior volume than vehicles at twice its price.</p>
 
-            <h3>5. Tata Sierra ICE — The Available Surprise</h3>
+            <h3>#3 · Tata Sierra ICE — The Available Surprise</h3>
             <p className="candidate-price">₹11.5–21L · 160bhp turbo · 622L boot · ⭐5 BNCAP</p>
             <p>Launched November 2025, already delivering. At ₹11.49–21.29L ex-showroom, it undercuts the Seltos at the entry point. Key number: the 622-litre boot is the largest in this list by a significant margin — larger than most competitors with their seats folded.</p>
             <p>The triple-screen layout, Level 2 ADAS, and 12-speaker JBL Dolby Atmos are genuinely impressive at this price. The 1.5L turbo petrol 160bhp with 6-speed automatic matches the Seltos on performance.</p>
 
-            <h3>6. Mahindra XUV700 — The SUV Experience</h3>
+            <h3>#7 · Mahindra XUV700 — The SUV Experience</h3>
             <p className="candidate-price">₹24–27L · 185bhp diesel · 447L boot</p>
             <p>The best Mahindra product in years. The 2.2-litre turbo diesel produces 185 bhp and 450 Nm — genuinely quick at highway speeds. The ADAS suite adds a real layer of safety on long highway runs.</p>
             <p>At approximately ₹27.5L for the AX7 variant, it is meaningfully more expensive than the Seltos or Carens. The question is whether the additional size, power, and SUV presence justify the premium.</p>
 
-            <h3>7. Tata Harrier ICE — The Highway Specialist</h3>
+            <h3>#6 · Tata Harrier ICE — The Highway Specialist</h3>
             <p className="candidate-price">₹13–25L · 170bhp diesel · 447L boot · ⭐5 BNCAP</p>
             <p>Updated for 2026 with revised features and improved NVH. The 2.0-litre Kryotec diesel produces 170 bhp and 350 Nm — the highest torque figure in this list below the XUV700. Relaxed and refined at cruising speeds on the highway.</p>
             <p>Built on the OMEGARC platform — the same land-rover-derived architecture used by the Defender. If the farm road at Kizhakkancherry is a factor, the Harrier's platform is genuinely more capable than the compact SUV class.</p>
 
-            <h3>8. Maruti XL6 CNG — The Budget Intelligent Choice</h3>
+            <h3>#8 · Maruti XL6 CNG — The Budget Intelligent Choice</h3>
             <p className="candidate-price">₹15–17L · 2.0L CNG · 239L boot</p>
             <p>The 2.0-litre CNG option reduces running costs to approximately one-third of petrol. At 15,000 km per year, the fuel saving versus petrol alternatives is approximately ₹80,000 over five years — a meaningful number.</p>
             <p>The 6-seater configuration with captain's seats is the most comfortable layout for four adults on long drives. Maruti's service network is ubiquitous in Bangalore and Karnataka.</p>
 
-            <h3>9. Tata Harrier EV — The Electric Highway Cruiser</h3>
+            <h3>#9 · Tata Harrier EV — The Electric Highway Cruiser</h3>
             <p className="candidate-price">₹21–29L · 65kWh AWD · 447L boot · ⭐5 BNCAP</p>
             <p>Already on sale at ₹21.49–28.99L ex-showroom with a claimed range of 350–500 km per charge. The dual-motor AWD is available on higher variants. The electric drivetrain changes the highway touring character entirely — no gear shifts, instant torque, refinement that diesel cannot match at speed.</p>
             <p>Charging infrastructure along the Bangalore–Coorg route has improved significantly and is sufficient for practical EV touring.</p>
 
-            <h3>10. Kia Syros EV — The Electric Alternative</h3>
+            <h3>#10 · Kia Syros EV — The Electric Alternative</h3>
             <p className="candidate-price candidate-pending">₹14–30L · 400–500km range · Coming Mid-2026</p>
             <p>Kia's upcoming electric compact SUV, expected mid-2026 with approximately 400–500 km range per charge. The running cost at approximately one-third of petrol is a significant long-term saving for primarily city driving.</p>
             <p>Worth a test drive when it launches — but the Seltos petrol or diesel is the more complete vehicle today.</p>
 
-            <h3>11. Hyundai Creta EV — The Electric Creta</h3>
+            <h3>#11 · Hyundai Creta EV — The Electric Creta</h3>
             <p className="candidate-price candidate-pending">₹18–22L · 350–400km range · Coming Late 2026</p>
             <p>Expected around the second half of 2026. If the Creta platform is already the preferred choice, waiting for the EV variant is a reasonable option — particularly if the primary use case is city driving with occasional highway runs.</p>
             <p>For everyone else, the Seltos 2026 is available now and represents the more complete package at this stage of EV infrastructure maturity.</p>
 
-            <h3>12. Tata Curvv EV — The Electric Option</h3>
+            <h3>#12 · Tata Curvv EV — The Electric Option</h3>
             <p className="candidate-price candidate-pending">₹15–24L · 400–500km range · Coming 2026</p>
             <p>Expected in 2026 with pricing between ₹15–24L. The electric mid-size SUV offers a range of approximately 400–500 km per charge. Tata's electric drivetrain is proven — the Nexon EV has accumulated significant real-world usage data in India.</p>
 
-            <h3>13. Renault Duster 7-Seater — The Wildcard</h3>
+            <h3>#13 · Renault Duster 7-Seater — The Wildcard</h3>
             <p className="candidate-price candidate-pending">₹10–20L · Hybrid TBC · Coming Late 2026</p>
             <p>Expected in late 2026 with a 7-seater configuration and a hybrid powertrain option. Pricing estimated at ₹10–20L — significantly cheaper than everything else in this list if the estimates hold.</p>
             <p>The previous Duster was praised for its ride quality and practicality. The new model is expected to build on this foundation with updated technology and a larger cabin.</p>
@@ -264,6 +264,23 @@ export default function VenueUpgradeArticle() {
 
           {/* RECOMMENDATION */}
           <section id="recommendation">
+            <h2>Top 3 Recommendations</h2>
+
+            <div className="verdict-lane">
+              <h3>#1 — Kia Seltos 2026 GTX Turbo DCT · ₹17–20L</h3>
+              <p>The most honest upgrade from the Venue DCT. Same brand ecosystem familiarity, same fun-to-drive character, significantly more space and safety. 160bhp turbo DCT is a genuine step up from the Venue's 120bhp. 5-star BNCAP, Level 2 ADAS, dual 12.3-inch display — this is a generational leap at every dimension that matters. <strong>Drive it first. If it feels right, end the search here.</strong></p>
+            </div>
+
+            <div className="verdict-lane">
+              <h3>#2 — Toyota Innova Hycross ZX Hybrid · ₹27–33L</h3>
+              <p>Not a compact SUV — a different class entirely. The space upgrade from the Venue is transformational, not incremental. Three adults in the second row with real armroom. The hybrid does 18–20 kmpl real-world, making it the most sensible long-highway vehicle in this list. <strong>Worth test-driving as the space comparison that clarifies whether the category jump makes sense for your daily use.</strong></p>
+            </div>
+
+            <div className="verdict-lane">
+              <h3>#3 — Tata Sierra ICE Pure+ · ₹11.5–21L</h3>
+              <p>The available surprise. 622-litre boot — the largest in this list by a significant margin. 5-star BNCAP. Triple-screen interior with Level 2 ADAS. 1.5L turbo 160bhp with 6-speed automatic. Already delivering, not waiting for a 2026 launch. <strong>At the entry price of ₹11.49L ex-showroom, it undercuts the Seltos and delivers more metal for the money than anything else evaluated.</strong></p>
+            </div>
+
             <h2>What I'd Do</h2>
             <p><strong>Drive the Seltos 2026 GTX turbo DCT first.</strong> It is the most direct upgrade from the Venue DCT — same brand ecosystem familiarity, same fun-to-drive character, significantly more space and safety. At ₹17–20L, it is priced correctly for what it delivers.</p>
             <p><strong>Then drive the Innova Hycross.</strong> Not as the comparison that makes the Seltos feel inadequate. As the comparison that clarifies whether the additional cabin width and hybrid efficiency are worth the size premium to <em>you</em>.</p>
