@@ -699,6 +699,7 @@ export default function VenueUpgradeArticle() {
             dual-screen interior that feels generational.
           </p>
 
+          <div className="container-article">
           <h2 id="videos">Video Reviews</h2>
 
           <div className="video-embed-section">
@@ -761,6 +762,7 @@ export default function VenueUpgradeArticle() {
             <p className="video-description">The most underrated 7-seater in India — why the Carens deserves a spot on every shortlist.</p>
           </div>
 
+          </div>
           <h2 id="three-paths">Three Paths Forward</h2>
 
           <div className="verdict-lane">
