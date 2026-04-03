@@ -6,10 +6,6 @@ export const metadata = {
 }
 
 import '../../../components/calculators.css'
-import EMICalculator from '../../../components/calculators/EMICalculator'
-import FuelCostComparator from '../../../components/calculators/FuelCostComparator'
-import CarCompareWidget from '../../../components/widgets/CarCompareWidget'
-import WeightedScores from '../../../components/calculators/WeightedScores'
 
 const FINANCIAL_TABLE: Array<[string,string,string,string,string,string,boolean]> = [
   ['Kia Seltos 2026 HTK+', '₹10.99L', '1.5L NA Petrol', '447L', '5', '⭐5', false],
@@ -69,7 +65,6 @@ export default function VenueUpgradeArticle() {
               ['#the-trigger', 'The Upgrade Trigger'],
               ['#what-changed', 'What Changed in 2026'],
               ['#candidates', 'The 13 Candidates'],
-              ['#tools', 'Interactive Tools'],
               ['#financials', 'Financial Comparison'],
               ['#videos', 'Video Reviews'],
               ['#three-paths', 'Three Paths Forward'],
@@ -373,33 +368,6 @@ export default function VenueUpgradeArticle() {
           </p>
         </section>
 
-        {/* ── TOOLS ── */}
-        <section id="tools" className="mb-12">
-          <h2 className="text-xl font-bold text-[#2C2A27] mb-2">Interactive Tools</h2>
-          <p className="text-sm text-[#6B6860] mb-8">Skip the static tables. Run the numbers on your specific situation.</p>
-          <div className="space-y-8">
-            <div className="bg-white rounded-xl border border-[#E5E0D8] p-5 min-w-0">
-              <h3 className="text-sm font-bold text-[#2C2A27] mb-1">EMI Calculator</h3>
-              <p className="text-xs text-[#6B6860] mb-4">₹15L at 9.5% p.a. over 5 years — adjust to your situation.</p>
-              <div className="min-w-0"><EMICalculator defaultAmount={1500000} /></div>
-            </div>
-            <div className="bg-white rounded-xl border border-[#E5E0D8] p-5 min-w-0">
-              <h3 className="text-sm font-bold text-[#2C2A27] mb-1">Weighted Rankings</h3>
-              <p className="text-xs text-[#6B6860] mb-4">Adjust weights for boot space, power, safety — watch the ranking reorder in real time.</p>
-              <div className="min-w-0"><WeightedScores /></div>
-            </div>
-            <div className="bg-white rounded-xl border border-[#E5E0D8] p-5 min-w-0">
-              <h3 className="text-sm font-bold text-[#2C2A27] mb-1">Running Cost Comparison</h3>
-              <p className="text-xs text-[#6B6860] mb-4">Adjust your monthly driving to see which car costs the least at the pump.</p>
-              <div className="min-w-0"><FuelCostComparator /></div>
-            </div>
-            <div className="bg-white rounded-xl border border-[#E5E0D8] p-5 min-w-0">
-              <h3 className="text-sm font-bold text-[#2C2A27] mb-1">Compare Any Two Cars</h3>
-              <p className="text-xs text-[#6B6860] mb-4">Pick any two candidates and compare them side by side.</p>
-              <div className="min-w-0"><CarCompareWidget /></div>
-            </div>
-          </div>
-        </section>
 
         {/* ── VIDEOS ── */}
         <section id="videos" className="mb-12">
