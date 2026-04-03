@@ -4,7 +4,7 @@
   border: 1px solid var(--border);
   border-radius: 8px;
   padding: 28px 32px;
-  max-width: 680px;
+  width: 100%;
 }
 
 .calc-section {
@@ -193,7 +193,7 @@
 
 /* ─── Fuel Cost Comparator ─── */
 .fuel-calc {
-  max-width: 680px;
+  width: 100%;
 }
 
 .fuel-controls {
@@ -345,7 +345,7 @@
 
 /* ─── Car Compare Widget ─── */
 .compare-widget {
-  max-width: 720px;
+  width: 100%;
 }
 
 .compare-selectors {
@@ -692,4 +692,30 @@
   }
   .ws-rankings-header { display: none; }
   .ws-car-row { grid-template-columns: 40px 1fr 48px; }
+}
+
+/* Responsive fuel row — collapse gracefully on mobile */
+@media (max-width: 600px) {
+  .fuel-row {
+    grid-template-columns: 28px 1fr 72px;
+    gap: 8px;
+  }
+  .fuel-bar-wrap { display: none; }
+  .fuel-meta { display: none; }
+  .fuel-cost { font-size: 0.82rem; }
+}
+
+/* Tool section: prevent grid blowout */
+.tool-section {
+  min-width: 0;
+  width: 100%;
+}
+
+/* Video embeds — responsive 16:9 */
+.video-embed iframe {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  height: auto;
+  border: none;
+  border-radius: 8px;
 }

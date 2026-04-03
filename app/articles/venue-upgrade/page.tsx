@@ -711,7 +711,7 @@ export default function VenueUpgradeArticle() {
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
-                style={{ width: '100%', height: '380px' }}
+                style={{ width: '100%', aspectRatio: 16/9 }}
               />
             </div>
             <p className="video-description">The redesigned Seltos 2026 — new platform, new engines, 5-star BNCAP, and a cabin that leapfrogs the competition.</p>
@@ -726,7 +726,7 @@ export default function VenueUpgradeArticle() {
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
-                style={{ width: '100%', height: '380px' }}
+                style={{ width: '100%', aspectRatio: 16/9 }}
               />
             </div>
             <p className="video-description">The two biggest-selling compact SUVs in India — direct comparison on space, features, and value.</p>
@@ -741,7 +741,7 @@ export default function VenueUpgradeArticle() {
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
-                style={{ width: '100%', height: '380px' }}
+                style={{ width: '100%', aspectRatio: 16/9 }}
               />
             </div>
             <p className="video-description">The class jump — why the Innova Hycross is in a different category and whether it is worth the premium over the Seltos.</p>
@@ -756,7 +756,7 @@ export default function VenueUpgradeArticle() {
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
-                style={{ width: '100%', height: '380px' }}
+                style={{ width: '100%', aspectRatio: 16/9 }}
               />
             </div>
             <p className="video-description">The most underrated 7-seater in India — why the Carens deserves a spot on every shortlist.</p>
