@@ -363,7 +363,91 @@ export default function VenueUpgradeArticle() {
             petrol or diesel remains the stronger choice.
           </p>
 
-          <h3>10. Renault Duster 7-Seater — The Wildcard</h3>
+          <h3>10. Tata Sierra ICE — The Available Surprise</h3>
+          <p>
+            The Tata Sierra ICE launched in November 2025 with deliveries commencing
+            January 2026. It is already on sale. At ₹11.49–21.29L ex-showroom
+            (approximately ₹13.3–24.9L on-road Bangalore), it undercuts the Seltos
+            at the entry point and is competitively priced across the range.
+          </p>
+          <p>
+            The numbers that matter for a Venue upgrade:
+          </p>
+          <ul>
+            <li>Length: 4,340mm — significantly larger than the Venue (+345mm)</li>
+            <li>Wheelbase: 2,730mm — substantially more than the Seltos 2026 (+40mm)</li>
+            <li>Boot: 622 litres — the largest in this list by a significant margin</li>
+            <li>Engine: 1.5L turbo petrol producing 160 bhp with 6-speed automatic — comparable to the Seltos turbo</li>
+            <li>Level 2 ADAS, triple-screen dashboard, 12-speaker JBL Dolby Atmos</li>
+          </ul>
+          <p>
+            The cabin quality is a generational leap over earlier Tata products.
+            The triple-screen layout — driver display, central infotainment, co-passenger
+            screen — is genuinely impressive at this price. The 622-litre boot
+            with the rear seats up is larger than most competitors with the seats folded.
+          </p>
+          <p>
+            <strong>Who it is for:</strong> Someone who wants maximum interior and
+            boot volume for the budget. The Sierra delivers SUV proportions,
+            a massive boot, and the latest Tata cabin technology — already available,
+            not waiting for a 2026 launch.
+          </p>
+
+          <h3>11. Tata Harrier ICE — The Highway Specialist</h3>
+          <p>
+            The Tata Harrier in its ICE form has been updated for 2026 with
+            revised features and improved NVH. At ₹12.89–25.35L ex-showroom
+            (approximately ₹15–29L on-road), it sits between the Seltos and
+            Innova Hycross in the pricing structure.
+          </p>
+          <p>
+            The 2.0-litre Kryotec diesel produces 170 bhp and 350 Nm of torque —
+            the torque figure is the highest in this list below the XUV700. On
+            highway runs, this engine is relaxed and refined at cruising speeds.
+            The 5-star BNCAP rating is the strongest safety argument in this segment.
+          </p>
+          <p>
+            The Harrier is built on the OMEGARC platform — the same land-rover-derived
+            architecture used by the Defender. It is fundamentally a more serious
+            vehicle for rough-road conditions than the compact SUV class.
+            If the farm road at Kizhakkancherry is a factor, the Harrier's
+            platform is genuinely more capable.
+          </p>
+          <p>
+            <strong>Who it is for:</strong> Someone who values safety, structural
+            integrity, and genuine highway composure. The Harrier is the most
+            serious vehicle in this price band for non-urban driving conditions.
+          </p>
+
+          <h3>12. Tata Harrier EV — The Electric Highway Cruiser</h3>
+          <p>
+            The Tata Harrier EV is already on sale at ₹21.49–28.99L ex-showroom.
+            It uses a 65 kWh battery with a claimed range of 350–500 km per charge.
+            A 75 kWh version extends this further. The dual-motor AWD configuration
+            is available on higher variants.
+          </p>
+          <p>
+            The electric drivetrain changes the highway touring character entirely —
+            no gear shifts, instant torque, and a refinement level that diesel
+            and petrol engines cannot match at highway speeds. For a car doing
+            5-hour runs to Coorg and Goa, the EV driving experience is meaningfully
+            more relaxing.
+          </p>
+          <p>
+            The Harrier EV inherits the ICE Harrier's platform strength and cabin
+            width. The battery floor does raise the seating position slightly —
+            which most drivers find beneficial for visibility. Charging infrastructure
+            along the Bangalore–Coorg route has improved significantly and
+            is sufficient for practical EV touring.
+          </p>
+          <p>
+            <strong>Who it is for:</strong> Someone who wants the Harrier's safety
+            and platform as a base, but wants the EV driving experience for
+            highway touring. The running cost saving versus diesel is significant
+            over a 5-year ownership horizon.
+          </p>
+
+          <h3>13. Renault Duster 7-Seater — The Wildcard</h3>
           <p>
             The new Renault Duster is expected in late 2026 with a 7-seater
             configuration and a hybrid powertrain option. Pricing is estimated
@@ -457,6 +541,30 @@ export default function VenueUpgradeArticle() {
                 <td>340L (3rd row folded)</td>
                 <td>7</td>
                 <td>⭐5</td>
+              </tr>
+              <tr>
+                <td>Tata Sierra ICE Pure+</td>
+                <td>₹11.49–21.29L</td>
+                <td>1.5L Turbo Petrol AT</td>
+                <td>622L</td>
+                <td>5</td>
+                <td>⭐5</td>
+              </tr>
+              <tr>
+                <td>Tata Harrier ICE XZ+</td>
+                <td>₹12.89–25.35L</td>
+                <td>2.0L Diesel</td>
+                <td>447L</td>
+                <td>5</td>
+                <td className="highlight">⭐5</td>
+              </tr>
+              <tr>
+                <td>Tata Harrier EV XZ+ AWD</td>
+                <td>₹21.49–28.99L</td>
+                <td>65kWh Electric AWD</td>
+                <td>447L</td>
+                <td>5</td>
+                <td className="highlight">⭐5</td>
               </tr>
             </tbody>
           </table>
