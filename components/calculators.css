@@ -474,3 +474,222 @@
   color: var(--text-muted);
   padding: 0 10px;
 }
+
+/* ─── Weighted Scores ─── */
+.weighted-scores {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 32px;
+  align-items: start;
+}
+
+.ws-panel-header {
+  margin-bottom: 20px;
+}
+
+.ws-panel-header h3 {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.ws-hint {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  font-style: italic;
+  margin: 0;
+}
+
+.ws-sliders {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ws-slider-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ws-slider-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.ws-label-name {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.ws-label-val {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--accent-rust);
+  font-variant-numeric: tabular-nums;
+}
+
+.ws-slider {
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  background: linear-gradient(
+    to right,
+    var(--accent-rust) 0%,
+    var(--accent-rust) var(--fill-pct, 50%),
+    var(--border) var(--fill-pct, 50%),
+    var(--border) 100%
+  );
+}
+
+.ws-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--accent-rust);
+  cursor: pointer;
+  border: 2px solid white;
+  box-shadow: 0 1px 4px rgba(196, 98, 45, 0.3);
+}
+
+.ws-total {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border-light);
+}
+
+/* Rankings */
+.ws-rankings { display: flex; flex-direction: column; gap: 8px; }
+
+.ws-rankings-header {
+  display: grid;
+  grid-template-columns: 48px 1fr 56px;
+  gap: 12px;
+  padding: 0 4px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+.ws-car-row {
+  display: grid;
+  grid-template-columns: 48px 1fr 56px;
+  gap: 12px;
+  align-items: center;
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--border-light);
+  background: var(--surface);
+  transition: all 0.15s;
+}
+
+.ws-car-row.ws-top {
+  background: #FEF3EE;
+  border-color: var(--accent-rust);
+}
+
+.ws-rank-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 900;
+  background: var(--border);
+  color: var(--text-muted);
+}
+
+.ws-rank-badge.gold { background: #F59E0B; color: white; }
+.ws-rank-badge.silver { background: #9CA3AF; color: white; }
+.ws-rank-badge.bronze { background: #D97706; color: white; }
+
+.ws-name-col { display: flex; flex-direction: column; gap: 3px; }
+
+.ws-car-name {
+  font-family: var(--font-display);
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.ws-car-sub {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.ws-breakdown-bars {
+  display: flex;
+  gap: 2px;
+  margin-top: 4px;
+  height: 24px;
+  align-items: flex-end;
+}
+
+.ws-breakdown-bar {
+  flex: 1;
+  height: 100%;
+  background: var(--border);
+  border-radius: 2px;
+  display: flex;
+  align-items: flex-end;
+}
+
+.ws-bar-fill {
+  width: 100%;
+  border-radius: 2px;
+  transition: height 0.4s ease;
+  min-height: 2px;
+}
+
+.ws-score-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.ws-score-val {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: var(--text);
+  line-height: 1;
+}
+
+.ws-score-max {
+  font-size: 0.7rem;
+  color: var(--text-light);
+}
+
+.ws-note {
+  font-size: 0.72rem;
+  color: var(--text-light);
+  margin-top: 16px;
+  font-style: italic;
+  grid-column: 1 / -1;
+}
+
+/* Responsive */
+@media (max-width: 700px) {
+  .weighted-scores {
+    grid-template-columns: 1fr;
+  }
+  .ws-rankings-header { display: none; }
+  .ws-car-row { grid-template-columns: 40px 1fr 48px; }
+}

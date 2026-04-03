@@ -9,6 +9,7 @@ import '../../../components/calculators.css'
 import EMICalculator from '../../../components/calculators/EMICalculator'
 import FuelCostComparator from '../../../components/calculators/FuelCostComparator'
 import CarCompareWidget from '../../../components/widgets/CarCompareWidget'
+import WeightedScores from '../../../components/calculators/WeightedScores'
 
 
 export default function VenueUpgradeArticle() {
@@ -67,6 +68,7 @@ export default function VenueUpgradeArticle() {
             <li><a href="#gallery">Gallery — All 10 Candidates</a></li>
             <li><a href="#tools">Interactive Tools</a></li>
             <li><a href="#emi-calculator">EMI Calculator</a></li>
+            <li><a href="#weighted-scores">Weighted Rankings</a></li>
             <li><a href="#fuel-cost-comparator">Running Cost Comparison</a></li>
             <li><a href="#car-compare">Compare Any Two Cars</a></li>
             <li><a href="#financials">Financial Comparison</a></li>
@@ -477,6 +479,7 @@ export default function VenueUpgradeArticle() {
             it could be worth holding off.
           </p>
 
+          <div className="container-article">
           <h2 id="financials">Financial Comparison</h2>
 
           <p>
@@ -580,6 +583,7 @@ export default function VenueUpgradeArticle() {
             </tbody>
           </table>
 
+          <div className="container-article">
           <h2 id="gallery">The Candidates at a Glance</h2>
           <p className="gallery-intro">
             Ten cars. Ten different arguments for an upgrade. Here's how they look in the metal.
@@ -636,6 +640,7 @@ export default function VenueUpgradeArticle() {
               <div className="car-card-price">₹12–18L</div>
             </div>
           </div>
+          </div>
           <p className="gallery-credit">Images sourced from CarWale. All photos show the right front three-quarter angle — the most informative angle for exterior comparison.</p>
 
 
@@ -649,6 +654,16 @@ export default function VenueUpgradeArticle() {
 
           <div className="tool-section">
             <h3 id="emi-calculator">EMI Calculator</h3>
+          <div className="tool-section">
+            <h3 id="weighted-scores">Weighted Rankings</h3>
+            <p className="tool-desc">
+              No single right answer. Adjust the weights to match your priorities — how much you care about
+              boot space vs power vs safety — and watch the ranking reorder in real time.
+            </p>
+            <WeightedScores />
+          </div>
+
+
             <p className="tool-desc">
               Adjust the loan amount, tenure, and interest rate to see what your monthly EMI would look like.
               Default: ₹15L at 9.5% p.a. over 5 years — a realistic starting point for a car loan in India.
@@ -675,6 +690,7 @@ export default function VenueUpgradeArticle() {
           </div>
 
 
+          </div>
           <p className="comparison-note">
             <strong>The honest comparison:</strong> The Seltos 2026 at its
             base variant (₹10.99L) costs approximately the same as the Venue

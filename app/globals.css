@@ -69,7 +69,7 @@ a:hover {
 }
 
 .container {
-  max-width: 720px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 0 24px;
 }
@@ -594,6 +594,8 @@ a:hover {
 /* ─── Article Body ─── */
 .article-body {
   padding: 48px 0;
+  max-width: 760px;   /* prose stays readable */
+  margin: 0 auto;     /* center the prose column */
 }
 
 .article-body h2 {
@@ -646,7 +648,8 @@ a:hover {
   font-size: 0.875rem;
   border: 1px solid var(--border);
   border-radius: 4px;
-  overflow: hidden;
+  overflow-x: auto;
+  display: table;
 }
 
 .data-table th {
@@ -819,7 +822,7 @@ a:hover {
 .car-gallery {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 16px;
+  gap: 20px;
   margin: 32px 0;
 }
 
@@ -911,15 +914,14 @@ a:hover {
   color: var(--text-muted);
   margin-bottom: 20px;
   line-height: 1.7;
-  max-width: 680px;
 }
 
-/* Two-column tool layout on desktop */
+/* Full-width tool layout on desktop — tools use available space */
 @media (min-width: 900px) {
   .tool-section {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 32px;
+    gap: 40px;
     align-items: start;
   }
   .tool-section h3 {
@@ -930,5 +932,51 @@ a:hover {
   }
   .tool-section > *:not(h3):not(.tool-desc) {
     grid-column: span 1;
+  }
+  .tool-section .emi-calc,
+  .tool-section .fuel-calc,
+  .tool-section .compare-widget {
+    width: 100%;
+  }
+}
+
+/* ─── Full-width breakout sections ─── */
+.section-breakout {
+  margin-left: calc(-50% + 50%);
+  margin-right: calc(-50% + 50%);
+  width: 100vw;
+  max-width: 1200px;
+}
+
+/* ─── Responsive adjustments for rich sections ─── */
+@media (min-width: 1100px) {
+  /* Widen car gallery images further */
+  .car-gallery {
+    gap: 24px;
+  }
+  .car-card img {
+    border-radius: 6px;
+  }
+  /* Make data table wider */
+  .data-table {
+    font-size: 0.9rem;
+  }
+  /* Make tool sections breathe */
+  .tool-section {
+    gap: 56px;
+  }
+}
+
+/* ─── Article section containers ─── */
+/* Wider than prose (760px) but not full container — for tables, galleries, tools */
+.container-article {
+  max-width: 1060px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+@media (max-width: 600px) {
+  .container-article {
+    padding: 0 16px;
   }
 }
