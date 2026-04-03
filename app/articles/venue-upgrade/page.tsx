@@ -26,7 +26,7 @@ const FINANCIAL_TABLE: Array<[string,string,string,string,string,string,boolean]
 
 export default function VenueUpgradeArticle() {
   return (
-    <main className="min-h-screen bg-[#FAFAF8]">
+    <main className="min-h-screen bg-[#FAFAF8] overflow-x-hidden">
 
       {/* ── HERO ── full viewport width */}
       <div className="relative w-full h-[55vh] min-h-[420px] overflow-hidden">
@@ -383,25 +383,25 @@ export default function VenueUpgradeArticle() {
           <h2 className="text-2xl font-bold text-[#2C2A27] mb-2">Interactive Tools</h2>
           <p className="text-sm text-[#6B6860] mb-8">Skip the static tables. These tools let you run the numbers on your specific situation.</p>
           <div className="space-y-10">
-            <div className="bg-white rounded-xl border border-[#E5E0D8] p-5">
+            <div className="bg-white rounded-xl border border-[#E5E0D8] p-5 overflow-hidden max-w-full">
               <h3 id="emi-calculator" className="text-base font-bold text-[#2C2A27] mb-1">EMI Calculator</h3>
               <p className="text-xs text-[#6B6860] mb-4">Adjust loan amount, tenure, and interest rate. Default: ₹15L at 9.5% p.a. over 5 years.</p>
-              <EMICalculator defaultAmount={1500000} />
+              <div className="overflow-hidden rounded"><EMICalculator defaultAmount={1500000} /></div>
             </div>
-            <div className="bg-white rounded-xl border border-[#E5E0D8] p-5">
+            <div className="bg-white rounded-xl border border-[#E5E0D8] p-5 overflow-hidden max-w-full">
               <h3 id="weighted-scores" className="text-base font-bold text-[#2C2A27] mb-1">Weighted Rankings</h3>
               <p className="text-xs text-[#6B6860] mb-4">Adjust weights for boot space, power, safety, and more — watch the ranking reorder in real time.</p>
-              <WeightedScores />
+              <div className="overflow-hidden rounded"><WeightedScores /></div>
             </div>
-            <div className="bg-white rounded-xl border border-[#E5E0D8] p-5">
+            <div className="bg-white rounded-xl border border-[#E5E0D8] p-5 overflow-hidden max-w-full">
               <h3 id="fuel-cost-comparator" className="text-base font-bold text-[#2C2A27] mb-1">Running Cost Comparison</h3>
               <p className="text-xs text-[#6B6860] mb-4">Fuel type changes everything. Adjust your monthly driving to see which car costs the least at the pump.</p>
-              <FuelCostComparator />
+              <div className="overflow-hidden rounded"><FuelCostComparator /></div>
             </div>
-            <div className="bg-white rounded-xl border border-[#E5E0D8] p-5">
+            <div className="bg-white rounded-xl border border-[#E5E0D8] p-5 overflow-hidden max-w-full">
               <h3 id="car-compare" className="text-base font-bold text-[#2C2A27] mb-1">Compare Any Two Cars</h3>
               <p className="text-xs text-[#6B6860] mb-4">Pick any two candidates and see how they stack up side by side on price, power, features, and practicality.</p>
-              <CarCompareWidget />
+              <div className="overflow-hidden rounded"><CarCompareWidget /></div>
             </div>
           </div>
         </section>
