@@ -706,7 +706,7 @@ export default function VenueUpgradeArticle() {
             <h3 className="video-section-title">Kia Seltos 2026 — First Look Review</h3>
             <div className="video-embed">
               <iframe
-                src="https://www.youtube.com/embed/YOUR_SELTOS_2026_ID"
+                src="https://www.youtube.com/embed/5xV85V2hJjw"
                 title="Kia Seltos 2026 India Review"
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -721,7 +721,7 @@ export default function VenueUpgradeArticle() {
             <h3 className="video-section-title">Kia Seltos vs Hyundai Creta — Compact SUV Showdown</h3>
             <div className="video-embed">
               <iframe
-                src="https://www.youtube.com/embed/YOUR_CRETA_SELTOS_COMPARE_ID"
+                src="https://www.youtube.com/embed/wj3xRizySZQ"
                 title="Seltos vs Creta Comparison"
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
