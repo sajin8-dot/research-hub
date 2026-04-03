@@ -77,7 +77,7 @@ function CandidateCard({
 
 export default function VenueUpgradeArticle() {
   return (
-    <main className="min-h-screen bg-[#FAFAF8] overflow-x-hidden">
+    <main className="min-h-screen bg-[#FAFAF8] overflow-x-hidden w-full">
 
       {/* ── HERO ── */}
       <div className="relative w-full h-[55vh] min-h-[420px] overflow-hidden">
