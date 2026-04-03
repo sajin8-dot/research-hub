@@ -1,35 +1,31 @@
 'use client'
 
 import { useState } from 'react'
+import { Slider } from '@/components/ui/slider'
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
+import { Badge } from '@/components/ui/badge'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
 const CARS = [
   { name: 'Kia Seltos 2026 HTK+', fuel: 'Petrol', efficiency: 16.8, tank: 50 },
   { name: 'Kia Seltos 2026 GTX', fuel: 'Petrol', efficiency: 15.8, tank: 50 },
   { name: 'Hyundai Creta', fuel: 'Petrol', efficiency: 17.4, tank: 50 },
-  { name: 'Maruti XL6 Alpha CNG', fuel: 'CNG', efficiency: 26.6, tank: 11 }, // kg
+  { name: 'Maruti XL6 Alpha CNG', fuel: 'CNG', efficiency: 26.6, tank: 11 },
   { name: 'Kia Carens', fuel: 'Diesel', efficiency: 18.2, tank: 45 },
   { name: 'Mahindra XUV700', fuel: 'Diesel', efficiency: 13.0, tank: 60 },
   { name: 'Toyota Innova Hycross', fuel: 'Hybrid', efficiency: 23.0, tank: 45 },
   { name: 'Tata Sierra ICE', fuel: 'Petrol', efficiency: 17.5, tank: 55 },
   { name: 'Tata Harrier ICE', fuel: 'Diesel', efficiency: 16.0, tank: 50 },
-  { name: 'Tata Harrier EV', fuel: 'Electric', efficiency: 6.5, tank: 75 }, // km per kWh
+  { name: 'Tata Harrier EV', fuel: 'Electric', efficiency: 6.5, tank: 75 },
   { name: 'Renault Duster', fuel: 'Petrol', efficiency: 16.0, tank: 50 },
 ]
 
 const FUEL_PRICES: Record<string, number> = {
-  Petrol: 108.5,   // per litre
-  Diesel: 93.5,    // per litre
-  CNG: 82.0,       // per kg
-  Hybrid: 108.5,    // petrol for hybrid
-  Electric: 9.5,    // per kWh (home charging)
-}
-
-const FUEL_UNITS: Record<string, string> = {
-  Petrol: 'L',
-  Diesel: 'L',
-  CNG: 'kg',
-  Hybrid: 'L',
-  Electric: 'kWh',
+  Petrol: 108.5,
+  Diesel: 93.5,
+  CNG: 82.0,
+  Hybrid: 108.5,
+  Electric: 9.5,
 }
 
 const FUEL_COLORS: Record<string, string> = {
@@ -71,99 +67,119 @@ export default function FuelCostComparator() {
   const cheapest = rows[0]
 
   return (
-    <div className="fuel-calc">
-      <div className="fuel-controls">
-        <div className="fuel-control">
-          <div className="calc-label-row">
-            <label className="calc-label">Monthly Driving</label>
-            <span className="calc-value-display">{monthlyKm.toLocaleString('en-IN')} km</span>
+    <div className="space-y-8" style={{ '--primary': '#C4622D' } as React.CSSProperties}>
+      {/* Controls Card */}
+      <Card className="bg-bg-warm border-border shadow-md rounded-lg">
+        <CardHeader>
+          <CardTitle className="text-text text-lg font-semibold">Fuel Cost Comparator</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-8">
+          {/* Monthly Driving Slider */}
+          <div className="space-y-4">
+            <div className="flex justify-between items-center">
+              <label className="text-text-muted font-medium">Monthly Driving</label>
+              <span className="text-text font-bold text-xl">{monthlyKm.toLocaleString('en-IN')} km</span>
+            </div>
+            <Slider
+              min={200}
+              max={5000}
+              step={50}
+              value={[monthlyKm]}
+              onValueChange={(vals) => setMonthlyKm(vals[0])}
+              className="[&_[data-slot=slider-range]]:bg-accent-rust"
+            />
+            <div className="flex justify-between text-sm text-text-light">
+              <span>200 km</span>
+              <span>5,000 km</span>
+            </div>
           </div>
-          <input
-            type="range"
-            min={200}
-            max={5000}
-            step={50}
-            value={monthlyKm}
-            onChange={(e) => setMonthlyKm(Number(e.target.value))}
-            className="calc-slider"
-            style={{ '--fill-pct': `${kmPct}%` } as React.CSSProperties}
-          />
-          <div className="calc-range-labels">
-            <span>200 km</span>
-            <span>5,000 km</span>
+
+          {/* Fuel Type Filter */}
+          <div className="space-y-4">
+            <label className="text-text-muted font-medium block">Fuel Type</label>
+            <div className="flex flex-wrap gap-2">
+              {(['All', 'Petrol', 'Diesel', 'CNG', 'Hybrid', 'Electric'] as FuelType[]).map((f) => (
+                <button
+                  key={f}
+                  className={`px-4 py-2 rounded-full border ${fuelFilter === f ? 'bg-accent-rust text-white border-accent-rust' : 'bg-surface border-border text-text-muted hover:border-accent-rust'}`}
+                  onClick={() => setFuelFilter(f)}
+                >
+                  {f}
+                </button>
+              ))}
+            </div>
           </div>
-        </div>
 
-        <div className="fuel-filter-row">
-          <span className="calc-label">Fuel type:</span>
-          <div className="fuel-filter-btns">
-            {(['All', 'Petrol', 'Diesel', 'CNG', 'Hybrid', 'Electric'] as FuelType[]).map((f) => (
-              <button
-                key={f}
-                className={`fuel-filter-btn ${fuelFilter === f ? 'active' : ''}`}
-                onClick={() => setFuelFilter(f)}
-              >
-                {f}
-              </button>
-            ))}
+          {/* Toggle Monthly/Per km */}
+          <div className="space-y-4">
+            <label className="text-text-muted font-medium block">View Mode</label>
+            <Tabs defaultValue="monthly" className="w-full">
+              <TabsList className="grid grid-cols-2">
+                <TabsTrigger value="monthly" onClick={() => setShowPerKm(false)}>
+                  Monthly Cost
+                </TabsTrigger>
+                <TabsTrigger value="perkm" onClick={() => setShowPerKm(true)}>
+                  Per km
+                </TabsTrigger>
+              </TabsList>
+            </Tabs>
           </div>
-        </div>
+        </CardContent>
+      </Card>
 
-        <div className="fuel-toggle">
-          <button
-            className={`fuel-toggle-btn ${!showPerKm ? 'active' : ''}`}
-            onClick={() => setShowPerKm(false)}
-          >
-            Monthly Cost
-          </button>
-          <button
-            className={`fuel-toggle-btn ${showPerKm ? 'active' : ''}`}
-            onClick={() => setShowPerKm(true)}
-          >
-            Per km
-          </button>
-        </div>
-      </div>
+      {/* Ranking Card */}
+      <Card className="bg-bg-warm border-border shadow-md rounded-lg">
+        <CardHeader>
+          <CardTitle className="text-text text-lg font-semibold">Ranking by Fuel Cost</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-6">
+          {rows.map((car, i) => {
+            const display = showPerKm
+              ? `₹${(car.costPerMonth / monthlyKm).toFixed(2)}/km`
+              : `₹${Math.round(car.costPerMonth).toLocaleString('en-IN')}/mo`
+            const barWidth = cheapest ? ((car.costPerMonth / cheapest.costPerMonth) * 100) : 100
 
-      <div className="fuel-ranking">
-        {rows.map((car, i) => {
-          const display = showPerKm
-            ? `₹${(car.costPerMonth / monthlyKm).toFixed(2)}/km`
-            : `₹${Math.round(car.costPerMonth).toLocaleString('en-IN')}/mo`
-          const pct = cheapest ? (car.costPerMonth / cheapest.costPerMonth) * 100 : 100
-          const barWidth = cheapest ? 100 - ((cheapest.costPerMonth - car.costPerMonth) / cheapest.costPerMonth) * 100 : 100
-
-          return (
-            <div key={car.name} className={`fuel-row ${i === 0 ? 'cheapest' : ''}`}>
-              <div className="fuel-rank">#{i + 1}</div>
-              <div className="fuel-info">
-                <div className="fuel-name">{car.name}</div>
-                <div className="fuel-meta">
-                  <span
-                    className="fuel-badge"
-                    style={{ background: FUEL_COLORS[car.fuel] || '#666' }}
-                  >
-                    {car.fuel}
-                  </span>
-                  <span className="fuel-efficiency">{car.efficiency} {car.fuel === 'Electric' ? 'km/kWh' : car.fuel === 'CNG' ? 'km/kg' : 'km/L'}</span>
+            return (
+              <div key={car.name} className={`flex items-center gap-4 p-4 rounded-lg border ${i === 0 ? 'border-accent-rust bg-surface' : 'border-border'}`}>
+                <div className={`flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full ${i === 0 ? 'bg-accent-rust text-white' : 'bg-border text-text-muted'}`}>
+                  #{i + 1}
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="font-semibold text-text truncate">{car.name}</div>
+                  <div className="flex items-center gap-2 mt-1">
+                    <Badge
+                      className="text-white font-medium border-0"
+                      style={{ backgroundColor: FUEL_COLORS[car.fuel] || '#666' }}
+                    >
+                      {car.fuel}
+                    </Badge>
+                    <span className="text-sm text-text-muted">
+                      {car.efficiency} {car.fuel === 'Electric' ? 'km/kWh' : car.fuel === 'CNG' ? 'km/kg' : 'km/L'}
+                    </span>
+                  </div>
+                  <div className="mt-3">
+                    <div className="relative h-2 bg-border rounded-full overflow-hidden">
+                      <div
+                        className="absolute top-0 left-0 h-full rounded-full"
+                        style={{
+                          width: `${barWidth}%`,
+                          backgroundColor: i === 0 ? '#1A8A5C' : FUEL_COLORS[car.fuel] || '#C4622D',
+                        }}
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div className="flex-shrink-0 text-right">
+                  <div className="text-xl font-bold text-text">{display}</div>
+                  <div className="text-sm text-text-light">annual ₹{Math.round(car.annual).toLocaleString('en-IN')}</div>
                 </div>
               </div>
-              <div className="fuel-bar-wrap">
-                <div
-                  className="fuel-bar"
-                  style={{
-                    width: `${barWidth}%`,
-                    background: i === 0 ? '#1A8A5C' : FUEL_COLORS[car.fuel] || '#C4622D',
-                  }}
-                />
-              </div>
-              <div className="fuel-cost">{display}</div>
-            </div>
-          )
-        })}
-      </div>
+            )
+          })}
+        </CardContent>
+      </Card>
 
-      <p className="fuel-note">
+      <p className="text-sm text-text-muted italic">
         * Based on current fuel prices: Petrol ₹108.5/L · Diesel ₹93.5/L · CNG ₹82/kg · EV ₹9.5/kWh (home charging)
       </p>
     </div>

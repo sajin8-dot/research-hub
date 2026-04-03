@@ -1,6 +1,10 @@
 'use client'
 
 import { useState, useMemo } from 'react'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Slider } from '@/components/ui/slider'
+import { Badge } from '@/components/ui/badge'
+import { cn } from '@/lib/utils'
 
 const CARS = [
   { id: 'seltos-htk', name: 'Kia Seltos 2026 HTK+', price: 10.99, boot: 447, efficiency: 16.8, power: 115, bancap: 5, seats: 5, features: 6 },
@@ -28,7 +32,7 @@ const CRITERIA = [
 function normalize(carVal: number, min: number, max: number, higherBetter: boolean): number {
   if (max === min) return 5
   let score = (carVal - min) / (max - min) * 10
-  if (!higherBetter) score = 10 - score  // invert for price
+  if (!higherBetter) score = 10 - score
   return Math.round(Math.max(0, Math.min(10, score)) * 10) / 10
 }
 
@@ -67,79 +71,97 @@ export default function WeightedScores() {
   }, [weights])
 
   return (
-    <div className="weighted-scores">
-      {/* Weight sliders */}
-      <div className="ws-weight-panel">
-        <div className="ws-panel-header">
-          <h3>Adjust Your Priorities</h3>
-          <p className="ws-hint">Drag the weights to match what matters to you. Higher = more important.</p>
-        </div>
-        <div className="ws-sliders">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      {/* Weights Panel */}
+      <Card className="bg-bg-warm border-border shadow-md">
+        <CardHeader>
+          <CardTitle className="text-text text-lg font-semibold">Adjust Your Priorities</CardTitle>
+          <p className="text-text-muted text-sm mt-1">
+            Drag the weights to match what matters to you. Higher = more important.
+          </p>
+        </CardHeader>
+        <CardContent className="space-y-6">
           {CRITERIA.map((c) => (
-            <div key={c.key} className="ws-slider-row">
-              <div className="ws-slider-label">
-                <span className="ws-label-name">{c.label}</span>
-                <span className="ws-label-val">{weights[c.key]}/10</span>
+            <div key={c.key} className="space-y-3">
+              <div className="flex justify-between items-center">
+                <span className="text-text font-medium">{c.label}</span>
+                <span className="text-accent-rust font-bold">{weights[c.key]}/10</span>
               </div>
-              <input
-                type="range"
+              <Slider
                 min={0}
                 max={10}
-                value={weights[c.key]}
-                onChange={(e) => setWeights({ ...weights, [c.key]: Number(e.target.value) })}
-                className="ws-slider"
-                style={{ '--fill-pct': `${(weights[c.key] / 10) * 100}%` } as React.CSSProperties}
+                step={1}
+                value={[weights[c.key]]}
+                onValueChange={(vals) => setWeights({ ...weights, [c.key]: vals[0] })}
+                className="[&_[data-slot=slider-range]]:bg-accent-rust"
               />
             </div>
           ))}
-        </div>
-        <div className="ws-total">Total weight: {totalWeight} points</div>
-      </div>
-
-      {/* Rankings */}
-      <div className="ws-rankings">
-        <div className="ws-rankings-header">
-          <span className="ws-rank-col">Rank</span>
-          <span className="ws-name-col">Car</span>
-          <span className="ws-score-col">Score</span>
-        </div>
-        {ranked.map((car, i) => (
-          <div key={car.id} className={`ws-car-row ${i === 0 ? 'ws-top' : ''}`}>
-            <div className="ws-rank-col">
-              <span className={`ws-rank-badge ${i === 0 ? 'gold' : i === 1 ? 'silver' : i === 2 ? 'bronze' : ''}`}>
-                #{i + 1}
-              </span>
-            </div>
-            <div className="ws-name-col">
-              <div className="ws-car-name">{car.name}</div>
-              <div className="ws-car-sub">
-                ₹{car.price}L · {car.boot}L boot · {car.efficiency} km/L · {car.power} bhp · {car.bancap}-star
-              </div>
-              <div className="ws-breakdown-bars">
-                {CRITERIA.map((c) => (
-                  <div key={c.key} className="ws-breakdown-bar" title={`${c.label}: ${car.breakdown[c.key]}`}>
-                    <div
-                      className="ws-bar-fill"
-                      style={{
-                        height: `${(car.breakdown[c.key] / 3) * 100}%`,
-                        background: i === 0 ? '#C4622D' : '#9C9590',
-                      }}
-                    />
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="ws-score-col">
-              <span className="ws-score-val">{car.totalScore}</span>
-              <span className="ws-score-max">/10</span>
-            </div>
+          <div className="pt-4 border-t border-border text-text-muted text-sm">
+            Total weight: <span className="font-bold">{totalWeight}</span> points
           </div>
-        ))}
-      </div>
+        </CardContent>
+      </Card>
 
-      <p className="ws-note">
-        * Scores normalized 0–10 per criterion. Weights applied as proportions of total. Price inverted (lower price = higher score).
-      </p>
+      {/* Rankings Panel */}
+      <Card className="bg-bg-warm border-border shadow-md">
+        <CardHeader>
+          <CardTitle className="text-text text-lg font-semibold">Rankings by Weighted Score</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          {ranked.map((car, i) => (
+            <div
+              key={car.id}
+              className={cn(
+                'flex items-center gap-4 p-4 rounded-lg border',
+                i === 0
+                  ? 'border-accent-rust bg-surface'
+                  : 'border-border bg-surface'
+              )}
+            >
+              <div className="flex-shrink-0">
+                <Badge
+                  className={cn(
+                    'w-8 h-8 rounded-full flex items-center justify-center text-white font-bold',
+                    i === 0 ? 'bg-yellow-500' : i === 1 ? 'bg-gray-400' : i === 2 ? 'bg-amber-700' : 'bg-border text-text-muted'
+                  )}
+                >
+                  #{i + 1}
+                </Badge>
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="font-semibold text-text truncate">{car.name}</div>
+                <div className="text-sm text-text-muted mt-1">
+                  ₹{car.price}L · {car.boot}L boot · {car.efficiency} km/L · {car.power} bhp · {car.bancap}-star
+                </div>
+                <div className="mt-3 flex items-end gap-1 h-6">
+                  {CRITERIA.map((c) => (
+                    <div
+                      key={c.key}
+                      className="flex-1 bg-border rounded-t-sm"
+                      title={`${c.label}: ${car.breakdown[c.key]}`}
+                    >
+                      <div
+                        className="bg-accent-rust rounded-t-sm transition-all"
+                        style={{
+                          height: `${(car.breakdown[c.key] / 3) * 100}%`,
+                        }}
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="flex-shrink-0 text-right">
+                <div className="text-2xl font-bold text-text">{car.totalScore}</div>
+                <div className="text-sm text-text-light">/10</div>
+              </div>
+            </div>
+          ))}
+          <p className="text-sm text-text-light italic mt-6">
+            * Scores normalized 0–10 per criterion. Weights applied as proportions of total. Price inverted (lower price = higher score).
+          </p>
+        </CardContent>
+      </Card>
     </div>
   )
 }

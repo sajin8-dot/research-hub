@@ -1,6 +1,9 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { Slider } from '@/components/ui/slider'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Progress, ProgressIndicator, ProgressTrack } from '@/components/ui/progress'
 
 const PRESET_AMOUNTS = [
   { label: '₹10L', value: 1000000 },
@@ -34,110 +37,137 @@ export default function EMICalculator({ defaultAmount = 1500000 }: { defaultAmou
   }, [principal, tenureYears, rate])
 
   const principalPct = ((principal - 500000) / (3000000 - 500000)) * 100
+  const ratePct = ((rate - 7.5) / (14 - 7.5)) * 100
 
   return (
-    <div className="emi-calc">
-      {/* Amount */}
-      <div className="calc-section">
-        <div className="calc-label-row">
-          <label className="calc-label">Loan Amount</label>
-          <span className="calc-value-display">₹{(principal / 100000).toFixed(1)}L</span>
-        </div>
-        <input
-          type="range"
-          min={500000}
-          max={3000000}
-          step={50000}
-          value={principal}
-          onChange={(e) => setPrincipal(Number(e.target.value))}
-          className="calc-slider"
-          style={{ '--fill-pct': `${principalPct}%` } as React.CSSProperties}
-        />
-        <div className="calc-range-labels">
-          <span>₹5L</span>
-          <span>₹30L</span>
-        </div>
-        <div className="calc-presets">
-          {PRESET_AMOUNTS.map((p) => (
-            <button
-              key={p.value}
-              className={`calc-preset ${principal === p.value ? 'active' : ''}`}
-              onClick={() => setPrincipal(p.value)}
-            >
-              {p.label}
-            </button>
-          ))}
-        </div>
-      </div>
+    <div className="space-y-8" style={{ '--primary': '#C4622D' } as React.CSSProperties}>
+      {/* Loan Amount Section */}
+      <Card className="bg-bg-warm border-border shadow-md rounded-lg">
+        <CardHeader>
+          <CardTitle className="text-text text-lg font-semibold">Loan Amount</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-6">
+          <div className="flex justify-between items-center">
+            <label className="text-text-muted font-medium">Loan Amount</label>
+            <span className="text-text font-bold text-xl">₹{(principal / 100000).toFixed(1)}L</span>
+          </div>
+          <Slider
+            min={500000}
+            max={3000000}
+            step={50000}
+            value={[principal]}
+            onValueChange={(vals) => setPrincipal(vals[0])}
+            className="[&_[data-slot=slider-range]]:bg-accent-rust"
+          />
+          <div className="flex justify-between text-sm text-text-light">
+            <span>₹5L</span>
+            <span>₹30L</span>
+          </div>
+          <div className="flex flex-wrap gap-3">
+            {PRESET_AMOUNTS.map((p) => (
+              <button
+                key={p.value}
+                className={`px-4 py-2 rounded-full border ${principal === p.value ? 'bg-accent-rust text-white border-accent-rust' : 'bg-surface border-border text-text-muted hover:border-accent-rust'}`}
+                onClick={() => setPrincipal(p.value)}
+              >
+                {p.label}
+              </button>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
 
-      {/* Tenure */}
-      <div className="calc-section">
-        <div className="calc-label-row">
-          <label className="calc-label">Loan Tenure</label>
-          <span className="calc-value-display">{tenureYears} year{tenureYears !== 1 ? 's' : ''}</span>
-        </div>
-        <div className="calc-tenure-grid">
-          {TENURE_YEARS.map((y) => (
-            <button
-              key={y}
-              className={`calc-tenure-btn ${tenureYears === y ? 'active' : ''}`}
-              onClick={() => setTenureYears(y)}
-            >
-              {y}y
-            </button>
-          ))}
-        </div>
-      </div>
+      {/* Loan Tenure Section */}
+      <Card className="bg-bg-warm border-border shadow-md rounded-lg">
+        <CardHeader>
+          <CardTitle className="text-text text-lg font-semibold">Loan Tenure</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-6">
+          <div className="flex justify-between items-center">
+            <label className="text-text-muted font-medium">Loan Tenure</label>
+            <span className="text-text font-bold text-xl">{tenureYears} year{tenureYears !== 1 ? 's' : ''}</span>
+          </div>
+          <div className="grid grid-cols-4 sm:grid-cols-7 gap-3">
+            {TENURE_YEARS.map((y) => (
+              <button
+                key={y}
+                className={`py-3 rounded-lg border ${tenureYears === y ? 'bg-accent-rust text-white border-accent-rust' : 'bg-surface border-border text-text-muted hover:border-accent-rust'}`}
+                onClick={() => setTenureYears(y)}
+              >
+                {y}y
+              </button>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
 
-      {/* Interest Rate */}
-      <div className="calc-section">
-        <div className="calc-label-row">
-          <label className="calc-label">Interest Rate (p.a.)</label>
-          <span className="calc-value-display">{rate.toFixed(1)}%</span>
-        </div>
-        <input
-          type="range"
-          min={7.5}
-          max={14}
-          step={0.1}
-          value={rate}
-          onChange={(e) => setRate(Number(e.target.value))}
-          className="calc-slider"
-          style={{ '--fill-pct': `${((rate - 7.5) / (14 - 7.5)) * 100}%` } as React.CSSProperties}
-        />
-        <div className="calc-range-labels">
-          <span>7.5%</span>
-          <span>14%</span>
-        </div>
-      </div>
+      {/* Interest Rate Section */}
+      <Card className="bg-bg-warm border-border shadow-md rounded-lg">
+        <CardHeader>
+          <CardTitle className="text-text text-lg font-semibold">Interest Rate (p.a.)</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-6">
+          <div className="flex justify-between items-center">
+            <label className="text-text-muted font-medium">Interest Rate (p.a.)</label>
+            <span className="text-text font-bold text-xl">{rate.toFixed(1)}%</span>
+          </div>
+          <Slider
+            min={7.5}
+            max={14}
+            step={0.1}
+            value={[rate]}
+            onValueChange={(vals) => setRate(vals[0])}
+            className="[&_[data-slot=slider-range]]:bg-accent-rust"
+          />
+          <div className="flex justify-between text-sm text-text-light">
+            <span>7.5%</span>
+            <span>14%</span>
+          </div>
+        </CardContent>
+      </Card>
 
-      {/* Results */}
-      <div className="emi-results">
-        <div className="emi-monthly">
-          <span className="emi-label">Monthly EMI</span>
-          <span className="emi-amount">₹{emi.toLocaleString('en-IN')}</span>
-        </div>
-        <div className="emi-breakdown">
-          <div className="emi-breakdown-item">
-            <span className="emi-breakdown-label">Principal</span>
-            <span className="emi-breakdown-val">₹{(principal / 100000).toFixed(1)}L</span>
-            <div className="emi-bar-track">
-              <div className="emi-bar-fill principal" style={{ width: `${(principal / totalPayment) * 100}%` }} />
+      {/* Results Section */}
+      <Card className="bg-bg-warm border-border shadow-md rounded-lg">
+        <CardHeader>
+          <CardTitle className="text-text text-lg font-semibold">EMI Breakdown</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-8">
+          <div className="text-center">
+            <div className="text-text-muted text-sm">Monthly EMI</div>
+            <div className="text-accent-rust text-4xl font-bold">₹{emi.toLocaleString('en-IN')}</div>
+          </div>
+          <div className="space-y-6">
+            <div className="space-y-3">
+              <div className="flex justify-between text-sm">
+                <span className="text-text-muted">Principal</span>
+                <span className="text-text font-semibold">₹{(principal / 100000).toFixed(1)}L</span>
+              </div>
+              <Progress value={(principal / totalPayment) * 100}>
+                <ProgressTrack className="bg-border">
+                  <ProgressIndicator className="bg-text" style={{ width: `${(principal / totalPayment) * 100}%` }} />
+                </ProgressTrack>
+              </Progress>
+            </div>
+            <div className="space-y-3">
+              <div className="flex justify-between text-sm">
+                <span className="text-text-muted">Interest</span>
+                <span className="text-accent-rust font-semibold">₹{(totalInterest / 100000).toFixed(1)}L</span>
+              </div>
+              <Progress value={(totalInterest / totalPayment) * 100}>
+                <ProgressTrack className="bg-border">
+                  <ProgressIndicator className="bg-accent-rust" style={{ width: `${(totalInterest / totalPayment) * 100}%` }} />
+                </ProgressTrack>
+              </Progress>
+            </div>
+            <div className="pt-4 border-t border-border">
+              <div className="flex justify-between text-lg font-bold">
+                <span className="text-text">Total Payment</span>
+                <span className="text-text">₹{(totalPayment / 100000).toFixed(1)}L</span>
+              </div>
             </div>
           </div>
-          <div className="emi-breakdown-item">
-            <span className="emi-breakdown-label">Interest</span>
-            <span className="emi-breakdown-val accent-rust">₹{(totalInterest / 100000).toFixed(1)}L</span>
-            <div className="emi-bar-track">
-              <div className="emi-bar-fill interest" style={{ width: `${(totalInterest / totalPayment) * 100}%` }} />
-            </div>
-          </div>
-          <div className="emi-breakdown-item total">
-            <span className="emi-breakdown-label">Total Payment</span>
-            <span className="emi-breakdown-val">₹{(totalPayment / 100000).toFixed(1)}L</span>
-          </div>
-        </div>
-      </div>
+        </CardContent>
+      </Card>
     </div>
   )
 }

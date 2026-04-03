@@ -1,6 +1,11 @@
 'use client'
 
 import { useState } from 'react'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
+import { Badge } from '@/components/ui/badge'
+import { cn } from '@/lib/utils'
 
 const CARS = [
   {
@@ -96,7 +101,7 @@ const CARS = [
     wheelbase: 2780,
     groundClearance: 190,
     warranty: '3 years / 100,000 km',
-    features: ['Ventilated seats', '8" screen', '6 airbags', 'Wireless charging', ' captains seats option'],
+    features: ['Ventilated seats', '8" screen', '6 airbags', 'Wireless charging', 'captains seats option'],
   },
   {
     id: 'xuv700',
@@ -221,9 +226,7 @@ export default function CarCompareWidget() {
     { label: 'Warranty', a: a.warranty, b: b.warranty, diff: 0 },
   ]
 
-  // Determine winner for a spec row. Returns 'A', 'B', or null (no comparison)
   const getWinner = (label: string, valA: string, valB: string, higherBetter?: boolean) => {
-    // Extract numeric value from strings like "₹10.99L", "170 bhp", "4460 mm", etc.
     const parseNum = (s: string) => {
       const m = String(s).match(/[\d.]+/)
       return m ? parseFloat(m[0]) : null
@@ -232,11 +235,8 @@ export default function CarCompareWidget() {
     const numB = parseNum(valB)
     if (numA === null || numB === null || numA === numB) return null
 
-    // Price: lower is better
     if (label === 'Price (ex-showroom)') return numA < numB ? 'A' : 'B'
-    // Seats / ground clearance: higher is generally better for these use cases
     if (label === 'Seats' || label === 'Ground Clearance') return numA > numB ? 'A' : 'B'
-    // Default: higher is better for performance specs
     if (higherBetter === true) return numA > numB ? 'A' : 'B'
     if (higherBetter === false) return numA < numB ? 'A' : 'B'
     return null
@@ -245,79 +245,138 @@ export default function CarCompareWidget() {
   const allFeatures = Array.from(new Set([...a.features, ...b.features]))
 
   return (
-    <div className="compare-widget">
-      <div className="compare-selectors">
-        <div className="compare-selector">
-          <label className="compare-selector-label">Car A</label>
-          <select
-            className="compare-select"
-            value={carA}
-            onChange={(e) => setCarA(e.target.value)}
-          >
-            {CARS.map((c) => (
-              <option key={c.id} value={c.id}>{c.name}</option>
-            ))}
-          </select>
-        </div>
-        <div className="compare-vs">VS</div>
-        <div className="compare-selector">
-          <label className="compare-selector-label">Car B</label>
-          <select
-            className="compare-select"
-            value={carB}
-            onChange={(e) => setCarB(e.target.value)}
-          >
-            {CARS.map((c) => (
-              <option key={c.id} value={c.id}>{c.name}</option>
-            ))}
-          </select>
-        </div>
-      </div>
+    <div className="space-y-8">
+      {/* Car Selection Card */}
+      <Card className="bg-bg-warm border-border shadow-md">
+        <CardHeader>
+          <CardTitle className="text-text text-lg font-semibold">Compare Cars</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 items-center gap-4">
+            <div className="space-y-2">
+              <label className="text-sm font-medium text-text-muted">Car A</label>
+              <Select value={carA} onValueChange={setCarA}>
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="Select a car" />
+                </SelectTrigger>
+                <SelectContent>
+                  {CARS.map((car) => (
+                    <SelectItem key={car.id} value={car.id}>
+                      {car.name}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="text-center">
+              <span className="text-text-light font-bold text-xl">VS</span>
+            </div>
+            <div className="space-y-2">
+              <label className="text-sm font-medium text-text-muted">Car B</label>
+              <Select value={carB} onValueChange={setCarB}>
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="Select a car" />
+                </SelectTrigger>
+                <SelectContent>
+                  {CARS.map((car) => (
+                    <SelectItem key={car.id} value={car.id}>
+                      {car.name}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
 
-      <div className="compare-table-wrap">
-        <table className="compare-table">
-          <thead>
-            <tr>
-              <th>Specification</th>
-              <th className={carA === carB ? '' : 'winner-col'}>{a.name}</th>
-              <th className={carA === carB ? '' : 'winner-col'}>{b.name}</th>
-            </tr>
-          </thead>
-          <tbody>
-            {specRows.map((row) => {
-              const w = getWinner(row.label, row.a, row.b, ('higherBetter' in row ? row.higherBetter : undefined))
+      {/* Specifications Table */}
+      <Card className="bg-bg-warm border-border shadow-md">
+        <CardHeader>
+          <CardTitle className="text-text text-lg font-semibold">Specifications Comparison</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="rounded-lg border border-border overflow-hidden">
+            <Table>
+              <TableHeader className="bg-surface">
+                <TableRow>
+                  <TableHead className="text-text-muted font-semibold">Specification</TableHead>
+                  <TableHead className={cn('text-text font-semibold', carA !== carB && 'text-accent-rust')}>
+                    {a.name}
+                  </TableHead>
+                  <TableHead className={cn('text-text font-semibold', carA !== carB && 'text-accent-rust')}>
+                    {b.name}
+                  </TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {specRows.map((row) => {
+                  const winner = getWinner(row.label, row.a, row.b, ('higherBetter' in row ? row.higherBetter : undefined))
+                  return (
+                    <TableRow key={row.label} className="border-border">
+                      <TableCell className="text-text-muted font-medium">{row.label}</TableCell>
+                      <TableCell className={cn('font-semibold', winner === 'A' && 'text-accent-green bg-bg-warm')}>
+                        {row.a}
+                      </TableCell>
+                      <TableCell className={cn('font-semibold', winner === 'B' && 'text-accent-green bg-bg-warm')}>
+                        {row.b}
+                      </TableCell>
+                    </TableRow>
+                  )
+                })}
+              </TableBody>
+            </Table>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Features Comparison */}
+      <Card className="bg-bg-warm border-border shadow-md">
+        <CardHeader>
+          <CardTitle className="text-text text-lg font-semibold">Features Check</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {allFeatures.map((feature) => {
+              const hasA = a.features.includes(feature)
+              const hasB = b.features.includes(feature)
               return (
-                <tr key={row.label}>
-                  <td className="compare-spec-label">{row.label}</td>
-                  <td className={w === 'A' ? 'compare-cell winner' : 'compare-cell'}>{row.a}</td>
-                  <td className={w === 'B' ? 'compare-cell winner' : 'compare-cell'}>{row.b}</td>
-                </tr>
+                <div
+                  key={feature}
+                  className={cn(
+                    'flex items-center justify-between p-3 rounded-lg border',
+                    hasA && hasB
+                      ? 'border-accent-green bg-surface'
+                      : hasA
+                      ? 'border-accent-rust bg-surface'
+                      : 'border-border bg-surface'
+                  )}
+                >
+                  <span className="text-text font-medium">{feature}</span>
+                  <div className="flex items-center gap-4">
+                    <Badge
+                      variant={hasA ? 'default' : 'outline'}
+                      className={cn(hasA ? 'bg-accent-rust text-white' : 'text-text-muted')}
+                    >
+                      {hasA ? '✓' : '–'}
+                    </Badge>
+                    <Badge
+                      variant={hasB ? 'default' : 'outline'}
+                      className={cn(hasB ? 'bg-accent-rust text-white' : 'text-text-muted')}
+                    >
+                      {hasB ? '✓' : '–'}
+                    </Badge>
+                  </div>
+                </div>
               )
             })}
-          </tbody>
-        </table>
-      </div>
-
-      <div className="compare-features">
-        <h4>Features Check</h4>
-        <div className="compare-features-grid">
-          {allFeatures.map((f) => {
-            const hasA = a.features.includes(f)
-            const hasB = b.features.includes(f)
-            return (
-              <div key={f} className={`compare-feature-row ${hasA && hasB ? 'both' : hasA ? 'a' : 'b'}`}>
-                <span className={`compare-feature-check ${hasA ? 'yes' : 'no'}`}>{hasA ? '✓' : '–'}</span>
-                <span className="compare-feature-name">{f}</span>
-                <span className={`compare-feature-check ${hasB ? 'yes' : 'no'}`}>{hasB ? '✓' : '–'}</span>
-              </div>
-            )
-          })}
-        </div>
-        <div className="compare-features-header">
-          <span>{a.name.split(' ')[0]}</span>
-          <span>{b.name.split(' ')[0]}</span>
-        </div>
-      </div>
+          </div>
+          <div className="mt-6 flex justify-between text-sm font-semibold text-text-muted">
+            <span>{a.name.split(' ')[0]}</span>
+            <span>{b.name.split(' ')[0]}</span>
+          </div>
+        </CardContent>
+      </Card>
     </div>
   )
 }
