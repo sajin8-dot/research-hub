@@ -799,9 +799,10 @@ a:hover {
   background: var(--bg-warm);
 }
 
-.data-table td.highlight {
+.data-table tr.highlight td {
   color: var(--accent-rust);
   font-weight: 600;
+  background: var(--bg-warm);
 }
 
 .data-table td.verdict {
