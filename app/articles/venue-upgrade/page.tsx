@@ -641,8 +641,8 @@ export default function VenueUpgradeArticle() {
               <div className="car-card-price">₹12–18L</div>
             </div>
           </div>
-          </div>
           <p className="gallery-credit">Images sourced from CarWale. All photos show the right front three-quarter angle — the most informative angle for exterior comparison.</p>
+          </div>
 
 
 
