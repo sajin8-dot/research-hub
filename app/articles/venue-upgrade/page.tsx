@@ -58,6 +58,7 @@ export default function VenueUpgradeArticle() {
             <li><a href="#the-trigger">The Upgrade Trigger</a></li>
             <li><a href="#what-changed">What Changed in 2026</a></li>
             <li><a href="#the-eight">The Candidates</a></li>
+            <li><a href="#gallery">Gallery — All 10 Candidates</a></li>
             <li><a href="#financials">Financial Comparison</a></li>
             <li><a href="#videos">Video Reviews</a></li>
             <li><a href="#three-paths">Three Paths Forward</a></li>
@@ -568,6 +569,65 @@ export default function VenueUpgradeArticle() {
               </tr>
             </tbody>
           </table>
+
+          <h2 id="gallery">The Candidates at a Glance</h2>
+          <p className="gallery-intro">
+            Ten cars. Ten different arguments for an upgrade. Here's how they look in the metal.
+          </p>
+          <div className="car-gallery">
+            <div className="car-card">
+              <img src="/cars/kia-seltos-2026.jpg" alt="Kia Seltos 2026" width="600" height="600" loading="lazy" />
+              <div className="car-card-name">Kia Seltos 2026</div>
+              <div className="car-card-price">₹10.99–20L</div>
+            </div>
+            <div className="car-card">
+              <img src="/cars/hyundai-creta.jpg" alt="Hyundai Creta" width="600" height="600" loading="lazy" />
+              <div className="car-card-name">Hyundai Creta</div>
+              <div className="car-card-price">₹11–24L</div>
+            </div>
+            <div className="car-card">
+              <img src="/cars/maruti-xl6.jpg" alt="Maruti XL6" width="600" height="600" loading="lazy" />
+              <div className="car-card-name">Maruti XL6 Alpha</div>
+              <div className="car-card-price">₹15–17L</div>
+            </div>
+            <div className="car-card">
+              <img src="/cars/kia-carens.jpg" alt="Kia Carens" width="600" height="600" loading="lazy" />
+              <div className="car-card-name">Kia Carens</div>
+              <div className="car-card-price">₹18–22L</div>
+            </div>
+            <div className="car-card">
+              <img src="/cars/mahindra-xuv700.jpg" alt="Mahindra XUV700" width="600" height="600" loading="lazy" />
+              <div className="car-card-name">Mahindra XUV700</div>
+              <div className="car-card-price">₹24–27L</div>
+            </div>
+            <div className="car-card">
+              <img src="/cars/toyota-innova-hycross.jpg" alt="Toyota Innova Hycross" width="600" height="600" loading="lazy" />
+              <div className="car-card-name">Toyota Innova Hycross</div>
+              <div className="car-card-price">₹27–33L</div>
+            </div>
+            <div className="car-card">
+              <img src="/cars/tata-sierra.jpg" alt="Tata Sierra" width="600" height="600" loading="lazy" />
+              <div className="car-card-name">Tata Sierra ICE</div>
+              <div className="car-card-price">₹11.49–21.29L</div>
+            </div>
+            <div className="car-card">
+              <img src="/cars/tata-harrier-ice.jpg" alt="Tata Harrier ICE" width="600" height="600" loading="lazy" />
+              <div className="car-card-name">Tata Harrier ICE</div>
+              <div className="car-card-price">₹12.89–25.35L</div>
+            </div>
+            <div className="car-card">
+              <img src="/cars/tata-harrier-ev.jpg" alt="Tata Harrier EV" width="600" height="600" loading="lazy" />
+              <div className="car-card-name">Tata Harrier EV</div>
+              <div className="car-card-price">₹21.49–28.99L</div>
+            </div>
+            <div className="car-card">
+              <img src="/cars/renault-duster.jpg" alt="Renault Duster" width="600" height="600" loading="lazy" />
+              <div className="car-card-name">Renault Duster</div>
+              <div className="car-card-price">₹12–18L</div>
+            </div>
+          </div>
+          <p className="gallery-credit">Images sourced from CarWale. All photos show the right front three-quarter angle — the most informative angle for exterior comparison.</p>
+
 
           <p className="comparison-note">
             <strong>The honest comparison:</strong> The Seltos 2026 at its
