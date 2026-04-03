@@ -26,7 +26,7 @@ const FINANCIAL_TABLE: Array<[string,string,string,string,string,string,boolean]
 
 export default function VenueUpgradeArticle() {
   return (
-    <main className="min-h-screen bg-[#FAFAF8]">
+    <main className="min-h-screen bg-[#FAFAF8] overflow-x-hidden">
 
       {/* ── HERO ── */}
       <div className="bg-[#0B044C] w-full py-16 px-4">
@@ -378,25 +378,25 @@ export default function VenueUpgradeArticle() {
           <h2 className="text-xl font-bold text-[#2C2A27] mb-2">Interactive Tools</h2>
           <p className="text-sm text-[#6B6860] mb-8">Skip the static tables. Run the numbers on your specific situation.</p>
           <div className="space-y-8">
-            <div className="bg-white rounded-xl border border-[#E5E0D8] p-5">
+            <div className="bg-white rounded-xl border border-[#E5E0D8] p-5 min-w-0">
               <h3 className="text-sm font-bold text-[#2C2A27] mb-1">EMI Calculator</h3>
               <p className="text-xs text-[#6B6860] mb-4">₹15L at 9.5% p.a. over 5 years — adjust to your situation.</p>
-              <EMICalculator defaultAmount={1500000} />
+              <div className="min-w-0"><EMICalculator defaultAmount={1500000} /></div>
             </div>
-            <div className="bg-white rounded-xl border border-[#E5E0D8] p-5">
+            <div className="bg-white rounded-xl border border-[#E5E0D8] p-5 min-w-0">
               <h3 className="text-sm font-bold text-[#2C2A27] mb-1">Weighted Rankings</h3>
               <p className="text-xs text-[#6B6860] mb-4">Adjust weights for boot space, power, safety — watch the ranking reorder in real time.</p>
-              <WeightedScores />
+              <div className="min-w-0"><WeightedScores /></div>
             </div>
-            <div className="bg-white rounded-xl border border-[#E5E0D8] p-5">
+            <div className="bg-white rounded-xl border border-[#E5E0D8] p-5 min-w-0">
               <h3 className="text-sm font-bold text-[#2C2A27] mb-1">Running Cost Comparison</h3>
               <p className="text-xs text-[#6B6860] mb-4">Adjust your monthly driving to see which car costs the least at the pump.</p>
-              <FuelCostComparator />
+              <div className="min-w-0"><FuelCostComparator /></div>
             </div>
-            <div className="bg-white rounded-xl border border-[#E5E0D8] p-5">
+            <div className="bg-white rounded-xl border border-[#E5E0D8] p-5 min-w-0">
               <h3 className="text-sm font-bold text-[#2C2A27] mb-1">Compare Any Two Cars</h3>
               <p className="text-xs text-[#6B6860] mb-4">Pick any two candidates and compare them side by side.</p>
-              <CarCompareWidget />
+              <div className="min-w-0"><CarCompareWidget /></div>
             </div>
           </div>
         </section>
