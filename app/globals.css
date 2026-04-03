@@ -639,6 +639,85 @@ a:hover {
   margin: 0 auto;     /* center the prose column */
 }
 
+/* Article footer */
+.article-footer {
+  padding: 40px 0;
+  border-top: 1px solid var(--border);
+  text-align: center;
+}
+
+.article-footer p {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  color: var(--text-light);
+  margin: 0;
+}
+
+/* Back link */
+.back-link {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  margin-bottom: 20px;
+  transition: color 0.2s;
+}
+.back-link:hover { color: var(--accent-rust); }
+
+/* Article subtitle */
+.article-subtitle {
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+/* Candidate price strip */
+.candidate-price {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--accent-rust);
+  margin-bottom: 12px;
+  letter-spacing: 0.01em;
+}
+
+.candidate-highlight {
+  color: var(--accent-green);
+}
+
+.candidate-pending {
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* Table note */
+.table-note {
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+  line-height: 1.6;
+}
+
+/* Source list */
+.source-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.source-list li {
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+}
+.source-list a {
+  color: var(--accent-green);
+  text-decoration: underline;
+}
+.source-list a:hover { color: var(--accent-green-dark); }
+
 .article-body h2 {
   font-family: var(--font-display);
   font-weight: 700;
