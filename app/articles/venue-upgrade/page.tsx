@@ -24,11 +24,62 @@ const FINANCIAL_TABLE: Array<[string,string,string,string,string,string,boolean]
   ['Tata Harrier EV XZ+ AWD', '₹21.49–28.99L', '65kWh Electric AWD', '447L', '5', '⭐5', false],
 ]
 
+// Spec badge — reusable visual pill
+function SpecBadge({ label, value }: { label: string; value: string }) {
+  return (
+    <span className="inline-flex items-center gap-1.5 bg-[#F7F4F0] border border-[#E5E0D8] rounded-full px-3 py-1 text-xs text-[#6B6860]">
+      <span className="font-semibold text-[#C4622D]">{value}</span>
+      <span>{label}</span>
+    </span>
+  )
+}
+
+// Candidate card — image + spec strip + condensed prose
+function CandidateCard({
+  img, name, price, engine, boot, bncaps, badge, children
+}: {
+  img: string; name: string; price: string; engine: string; boot: string; bncaps: string; badge?: string
+  children: React.ReactNode
+}) {
+  return (
+    <div className="flex flex-col sm:flex-row gap-4 py-6 border-b border-[#E5E0D8] last:border-0">
+      <div className="flex-shrink-0">
+        <img
+          src={img}
+          alt={name}
+          loading="lazy"
+          className="w-full sm:w-[180px] h-[130px] object-cover rounded-lg"
+        />
+      </div>
+      <div className="flex-1 min-w-0">
+        <div className="flex items-start justify-between gap-2 mb-2">
+          <h3 className="text-base font-bold text-[#2C2A27] leading-tight">{name}</h3>
+          {badge && (
+            <span className="flex-shrink-0 bg-[#C4622D]/10 text-[#C4622D] text-[10px] font-semibold uppercase tracking-wide px-2 py-0.5 rounded-full">{badge}</span>
+          )}
+        </div>
+        <div className="flex flex-wrap gap-2 mb-3">
+          <SpecBadge label="ex-showroom" value={price} />
+          <SpecBadge label="engine" value={engine} />
+          <SpecBadge label="boot" value={boot} />
+          <span className="inline-flex items-center gap-1.5 bg-[#F7F4F0] border border-[#E5E0D8] rounded-full px-3 py-1 text-xs text-[#6B6860]">
+            <span className="font-semibold text-[#C4622D]">{bncaps}</span>
+            <span>BNCAP</span>
+          </span>
+        </div>
+        <div className="text-sm text-[#3D3B37] leading-relaxed space-y-2">
+          {children}
+        </div>
+      </div>
+    </div>
+  )
+}
+
 export default function VenueUpgradeArticle() {
   return (
     <main className="min-h-screen bg-[#FAFAF8] overflow-x-hidden">
 
-      {/* ── HERO ── full viewport width */}
+      {/* ── HERO ── */}
       <div className="relative w-full h-[55vh] min-h-[420px] overflow-hidden">
         <img
           src="/article-hero.png"
@@ -77,11 +128,10 @@ export default function VenueUpgradeArticle() {
           <h2 className="text-sm font-semibold text-[#2C2A27] uppercase tracking-wider mb-3">Contents</h2>
           <ol className="space-y-1.5 text-sm text-[#5C6B4F]">
             {[
-              ['#the-baseline', 'The Baseline: What the Venue DCT Actually Has'],
+              ['#the-baseline', 'The Baseline'],
               ['#the-trigger', 'The Upgrade Trigger'],
               ['#what-changed', 'What Changed in 2026'],
-              ['#candidates', 'The Candidates'],
-              ['#gallery', 'Gallery — All 10 Candidates'],
+              ['#candidates', 'The 13 Candidates'],
               ['#tools', 'Interactive Tools'],
               ['#financials', 'Financial Comparison'],
               ['#videos', 'Video Reviews'],
@@ -96,7 +146,7 @@ export default function VenueUpgradeArticle() {
           </ol>
         </nav>
 
-        {/* ── SECTION: THE BASELINE ── */}
+        {/* ── THE BASELINE ── */}
         <section className="py-12 border-b border-[#E5E0D8]">
           <h2 id="the-baseline" className="text-2xl font-bold text-[#2C2A27] mb-6">The Baseline: What the Venue DCT Actually Has</h2>
           <div className="space-y-4 text-[#3D3B37] leading-relaxed">
@@ -123,7 +173,7 @@ export default function VenueUpgradeArticle() {
           </div>
         </section>
 
-        {/* ── SECTION: UPGRADE TRIGGER ── */}
+        {/* ── UPGRADE TRIGGER ── */}
         <section className="py-12 border-b border-[#E5E0D8]">
           <h2 id="the-trigger" className="text-2xl font-bold text-[#2C2A27] mb-6">The Upgrade Trigger</h2>
           <div className="space-y-4 text-[#3D3B37] leading-relaxed">
@@ -146,7 +196,7 @@ export default function VenueUpgradeArticle() {
           </div>
         </section>
 
-        {/* ── SECTION: WHAT CHANGED ── */}
+        {/* ── WHAT CHANGED ── */}
         <section className="py-12 border-b border-[#E5E0D8]">
           <h2 id="what-changed" className="text-2xl font-bold text-[#2C2A27] mb-6">What Changed in 2026</h2>
           <div className="space-y-4 text-[#3D3B37] leading-relaxed">
@@ -159,164 +209,210 @@ export default function VenueUpgradeArticle() {
           </div>
         </section>
 
-        {/* ── SECTION: CANDIDATES ── */}
+        {/* ── CANDIDATES ── */}
         <section id="candidates" className="py-12 border-b border-[#E5E0D8]">
-          <h2 className="text-2xl font-bold text-[#2C2A27] mb-8">The Candidates</h2>
-          <div className="space-y-10">
+          <h2 className="text-2xl font-bold text-[#2C2A27] mb-2">The 13 Candidates</h2>
+          <p className="text-sm text-[#6B6860] mb-6">Thirteen cars across segments and price bands — petrol, diesel, CNG, hybrid, and electric.</p>
 
-            {/* Seltos 2026 */}
-            <div>
-              <h3 className="text-lg font-bold text-[#2C2A27] mb-3">1. Kia Seltos 2026 — The Honest Upgrade</h3>
-              <div className="space-y-3 text-[#3D3B37] leading-relaxed text-sm">
-                <p><strong>The car that ends this search.</strong> The Seltos 2026 launched on January 2, 2026 with a comprehensive redesign — new platform, new engine options, a significantly larger cabin, and a 5-star BNCAP safety rating.</p>
-                <p>The numbers that matter versus the Venue DCT:</p>
-                <ul className="space-y-1">
-                  <li>Length: +95mm (4,460mm vs 3,995mm Venue)</li>
-                  <li>Wheelbase: +80mm (2,690mm vs 2,610mm Venue)</li>
-                  <li>Boot: 447 litres (vs ~350 litres Venue)</li>
-                  <li>Engine options: 115bhp NA petrol / 160bhp turbo petrol / 116bhp diesel</li>
-                  <li>Top engine (turbo petrol DCT): 160bhp vs Venue's 120bhp — a meaningful step up</li>
-                </ul>
-                <p>The turbo petrol variant at 160 bhp is the one to prioritise — it gives the Seltos the kind of performance feel that made the Venue enjoyable to drive, at a higher level. The DCT is available with the turbo engine.</p>
-                <p>The interior is a generational leap over the Venue. The panoramic curved display — dual 12.3-inch screens — is genuinely impressive. Level 2 ADAS includes adaptive cruise, lane keep, and forward collision warning.</p>
-                <p>The 5-star BNCAP rating for adult and child occupancy is the safety proof that a family of five needs. <strong>Who it is for:</strong> Someone upgrading from the Venue who wants a genuine step forward in space, safety, and driving refinement — without moving into a different vehicle class.</p>
-              </div>
-            </div>
+          {/* 1. Seltos 2026 */}
+          <CandidateCard
+            img="/cars/kia-seltos-2026.jpg"
+            name="1. Kia Seltos 2026 — The Honest Upgrade"
+            price="₹11–20L"
+            engine="160bhp turbo"
+            boot="447L"
+            bncaps="⭐5"
+            badge="Top Pick"
+          >
+            <p><strong>The car that ends this search.</strong> The Seltos 2026 launched January 2 with a comprehensive redesign — new platform, new engines, a significantly larger cabin, and a 5-star BNCAP rating. The turbo petrol DCT at 160bhp is the variant to prioritse.</p>
+            <p>The dual 12.3-inch curved display, Level 2 ADAS, Bose audio, and 5-star safety make this a generational leap over the Venue at every meaningful dimension. At ₹17–20L for the GTX turbo DCT, it is priced correctly for what it delivers.</p>
+            <p className="text-[#6B6860] italic">Best for: Upgrading from the Venue without moving up a vehicle class.</p>
+          </CandidateCard>
 
-            {/* Hyundai Creta */}
-            <div>
-              <h3 className="text-lg font-bold text-[#2C2A27] mb-3">2. Hyundai Creta — The Familiar Step Up</h3>
-              <div className="space-y-3 text-[#3D3B37] leading-relaxed text-sm">
-                <p>The Creta has been India's best-selling SUV for years. The updated version brings a refreshed front fascia, updated interior technology, and improved feature content. The Creta EV is expected in 2026.</p>
-                <p>Versus the Venue DCT: wider cabin, more rear seat legroom, larger boot, stronger diesel engine option. The Creta's advantage over the Seltos is primarily the brand familiarity — if the Venue has been hassle-free, the Creta's Hyundai ecosystem is a continuation of that experience.</p>
-                <p><strong>Who it is for:</strong> Someone brand-loyal to Hyundai who wants the most recognised compact SUV in India with improved space and feature content over the Venue.</p>
-              </div>
-            </div>
+          {/* 2. Hyundai Creta */}
+          <CandidateCard
+            img="/cars/hyundai-creta.jpg"
+            name="2. Hyundai Creta — The Familiar Step Up"
+            price="₹11–24L"
+            engine="115bhp petrol"
+            boot="433L"
+            bncaps="⭐4"
+          >
+            <p>India's best-selling SUV for years, refreshed with updated interior technology and feature content. The Creta EV is expected in late 2026 — worth waiting for if electric is the direction.</p>
+            <p>Versus the Venue: wider cabin, more rear seat legroom, larger boot, stronger diesel option. The Hyundai ecosystem is a continuation of the Venue ownership experience — same service network, same brand trust.</p>
+            <p className="text-[#6B6860] italic">Best for: Brand-loyal Hyundai owners who want the most recognised compact SUV in India.</p>
+          </CandidateCard>
 
-            {/* Kia Syros EV */}
-            <div>
-              <h3 className="text-lg font-bold text-[#2C2A27] mb-3">3. Kia Syros EV — The Electric Alternative</h3>
-              <div className="space-y-3 text-[#3D3B37] leading-relaxed text-sm">
-                <p>The Syros EV is Kia's upcoming electric compact SUV, expected to launch in 2026 with a range of approximately 400–500 km per charge. Pricing expected between ₹14–30 lakh.</p>
-                <p>For primarily city driving and occasional highway runs, the Syros EV's running cost — approximately one-third of petrol — is a significant long-term saving.</p>
-                <p><strong>Who it is for:</strong> Someone with home charging capability who wants to move into electric. Worth a test drive when it launches — but the Seltos petrol or diesel is the more complete vehicle today.</p>
-              </div>
-            </div>
+          {/* 3. Toyota Innova Hycross */}
+          <CandidateCard
+            img="/cars/toyota-innova-hycross.jpg"
+            name="3. Toyota Innova Hycross — The Class Jump"
+            price="₹27–33L"
+            engine="186bhp hybrid"
+            boot="340L+"
+            bncaps="⭐5"
+            badge="Space Leader"
+          >
+            <p>Not a compact SUV — a mid-size MPV that competes with vehicles twice its price. The space upgrade from the Venue is transformational, not incremental. The 2.0-litre self-charging hybrid returns 18–20 kmpl real-world — the most efficient vehicle in this list on highway runs.</p>
+            <p>The cabin width accommodates three adults in the second row with real armroom. The third row, folded flat, creates a cargo area that Luka the Jack Russell could sleep in comfortably.</p>
+            <p className="text-[#6B6860] italic">Best for: Families who have honestly decided that maximum space is worth the additional footprint and price.</p>
+          </CandidateCard>
 
-            {/* Hyundai Creta EV */}
-            <div>
-              <h3 className="text-lg font-bold text-[#2C2A27] mb-3">4. Hyundai Creta EV — The Electric Creta</h3>
-              <div className="space-y-3 text-[#3D3B37] leading-relaxed text-sm">
-                <p>The Creta EV is expected around the second half of 2026, with pricing estimated at ₹18–22 lakh. Real-world range approximately 350–400 km.</p>
-                <p><strong>Who it is for:</strong> Someone who has decided on the Creta platform and is willing to wait 6–9 months for the electric version. For everyone else, the Seltos 2026 is available now.</p>
-              </div>
-            </div>
+          {/* 4. Kia Carens */}
+          <CandidateCard
+            img="/cars/kia-carens.jpg"
+            name="4. Kia Carens — The Value MPV"
+            price="₹18–22L"
+            engine="116bhp diesel"
+            boot="445L"
+            bncaps="⭐3"
+          >
+            <p>Consistently underestimated. The low loading height — closer to the ground than an SUV floor — is a genuine practical advantage for a large dog. The 7-seater with captain's seats on higher variants makes the second row genuinely comfortable for adults.</p>
+            <p>At approximately ₹22–26L for a well-equipped 7-seater, the Carens undercuts the Creta and delivers more interior volume than vehicles at twice its price.</p>
+            <p className="text-[#6B6860] italic">Best for: Maximum interior volume per rupee. Regularly carrying five people and luggage simultaneously.</p>
+          </CandidateCard>
 
-            {/* Toyota Innova Hycross */}
-            <div>
-              <h3 className="text-lg font-bold text-[#2C2A27] mb-3">5. Toyota Innova Hycross — The Class Jump</h3>
-              <div className="space-y-3 text-[#3D3B37] leading-relaxed text-sm">
-                <p>The Innova Hycross is not a compact SUV. It is a mid-size MPV that competes with vehicles twice its price. It is included here because the space upgrade from the Venue is transformational — not incremental.</p>
-                <p>The hybrid engine — Toyota's 2.0-litre self-charging hybrid — produces approximately 186 bhp combined while returning 18–20 kmpl real-world. On 5-hour highway runs, this is the most efficient vehicle in this list.</p>
-                <p>The cabin width is the real story. Three adults in the second row with real armroom. The third row, folded flat, creates a cargo area that Luka the Jack Russell could sleep in.</p>
-                <p>The trade-off is size. The Hycross is 4.7 metres long — harder to park and manoeuvre in Bangalore than the Venue. That difference is real and daily.</p>
-                <p><strong>Who it is for:</strong> A family that has honestly evaluated the Venue's limitations and decided that maximum space is worth the additional footprint.</p>
-              </div>
-            </div>
+          {/* 5. Tata Sierra ICE */}
+          <CandidateCard
+            img="/cars/tata-sierra.jpg"
+            name="5. Tata Sierra ICE — The Available Surprise"
+            price="₹11.5–21L"
+            engine="160bhp turbo"
+            boot="622L"
+            bncaps="⭐5"
+          >
+            <p>Launched November 2025, already delivering. At ₹11.49–21.29L ex-showroom, it undercuts the Seltos at the entry point. Key number: the 622-litre boot is the largest in this list by a significant margin — larger than most competitors with their seats folded.</p>
+            <p>The triple-screen layout — driver display, central infotainment, co-passenger screen — Level 2 ADAS, and 12-speaker JBL Dolby Atmos are genuinely impressive at this price. The 1.5L turbo petrol 160bhp with 6-speed automatic matches the Seltos on performance.</p>
+            <p className="text-[#6B6860] italic">Best for: Maximum boot and cabin volume for the budget. Already available, not waiting for a 2026 launch.</p>
+          </CandidateCard>
 
-            {/* Kia Carens */}
-            <div>
-              <h3 className="text-lg font-bold text-[#2C2A27] mb-3">6. Kia Carens — The Value MPV</h3>
-              <div className="space-y-3 text-[#3D3B37] leading-relaxed text-sm">
-                <p>The Carens is consistently underestimated. It is categorised as a compact MPV, but its interior volume rivals vehicles at twice its price. The low loading height — closer to the ground than an SUV floor — is a genuine practical advantage for Luka.</p>
-                <p>The 7-seater configuration with captain's seats on higher variants makes the second row genuinely comfortable for adults. At approximately ₹22–26L, the Carens undercuts the Creta and Seltos significantly when configured as a 7-seater.</p>
-                <p><strong>Who it is for:</strong> Someone who wants maximum interior volume per rupee. The most intelligent buy in its price category if the use case involves regularly carrying five people and luggage simultaneously.</p>
-              </div>
-            </div>
+          {/* 6. Mahindra XUV700 */}
+          <CandidateCard
+            img="/cars/mahindra-xuv700.jpg"
+            name="6. Mahindra XUV700 — The SUV Experience"
+            price="₹24–27L"
+            engine="185bhp diesel"
+            boot="447L"
+            bncaps="Expected ⭐5"
+          >
+            <p>The best Mahindra product in years. The 2.2-litre turbo diesel produces 185 bhp and 450 Nm — genuinely quick at highway speeds. The ADAS suite adds a real layer of safety on long highway runs. 10-speaker Sony audio, large touchscreen, premium switchgear.</p>
+            <p>At approximately ₹27.5L for the AX7 variant, it is meaningfully more expensive than the Seltos or Carens. The question is whether the additional size, power, and SUV presence justify the premium.</p>
+            <p className="text-[#6B6860] italic">Best for: Someone who wants the SUV feel — higher driving position, road presence — and is willing to pay for it.</p>
+          </CandidateCard>
 
-            {/* Mahindra XUV700 */}
-            <div>
-              <h3 className="text-lg font-bold text-[#2C2A27] mb-3">7. Mahindra XUV700 — The SUV Experience</h3>
-              <div className="space-y-3 text-[#3D3B37] leading-relaxed text-sm">
-                <p>The XUV700 is the best Mahindra product in years. The 2.2-litre turbo diesel produces 185 bhp and 450 Nm — genuinely quick at highway speeds. The ADAS suite adds a real layer of safety on long highway runs.</p>
-                <p>At approximately ₹27.5L for the AX7 variant, it is meaningfully more expensive than the Seltos or Creta. The question is whether the additional size, power, and features justify the premium.</p>
-                <p><strong>Who it is for:</strong> Someone who wants the SUV feel — higher driving position, road presence — and is willing to pay for it.</p>
-              </div>
-            </div>
+          {/* 7. Tata Harrier ICE */}
+          <CandidateCard
+            img="/cars/tata-harrier-ice.jpg"
+            name="7. Tata Harrier ICE — The Highway Specialist"
+            price="₹13–25L"
+            engine="170bhp diesel"
+            boot="447L"
+            bncaps="⭐5"
+          >
+            <p>Updated for 2026 with revised features and improved NVH. The 2.0-litre Kryotec diesel produces 170 bhp and 350 Nm — the highest torque figure in this list below the XUV700. Relaxed and refined at cruising speeds on the highway.</p>
+            <p>Built on the OMEGARC platform — the same land-rover-derived architecture used by the Defender. If the farm road at Kizhakkancherry is a factor, the Harrier's platform is genuinely more capable than the compact SUV class.</p>
+            <p className="text-[#6B6860] italic">Best for: Safety, structural integrity, and genuine highway composure. Non-urban driving conditions.</p>
+          </CandidateCard>
 
-            {/* Maruti XL6 CNG */}
-            <div>
-              <h3 className="text-lg font-bold text-[#2C2A27] mb-3">8. Maruti XL6 CNG — The Budget Intelligent Choice</h3>
-              <div className="space-y-3 text-[#3D3B37] leading-relaxed text-sm">
-                <p>The XL6 Alpha CNG at approximately ₹18–20L is in a different financial category. The 2.0-litre CNG option reduces running costs to approximately one-third of petrol. At 15,000 km per year, the fuel saving versus petrol alternatives is approximately ₹80,000 over five years.</p>
-                <p>The 6-seater configuration — captain's seats in the second row — is the most comfortable layout for four adults on long drives.</p>
-                <p><strong>Who it is for:</strong> The budget-conscious buyer who wants a genuine step up in practicality from the Venue without the price of a compact SUV.</p>
-              </div>
-            </div>
+          {/* 8. Maruti XL6 CNG */}
+          <CandidateCard
+            img="/cars/maruti-xl6.jpg"
+            name="8. Maruti XL6 CNG — The Budget Intelligent Choice"
+            price="₹15–17L"
+            engine="2.0L CNG"
+            boot="239L"
+            bncaps="⭐3"
+          >
+            <p>The 2.0-litre CNG option reduces running costs to approximately one-third of petrol. At 15,000 km per year, the fuel saving versus petrol alternatives is approximately ₹80,000 over five years — a meaningful number.</p>
+            <p>The 6-seater configuration with captain's seats is the most comfortable layout for four adults on long drives. Maruti's service network is ubiquitous in Bangalore and Karnataka. The practical choice for the cost-conscious buyer.</p>
+            <p className="text-[#6B6860] italic">Best for: Budget-conscious buyers who want a genuine step up in practicality without the price of a compact SUV.</p>
+          </CandidateCard>
 
-            {/* Tata Curvv EV */}
-            <div>
-              <h3 className="text-lg font-bold text-[#2C2A27] mb-3">9. Tata Curvv EV — The Electric Option</h3>
-              <div className="space-y-3 text-[#3D3B37] leading-relaxed text-sm">
-                <p>The Tata Curvv EV is expected in 2026 with pricing between ₹15–24L. The electric mid-size SUV offers a range of approximately 400–500 km per charge.</p>
-                <p>Tata's electric drivetrain is proven — the Nexon EV has accumulated significant real-world usage data in India.</p>
-                <p><strong>Who it is for:</strong> Someone committed to electric who wants a larger cabin than the Venue and is willing to wait for the Curvv EV's 2026 launch.</p>
-              </div>
-            </div>
+          {/* 9. Tata Harrier EV */}
+          <CandidateCard
+            img="/cars/tata-harrier-ev.jpg"
+            name="9. Tata Harrier EV — The Electric Highway Cruiser"
+            price="₹21–29L"
+            engine="65kWh AWD"
+            boot="447L"
+            bncaps="⭐5"
+          >
+            <p>Already on sale at ₹21.49–28.99L ex-showroom with a claimed range of 350–500 km per charge. The dual-motor AWD configuration is available on higher variants. The electric drivetrain changes the highway touring character entirely — no gear shifts, instant torque, and refinement that diesel cannot match at speed.</p>
+            <p>The battery floor raises the seating position slightly — most drivers find this beneficial for visibility. Charging infrastructure along the Bangalore–Coorg route has improved significantly and is sufficient for practical EV touring.</p>
+            <p className="text-[#6B6860] italic">Best for: Someone who wants the Harrier's safety and platform, but with the EV driving experience for highway touring.</p>
+          </CandidateCard>
 
-            {/* Tata Sierra ICE */}
-            <div>
-              <h3 className="text-lg font-bold text-[#2C2A27] mb-3">10. Tata Sierra ICE — The Available Surprise</h3>
-              <div className="space-y-3 text-[#3D3B37] leading-relaxed text-sm">
-                <p>The Tata Sierra ICE launched in November 2025 with deliveries commencing January 2026. At ₹11.49–21.29L ex-showroom (approximately ₹13.3–24.9L on-road Bangalore), it undercuts the Seltos at the entry point.</p>
-                <p>Key numbers: Length 4,340mm (+345mm vs Venue), Wheelbase 2,730mm (+120mm vs Venue), Boot 622 litres (yes, 622L — the largest in this list), 1.5L turbo petrol 160bhp with 6-speed automatic.</p>
-                <p>The triple-screen layout — driver display, central infotainment, co-passenger screen — is genuinely impressive at this price. Level 2 ADAS, 12-speaker JBL Dolby Atmos.</p>
-                <p><strong>Who it is for:</strong> Someone who wants maximum interior and boot volume for the budget. The Sierra delivers SUV proportions, a massive boot, and the latest Tata cabin technology — already available, not waiting for a 2026 launch.</p>
-              </div>
-            </div>
+          {/* 10. Kia Syros EV */}
+          <CandidateCard
+            img="/cars/kia-seltos-2026.jpg"
+            name="10. Kia Syros EV — The Electric Alternative"
+            price="₹14–30L"
+            engine="400–500km range"
+            boot="TBC"
+            bncaps="TBC"
+            badge="Coming Mid-2026"
+          >
+            <p>Kia's upcoming electric compact SUV, expected mid-2026 with approximately 400–500 km range per charge. The running cost at approximately one-third of petrol is a significant long-term saving for primarily city driving.</p>
+            <p>Worth a test drive when it launches — but the Seltos petrol or diesel is the more complete vehicle today.</p>
+            <p className="text-[#6B6860] italic">Best for: Someone with home charging capability who wants to move into electric as the primary direction.</p>
+          </CandidateCard>
 
-            {/* Tata Harrier ICE */}
-            <div>
-              <h3 className="text-lg font-bold text-[#2C2A27] mb-3">11. Tata Harrier ICE — The Highway Specialist</h3>
-              <div className="space-y-3 text-[#3D3B37] leading-relaxed text-sm">
-                <p>The Tata Harrier in its ICE form has been updated for 2026 with revised features and improved NVH. At ₹12.89–25.35L ex-showroom, it sits between the Seltos and Innova Hycross in pricing.</p>
-                <p>The 2.0-litre Kryotec diesel produces 170 bhp and 350 Nm of torque — the highest torque figure in this list below the XUV700. On highway runs, this engine is relaxed and refined at cruising speeds. The 5-star BNCAP rating is the strongest safety argument in this segment.</p>
-                <p><strong>Who it is for:</strong> Someone who values safety, structural integrity, and genuine highway composure. The most serious vehicle in this price band for non-urban driving conditions.</p>
-              </div>
-            </div>
+          {/* 11. Hyundai Creta EV */}
+          <CandidateCard
+            img="/cars/hyundai-creta.jpg"
+            name="11. Hyundai Creta EV — The Electric Creta"
+            price="₹18–22L"
+            engine="350–400km range"
+            boot="433L"
+            bncaps="⭐4"
+            badge="Coming Late 2026"
+          >
+            <p>Expected around the second half of 2026. If the Creta platform is already the preferred choice, waiting for the EV variant is a reasonable option — particularly if the primary use case is city driving with occasional highway runs.</p>
+            <p>For everyone else, the Seltos 2026 is available now and represents the more complete package at this stage of EV infrastructure maturity.</p>
+            <p className="text-[#6B6860] italic">Best for: Someone who has decided on the Creta platform and is willing to wait 6–9 months for the electric version.</p>
+          </CandidateCard>
 
-            {/* Tata Harrier EV */}
-            <div>
-              <h3 className="text-lg font-bold text-[#2C2A27] mb-3">12. Tata Harrier EV — The Electric Highway Cruiser</h3>
-              <div className="space-y-3 text-[#3D3B37] leading-relaxed text-sm">
-                <p>The Tata Harrier EV is already on sale at ₹21.49–28.99L ex-showroom. It uses a 65 kWh battery with a claimed range of 350–500 km per charge. The dual-motor AWD configuration is available on higher variants.</p>
-                <p>The electric drivetrain changes the highway touring character entirely — no gear shifts, instant torque, and a refinement level that diesel and petrol engines cannot match at highway speeds.</p>
-                <p><strong>Who it is for:</strong> Someone who wants the Harrier's safety and platform as a base, but wants the EV driving experience for highway touring. The running cost saving versus diesel is significant over a 5-year ownership horizon.</p>
-              </div>
-            </div>
+          {/* 12. Tata Curvv EV */}
+          <CandidateCard
+            img="/cars/tata-sierra.jpg"
+            name="12. Tata Curvv EV — The Electric Option"
+            price="₹15–24L"
+            engine="400–500km range"
+            boot="TBC"
+            bncaps="TBC"
+            badge="Coming 2026"
+          >
+            <p>Expected in 2026 with pricing between ₹15–24L. The electric mid-size SUV offers a range of approximately 400–500 km per charge. Tata's electric drivetrain is proven — the Nexon EV has accumulated significant real-world usage data in India.</p>
+            <p>The Curvv EV extends this platform to a larger vehicle with more interior space. Worth watching if electric is the direction.</p>
+            <p className="text-[#6B6860] italic">Best for: Someone committed to electric who wants a larger cabin than the Venue and is willing to wait for the 2026 launch.</p>
+          </CandidateCard>
 
-            {/* Renault Duster */}
-            <div>
-              <h3 className="text-lg font-bold text-[#2C2A27] mb-3">13. Renault Duster 7-Seater — The Wildcard</h3>
-              <div className="space-y-3 text-[#3D3B37] leading-relaxed text-sm">
-                <p>The new Renault Duster is expected in late 2026 with a 7-seater configuration and a hybrid powertrain option. Pricing estimated at ₹10–20L — significantly cheaper than everything else in this list.</p>
-                <p>The Duster nameplate carries genuine off-road credibility. The previous Duster was praised for its ride quality and practicality.</p>
-                <p><strong>Who it is for:</strong> Someone with a flexible timeline who wants to wait and see what the Duster 7-seater offers. Late 2026 is a long wait — but if the pricing is as competitive as expected, it could be worth holding off.</p>
-              </div>
-            </div>
+          {/* 13. Renault Duster */}
+          <CandidateCard
+            img="/cars/renault-duster.jpg"
+            name="13. Renault Duster 7-Seater — The Wildcard"
+            price="₹10–20L"
+            engine="Hybrid TBC"
+            boot="TBC"
+            bncaps="TBC"
+            badge="Coming Late 2026"
+          >
+            <p>Expected in late 2026 with a 7-seater configuration and a hybrid powertrain option. Pricing estimated at ₹10–20L — significantly cheaper than everything else in this list if the estimates hold.</p>
+            <p>The previous Duster was praised for its ride quality and practicality. The new model is expected to build on this foundation with updated technology and a larger cabin.</p>
+            <p className="text-[#6B6860] italic">Best for: Someone with a flexible timeline who wants to wait and see what competitive pricing the Duster delivers.</p>
+          </CandidateCard>
 
-          </div>
         </section>
 
-        {/* ── SECTION: FINANCIAL COMPARISON ── */}
+        {/* ── FINANCIAL COMPARISON ── */}
         <section id="financials" className="py-12 border-b border-[#E5E0D8]">
-          <h2 className="text-2xl font-bold text-[#2C2A27] mb-6">Financial Comparison</h2>
-          <p className="text-xs text-[#6B6860] mb-4 leading-relaxed">
+          <h2 className="text-2xl font-bold text-[#2C2A27] mb-4">Financial Comparison</h2>
+          <p className="text-xs text-[#6B6860] mb-6 leading-relaxed">
             Prices are ex-showroom or on-road Bangalore estimates, April 2026.
             Annual usage: 15,000 km at 70% highway, 30% city. Confirm exact prices with dealers before any decision.
           </p>
           <div className="overflow-x-auto rounded-lg border border-[#E5E0D8]">
-            <table className="w-full text-sm">
+            <table className="w-full text-sm min-w-[560px]">
               <thead>
                 <tr className="bg-[#F7F4F0] border-b border-[#E5E0D8]">
                   <th scope="col" className="text-left px-4 py-3 font-semibold text-[#2C2A27] whitespace-nowrap">Vehicle</th>
@@ -330,55 +426,25 @@ export default function VenueUpgradeArticle() {
               <tbody className="divide-y divide-[#F0EDE8]">
                 {FINANCIAL_TABLE.map(([vehicle, price, engine, boot, seats, bncaps, isHighlight]) => (
                   <tr key={vehicle} className={`${isHighlight ? 'bg-[#EFEBE5]' : 'bg-white'} hover:bg-[#F7F4F0] transition-colors`}>
-                    <td className="px-4 py-3 font-medium text-[#2C2A27] whitespace-nowrap">{vehicle}</td>
-                    <td className="px-4 py-3 text-right text-[#3D3B37]">{price}</td>
-                    <td className="px-4 py-3 text-[#6B6860] hidden md:table-cell">{engine}</td>
-                    <td className="px-4 py-3 text-center text-[#6B6860] hidden sm:table-cell">{boot}</td>
-                    <td className="px-4 py-3 text-center text-[#6B6860] hidden sm:table-cell">{seats}</td>
-                    <td className={`px-4 py-3 text-center font-semibold ${isHighlight ? 'text-[#C4622D]' : 'text-[#3D3B37]'}`}>{bncaps}</td>
+                    <td className="px-4 py-3 font-medium text-[#2C2A27] whitespace-nowrap text-xs">{vehicle}</td>
+                    <td className="px-4 py-3 text-right text-[#3D3B37] text-xs">{price}</td>
+                    <td className="px-4 py-3 text-[#6B6860] hidden md:table-cell text-xs">{engine}</td>
+                    <td className="px-4 py-3 text-center text-[#6B6860] hidden sm:table-cell text-xs">{boot}</td>
+                    <td className="px-4 py-3 text-center text-[#6B6860] hidden sm:table-cell text-xs">{seats}</td>
+                    <td className={`px-4 py-3 text-center font-semibold text-xs ${isHighlight ? 'text-[#C4622D]' : 'text-[#3D3B37]'}`}>{bncaps}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
-          <p className="mt-5 text-sm text-[#6B6860] leading-relaxed italic">
-            <strong className="not-italic text-[#2C2A27]">The honest comparison:</strong> The Seltos 2026 at its base variant (₹10.99L)
+          <p className="mt-5 text-sm text-[#6B6860] leading-relaxed">
+            <strong className="not-italic text-[#2C2A27]">The honest comparison:</strong> The Seltos 2026 base variant (₹10.99L)
             costs approximately the same as the Venue DCT did in 2019. The top-spec Seltos GTX turbo DCT (₹17–20L) is where the meaningful
-            upgrade sits — more power than the Venue, significantly more space, Level 2 ADAS, 5-star safety, and a dual-screen interior
-            that feels generational.
+            upgrade sits — more power, significantly more space, Level 2 ADAS, 5-star safety, and a dual-screen interior that feels generational.
           </p>
         </section>
 
-        {/* ── SECTION: GALLERY ── */}
-        <section id="gallery" className="py-12 border-b border-[#E5E0D8]">
-          <h2 className="text-2xl font-bold text-[#2C2A27] mb-2">Gallery — All 10 Candidates</h2>
-          <p className="text-sm text-[#6B6860] mb-8">Ten cars. Ten different arguments for an upgrade. Here's how they look in the metal.</p>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-            {[
-              ['/cars/kia-seltos-2026.jpg', 'Kia Seltos 2026', '₹10.99–20L'],
-              ['/cars/hyundai-creta.jpg', 'Hyundai Creta', '₹11–24L'],
-              ['/cars/maruti-xl6.jpg', 'Maruti XL6 Alpha', '₹15–17L'],
-              ['/cars/kia-carens.jpg', 'Kia Carens', '₹18–22L'],
-              ['/cars/mahindra-xuv700.jpg', 'Mahindra XUV700', '₹24–27L'],
-              ['/cars/toyota-innova-hycross.jpg', 'Toyota Innova Hycross', '₹27–33L'],
-              ['/cars/tata-sierra.jpg', 'Tata Sierra ICE', '₹11.49–21.29L'],
-              ['/cars/tata-harrier-ice.jpg', 'Tata Harrier ICE', '₹12.89–25.35L'],
-              ['/cars/tata-harrier-ev.jpg', 'Tata Harrier EV', '₹21.49–28.99L'],
-              ['/cars/renault-duster.jpg', 'Renault Duster', '₹12–18L'],
-            ].map(([src, name, price]) => (
-              <div key={src} className="bg-[#F7F4F0] rounded-lg overflow-hidden">
-                <img src={src} alt={name} loading="lazy" className="w-full aspect-square object-cover" />
-                <div className="px-3 py-2">
-                  <p className="text-xs font-semibold text-[#2C2A27]">{name}</p>
-                  <p className="text-xs text-[#6B6860]">{price}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-          <p className="mt-4 text-xs text-[#9B9590]">Images sourced from CarWale. All photos show the right front three-quarter angle.</p>
-        </section>
-
-        {/* ── SECTION: TOOLS ── */}
+        {/* ── TOOLS ── */}
         <section id="tools" className="py-12 border-b border-[#E5E0D8]">
           <h2 className="text-2xl font-bold text-[#2C2A27] mb-2">Interactive Tools</h2>
           <p className="text-sm text-[#6B6860] mb-8">Skip the static tables. These tools let you run the numbers on your specific situation.</p>
@@ -406,7 +472,7 @@ export default function VenueUpgradeArticle() {
           </div>
         </section>
 
-        {/* ── SECTION: VIDEOS ── */}
+        {/* ── VIDEOS ── */}
         <section id="videos" className="py-12 border-b border-[#E5E0D8]">
           <h2 className="text-2xl font-bold text-[#2C2A27] mb-8">Video Reviews</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -450,7 +516,7 @@ export default function VenueUpgradeArticle() {
           </div>
         </section>
 
-        {/* ── SECTION: THREE PATHS ── */}
+        {/* ── THREE PATHS ── */}
         <section id="three-paths" className="py-12 border-b border-[#E5E0D8]">
           <h2 className="text-2xl font-bold text-[#2C2A27] mb-8">Three Paths Forward</h2>
           <div className="space-y-6">
@@ -496,7 +562,7 @@ export default function VenueUpgradeArticle() {
           </div>
         </section>
 
-        {/* ── SECTION: RECOMMENDATION ── */}
+        {/* ── RECOMMENDATION ── */}
         <section id="recommendation" className="py-12 border-b border-[#E5E0D8]">
           <h2 className="text-2xl font-bold text-[#2C2A27] mb-6">What I'd Do</h2>
           <div className="space-y-4 text-[#3D3B37] leading-relaxed">
