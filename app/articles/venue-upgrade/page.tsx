@@ -30,8 +30,8 @@ export default function VenueUpgradeArticle() {
           <div className="verdict-box">
             <p className="verdict-label">The Core Finding</p>
             <p className="verdict-text">
-              Three cars score at the top on Seb's weighted criteria — Seltos (40.4), Carens (39.3), Harrier (36.3). 
-              No diesel. No CNG. Seltos leads on cost and city drivability. Carens leads on space. Harrier leads on features.
+              Three cars score at the top with your weights — Seltos (41.9), Carens (39.6), Sierra (39.2). 
+              Seltos leads on cost and city drive. Carens leads on space. Sierra leads on boot volume and value. No diesel. No CNG.
             </p>
           </div>
 
@@ -54,7 +54,7 @@ export default function VenueUpgradeArticle() {
           {/* RANKING SUMMARY */}
           <section id="ranking">
             <h2>The Rankings</h2>
-            <p className="table-note">Scoring: Seb's weighted criteria — Space (×8), City Drivability (×7), Features (×6), Cost (×5). Each factor scored 1–5. Maximum score: 80. Cost: 5 = cheapest, 1 = most expensive. Only top-end petrol automatics qualify.</p>
+            <p className="table-note">Scoring: Seb's weighted criteria — Space (×6), City Drivability (×8), Features (×7), Cost (×5). Each factor scored 1–5. Maximum score: 130. Cost: 5 = cheapest, 1 = most expensive. Formula: (Space×6 + City×8 + Features×7 + Cost×5) ÷ 2.6. Only top-end petrol automatics qualify.</p>
             <table className="data-table">
               <thead>
                 <tr>
@@ -65,91 +65,84 @@ export default function VenueUpgradeArticle() {
                   <th>City Drive</th>
                   <th>Features</th>
                   <th>Cost</th>
-                  <th>Top-End Petrol Automatic</th>
+                  <th>Top-End Variant</th>
                 </tr>
               </thead>
               <tbody>
                 <tr className="highlight">
                   <td className="num">1</td>
                   <td><strong>Kia Seltos 2026 GTX Turbo DCT</strong></td>
-                  <td className="num">40.4</td>
+                  <td className="num">41.9</td>
                   <td className="num">4</td><td className="num">4</td><td className="num">4</td><td className="num">5</td>
                   <td>₹17–20L · 1.4L Turbo DCT</td>
                 </tr>
                 <tr className="highlight">
                   <td className="num">2</td>
                   <td><strong>Kia Carens Luxury Plus 7-Seater DCT</strong></td>
-                  <td className="num">39.3</td>
+                  <td className="num">39.6</td>
                   <td className="num">5</td><td className="num">4</td><td className="num">3</td><td className="num">4</td>
                   <td>₹19.65L · 1.5L Turbo DCT</td>
                 </tr>
                 <tr className="highlight">
                   <td className="num">3</td>
-                  <td><strong>Tata Harrier Fearless Ultra Red Dark AT</strong></td>
-                  <td className="num">36.3</td>
-                  <td className="num">4</td><td className="num">3</td><td className="num">5</td><td className="num">3</td>
-                  <td>₹24.69L · 1.5L Turbo AT</td>
+                  <td><strong>Tata Sierra Accomplished+ AT</strong></td>
+                  <td className="num">39.2</td>
+                  <td className="num">5</td><td className="num">3</td><td className="num">4</td><td className="num">4</td>
+                  <td>₹20.99L · 1.5L Turbo AT</td>
                 </tr>
                 <tr>
                   <td className="num">4</td>
                   <td>Tata Harrier Fearless Ultra AT</td>
-                  <td className="num">36.3</td>
+                  <td className="num">37.7</td>
                   <td className="num">4</td><td className="num">3</td><td className="num">5</td><td className="num">3</td>
                   <td>₹24.69L · 1.5L Turbo AT</td>
                 </tr>
                 <tr>
                   <td className="num">5</td>
                   <td>Mahindra XUV700 AX7L DCT</td>
-                  <td className="num">35.2</td>
+                  <td className="num">35.8</td>
                   <td className="num">4</td><td className="num">3</td><td className="num">5</td><td className="num">2</td>
                   <td>₹24–27L · 2.0L Turbo DCT</td>
                 </tr>
                 <tr>
                   <td className="num">6</td>
-                  <td>Tata Harrier EV XZ+ AWD</td>
-                  <td className="num">34.1</td>
-                  <td className="num">4</td><td className="num">3</td><td className="num">4</td><td className="num">3</td>
-                  <td>₹21–29L · Electric AWD</td>
-                </tr>
-                <tr>
-                  <td className="num">7</td>
-                  <td>Tata Sierra Accomplished+ AT</td>
-                  <td className="num">34.1</td>
-                  <td className="num">5</td><td className="num">3</td><td className="num">4</td><td className="num">4</td>
-                  <td>₹20.99L · 1.5L Turbo AT</td>
-                </tr>
-                <tr>
-                  <td className="num">8</td>
                   <td>Hyundai Creta SX(O) DCT</td>
-                  <td className="num">33.0</td>
+                  <td className="num">35.8</td>
                   <td className="num">3</td><td className="num">4</td><td className="num">4</td><td className="num">3</td>
                   <td>₹21–22L · 1.5L Turbo DCT</td>
                 </tr>
                 <tr>
-                  <td className="num">9</td>
+                  <td className="num">7</td>
+                  <td>Tata Harrier EV XZ+ AWD</td>
+                  <td className="num">35.0</td>
+                  <td className="num">4</td><td className="num">3</td><td className="num">4</td><td className="num">3</td>
+                  <td>₹21–29L · Electric AWD</td>
+                </tr>
+                <tr>
+                  <td className="num">8</td>
                   <td>Kia Syros EV</td>
-                  <td className="num">31.5</td>
+                  <td className="num">33.5</td>
                   <td className="num">3</td><td className="num">3</td><td className="num">4</td><td className="num">3</td>
                   <td>EV — pricing TBC</td>
                 </tr>
                 <tr>
-                  <td className="num">10</td>
+                  <td className="num">9</td>
                   <td>Hyundai Creta EV</td>
-                  <td className="num">31.5</td>
+                  <td className="num">33.5</td>
                   <td className="num">3</td><td className="num">3</td><td className="num">4</td><td className="num">3</td>
                   <td>EV — late 2026</td>
                 </tr>
                 <tr>
-                  <td className="num">11</td>
+                  <td className="num">10</td>
                   <td>Tata Curvv EV</td>
-                  <td className="num">31.5</td>
+                  <td className="num">33.5</td>
                   <td className="num">3</td><td className="num">3</td><td className="num">4</td><td className="num">4</td>
                   <td>₹15–24L · EV — 2026</td>
                 </tr>
                 <tr>
-                  <td className="num">12</td>
+                  <td className="num">11</td>
                   <td>Renault Duster 7-Seater</td>
-                  <td className="num">29.3</td>
+                  <td className="num">30.0</td>
                   <td className="num">3</td><td className="num">3</td><td className="num">2</td><td className="num">4</td>
                   <td>TBC — late 2026</td>
                 </tr>
@@ -308,8 +301,8 @@ export default function VenueUpgradeArticle() {
               </tbody>
             </table>
             <p className="table-note">
-              <strong>Three cars score at the top:</strong> Seltos GTX DCT (40.4), Carens Luxury Plus DCT (39.3), Harrier Fearless Ultra AT (36.3).
-              The Seltos leads on value, the Carens on space, the Harrier on features.
+              <strong>Three cars score at the top with Seb's updated weights:</strong> Seltos GTX DCT (41.9), Carens Luxury Plus DCT (39.6), Sierra Accomplished+ AT (39.2).
+              The Seltos leads on value and city drive, the Carens on space, the Sierra on boot volume.
             </p>
           </section>
 
@@ -326,9 +319,9 @@ export default function VenueUpgradeArticle() {
 
             <div className="verdict-lane">
               <h3>Path 2 — If the Seltos Feels Too Compact</h3>
-              <p className="verdict-lane-car">Kia Carens Luxury Plus DCT or Harrier Fearless Ultra AT</p>
-              <p>If after driving the Seltos the honest verdict is that it doesn't solve the space problem sufficiently, two cars tie on score at 36.6: the Carens Luxury Plus 7-Seater DCT (₹19.65L) and the Harrier Fearless Ultra AT (₹24.69L).</p>
-              <p>The Carens gives you a third row of seats and the lowest cost per litre of cabin volume in this list. The Harrier gives you the most features, the 5-star BNCAP rating, and the highway-capable platform. Both are correct answers — the choice depends on which trade-off matters more.</p>
+              <p className="verdict-lane-car">Kia Carens Luxury Plus DCT or Tata Sierra Accomplished+ AT</p>
+              <p>If after driving the Seltos the honest verdict is that it doesn't solve the space problem sufficiently, two cars score at the top: the Carens Luxury Plus 7-Seater DCT (₹19.65L, score 39.6) and the Sierra Accomplished+ AT (₹20.99L, score 39.2).</p>
+              <p>The Carens gives you a third row of seats and the lowest cost per litre of cabin volume in this list. The Sierra gives you the biggest boot by a significant margin — 622L vs the Carens' 445L — and a more modern cabin. Both are correct answers — the choice depends on which trade-off matters more: usable third row or raw boot volume.</p>
             </div>
 
             <div className="verdict-lane">
@@ -345,23 +338,23 @@ export default function VenueUpgradeArticle() {
 
             <div className="verdict-lane">
               <h3>#1 — Kia Seltos 2026 GTX Turbo DCT · ₹17–20L</h3>
-              <p>Scores highest at 40.4 — cheapest top-end petrol automatic, same DCT character as the Venue, more power, more space, 5-star BNCAP, Level 2 ADAS. At 4.46m it is still city-manageable and the DCT keeps the engaging drive feel you enjoy in Bangalore traffic. <strong>Drive it first. If the steering feel is still there, end the search here.</strong></p>
+              <p>Scores highest at 41.9 with your weights. Cheapest top-end petrol automatic, same DCT character as the Venue, more power, more space, 5-star BNCAP, Level 2 ADAS. At 4.46m it is still city-manageable and the DCT keeps the engaging drive feel you enjoy in Bangalore traffic. <strong>Drive it first. If the steering feel is still there, end the search here.</strong></p>
             </div>
 
             <div className="verdict-lane">
               <h3>#2 — Kia Carens Luxury Plus 7-Seater DCT · ₹19.65L</h3>
-              <p>Scores 39.3 — the 7-seater configuration is the key differentiator. The low loading height is genuinely practical for Luka. The 160bhp turbo DCT is the same engine as the Seltos, so the driving character is similar. At ₹19.65L it undercuts the Harrier by ₹5L and delivers more usable volume. <strong>Drive it alongside the Seltos and compare directly.</strong></p>
+              <p>Scores 39.6. The 7-seater configuration is the key differentiator — no other top-3 car offers a genuine third row. The low loading height is genuinely practical for Luka. The 160bhp turbo DCT is the same engine as the Seltos, so the driving character is similar. At ₹19.65L it undercuts the Sierra by ₹1.3L and delivers more usable volume. <strong>Drive it alongside the Seltos and compare directly.</strong></p>
             </div>
 
             <div className="verdict-lane">
-              <h3>#3 — Tata Harrier Fearless Ultra Red Dark AT · ₹24.69L</h3>
-              <p>Scores 36.3 — the most feature-rich car in the top 3. What you get for the premium: 14.5-inch HD touchscreen, JBL sound system, ventilated seats, panoramic sunroof, 5-star BNCAP, and the OMEGARC platform the Defender is built on. The trade-off: worst city drivability of the three (4.66m, 6-speed torque converter, lower ground clearance). <strong>Worth it only if features and platform matter more than city ease.</strong></p>
+              <h3>#3 — Tata Sierra Accomplished+ AT · ₹20.99L</h3>
+              <p>Scores 39.2. The 622-litre boot is the largest in this entire list — significantly bigger than the Seltos (447L) and Carens (445L). 5-star BNCAP, triple-screen interior, Level 2 ADAS. 1.5L turbo 160bhp with 6-speed torque converter automatic. At ₹20.99L it is ₹1.3L more than the Carens but delivers more boot and a more modern cabin. <strong>The boot alone might be the deciding factor.</strong></p>
             </div>
 
             <h2>What I'd Do</h2>
             <p><strong>Drive the Seltos 2026 GTX turbo DCT first.</strong> It is the most direct upgrade from the Venue DCT — same brand ecosystem familiarity, same fun-to-drive character, significantly more space and safety. At 4.46m it is still city-manageable and the DCT keeps the engaging feel you enjoy in Bangalore traffic. At ₹17–20L, it is priced correctly for what it delivers.</p>
             <p><strong>Then drive the Carens Luxury Plus 7-Seater DCT.</strong> The direct comparison that matters — same engine, same DCT, but with a genuine third row and lower loading height. If the third row is genuinely useful for your family, the Carens wins on value. If the third row is mostly folded, the Seltos wins on price.</p>
-            <p><strong>Finally drive the Harrier Fearless Ultra AT.</strong> Only if the Seltos and Carens both feel insufficient on cabin space or feature content. At ₹24.69L it is a ₹5L premium over the Carens — worth it only if the additional features and platform capability are genuinely valued.</p>
+            <p><strong>Finally drive the Sierra Accomplished+ AT.</strong> If boot volume is the primary filter — and it should be, given three kids plus Luka — the Sierra's 622L boot is in a different class. It costs ₹1.3L more than the Carens but delivers the most boot space of any car in this list. If the boot is big enough, the search is over.</p>
             <p><strong>The Venue DCT has been a great car.</strong> It earned its upgrade. The Seltos 2026 is the most honest recognition of that investment — a car that takes everything the Venue did well and does it at a higher level, without requiring a category jump.</p>
           </section>
 
