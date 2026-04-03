@@ -66,7 +66,6 @@ export default function VenueUpgradeArticle() {
               ['#what-changed', 'What Changed in 2026'],
               ['#candidates', 'The 13 Candidates'],
               ['#financials', 'Financial Comparison'],
-              ['#videos', 'Video Reviews'],
               ['#three-paths', 'Three Paths Forward'],
               ['#recommendation', "What I'd Do"],
               ['#sources', 'Sources'],
@@ -368,34 +367,6 @@ export default function VenueUpgradeArticle() {
           </p>
         </section>
 
-
-        {/* ── VIDEOS ── */}
-        <section id="videos" className="mb-12">
-          <h2 className="text-xl font-bold text-[#2C2A27] mb-6">Video Reviews</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {[
-              { title: 'Kia Seltos 2026 — First Look Review', id: '5xV85V2hJjw', desc: 'The redesigned Seltos 2026 — new platform, new engines, 5-star BNCAP, and a cabin that leapfrogs the competition.' },
-              { title: 'Kia Seltos vs Hyundai Creta — Compact SUV Showdown', id: 'wj3xRizySZQ', desc: 'The two biggest-selling compact SUVs in India — direct comparison on space, features, and value.' },
-              { title: 'Toyota Innova Hycross — Full Road Test', id: 'BCFqH00GKYE', desc: "The class jump — why the Innova Hycross is in a different category and whether it's worth the premium over the Seltos." },
-              { title: 'Kia Carens — The Honest Review', id: '0D5vJ5gFS0U', desc: 'The most underrated 7-seater in India — why the Carens deserves a spot on every shortlist.' },
-            ].map(({ title, id, desc }) => (
-              <div key={id}>
-                <h3 className="text-sm font-bold text-[#2C2A27] mb-2">{title}</h3>
-                <div className="overflow-hidden rounded-lg">
-                  <iframe
-                    src={`https://www.youtube.com/embed/${id}`}
-                    title={title}
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                    loading="lazy"
-                    className="w-full aspect-video block"
-                  />
-                </div>
-                <p className="mt-2 text-xs text-[#6B6860]">{desc}</p>
-              </div>
-            ))}
-          </div>
-        </section>
 
         {/* ── THREE PATHS ── */}
         <section id="three-paths" className="mb-12">

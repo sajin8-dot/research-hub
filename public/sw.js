@@ -1,7 +1,7 @@
 // Research Hub Service Worker
 // Caches the site for offline use
 
-const CACHE_NAME = 'research-hub-v1';
+const CACHE_NAME = 'research-hub-v2';
 const OFFLINE_URL = '/';
 
 self.addEventListener('install', (event) => {
