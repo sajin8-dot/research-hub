@@ -22,23 +22,23 @@ const FINANCIAL_TABLE: Array<[string,string,string,string,string,string,boolean]
 
 export default function VenueUpgradeArticle() {
   return (
-    <main className="min-h-screen bg-[#FAFAF8] overflow-x-hidden">
+    <main className="min-h-screen bg-[#F7F4F0] overflow-x-hidden">
 
       {/* ── HERO ── */}
-      <div className="bg-[#0B044C] w-full py-16 px-4">
+      <div className="bg-[#2C2A27] w-full py-16 px-4">
         <div className="max-w-[760px] mx-auto">
-          <Link href="/" className="inline-block text-white/60 hover:text-white text-sm mb-6 transition-colors">
+          <Link href="/" className="inline-block text-white/50 hover:text-white text-sm mb-6 transition-colors">
             ← Back to Research
           </Link>
-          <h1 className="text-3xl md:text-4xl font-bold text-white leading-tight">
+          <h1 className="font-serif text-3xl md:text-4xl font-bold text-[#F7F4F0] leading-tight">
             Upgrading From the Venue DCT
           </h1>
-          <p className="mt-4 text-white/70 text-base">
+          <p className="mt-4 text-white/60 text-base">
             The honest search — three kids, a Jack Russell, and five years of memories
           </p>
           <div className="flex items-center gap-3 mt-6">
             <span className="bg-[#C4622D] text-white text-xs font-semibold px-2 py-0.5 rounded uppercase tracking-wide">Car Search</span>
-            <span className="text-white/50 text-sm">April 2026</span>
+            <span className="text-white/40 text-sm">April 2026</span>
           </div>
         </div>
       </div>
@@ -79,7 +79,7 @@ export default function VenueUpgradeArticle() {
 
         {/* ── THE BASELINE ── */}
         <section id="the-baseline" className="mb-12">
-          <h2 className="text-xl font-bold text-[#2C2A27] mb-4">The Baseline: What the Venue DCT Actually Has</h2>
+          <h2 className="font-serif text-xl font-bold text-[#2C2A27] mb-4">The Baseline: What the Venue DCT Actually Has</h2>
           <div className="space-y-3 text-[#3D3B37] text-sm leading-relaxed">
             <p>
               The Hyundai Venue DCT was bought in 2019. It is a sub-4-metre compact SUV
@@ -106,7 +106,7 @@ export default function VenueUpgradeArticle() {
 
         {/* ── UPGRADE TRIGGER ── */}
         <section id="the-trigger" className="mb-12">
-          <h2 className="text-xl font-bold text-[#2C2A27] mb-4">The Upgrade Trigger</h2>
+          <h2 className="font-serif text-xl font-bold text-[#2C2A27] mb-4">The Upgrade Trigger</h2>
           <div className="space-y-3 text-[#3D3B37] text-sm leading-relaxed">
             <p>
               Space. Not power. Not features. Not badge. Space — specifically the space
@@ -129,7 +129,7 @@ export default function VenueUpgradeArticle() {
 
         {/* ── WHAT CHANGED ── */}
         <section id="what-changed" className="mb-12">
-          <h2 className="text-xl font-bold text-[#2C2A27] mb-4">What Changed in 2026</h2>
+          <h2 className="font-serif text-xl font-bold text-[#2C2A27] mb-4">What Changed in 2026</h2>
           <div className="space-y-3 text-[#3D3B37] text-sm leading-relaxed">
             <p>Three significant changes since the previous version of this article:</p>
             <ul className="space-y-2 pl-4">
@@ -142,13 +142,13 @@ export default function VenueUpgradeArticle() {
 
         {/* ── CANDIDATES ── */}
         <section id="candidates" className="mb-12">
-          <h2 className="text-xl font-bold text-[#2C2A27] mb-6">The 13 Candidates</h2>
+          <h2 className="font-serif text-xl font-bold text-[#2C2A27] mb-6">The 13 Candidates</h2>
           <div className="space-y-8">
 
             <div>
               <div className="flex items-baseline gap-2 mb-2">
                 <span className="text-sm font-bold text-[#C4622D]">1</span>
-                <h3 className="text-base font-bold text-[#2C2A27]">Kia Seltos 2026 — The Honest Upgrade</h3>
+                <h3 className="font-serif text-base font-bold text-[#2C2A27]">Kia Seltos 2026 — The Honest Upgrade</h3>
                 <span className="text-xs bg-[#C4622D]/10 text-[#C4622D] px-2 py-0.5 rounded-full font-medium">₹11–20L</span>
                 <span className="text-xs bg-[#5C6B4F]/10 text-[#5C6B4F] px-2 py-0.5 rounded-full font-medium">⭐5 BNCAP</span>
               </div>
@@ -163,7 +163,7 @@ export default function VenueUpgradeArticle() {
             <div>
               <div className="flex items-baseline gap-2 mb-2">
                 <span className="text-sm font-bold text-[#C4622D]">2</span>
-                <h3 className="text-base font-bold text-[#2C2A27]">Hyundai Creta — The Familiar Step Up</h3>
+                <h3 className="font-serif text-base font-bold text-[#2C2A27]">Hyundai Creta — The Familiar Step Up</h3>
                 <span className="text-xs bg-[#F7F4F0] border border-[#E5E0D8] text-[#6B6860] px-2 py-0.5 rounded-full font-medium">₹11–24L</span>
                 <span className="text-xs bg-[#5C6B4F]/10 text-[#5C6B4F] px-2 py-0.5 rounded-full font-medium">⭐4 BNCAP</span>
               </div>
@@ -177,7 +177,7 @@ export default function VenueUpgradeArticle() {
             <div>
               <div className="flex items-baseline gap-2 mb-2">
                 <span className="text-sm font-bold text-[#C4622D]">3</span>
-                <h3 className="text-base font-bold text-[#2C2A27]">Toyota Innova Hycross — The Class Jump</h3>
+                <h3 className="font-serif text-base font-bold text-[#2C2A27]">Toyota Innova Hycross — The Class Jump</h3>
                 <span className="text-xs bg-[#F7F4F0] border border-[#E5E0D8] text-[#6B6860] px-2 py-0.5 rounded-full font-medium">₹27–33L</span>
                 <span className="text-xs bg-[#5C6B4F]/10 text-[#5C6B4F] px-2 py-0.5 rounded-full font-medium">⭐5 BNCAP</span>
               </div>
@@ -192,7 +192,7 @@ export default function VenueUpgradeArticle() {
             <div>
               <div className="flex items-baseline gap-2 mb-2">
                 <span className="text-sm font-bold text-[#C4622D]">4</span>
-                <h3 className="text-base font-bold text-[#2C2A27]">Kia Carens — The Value MPV</h3>
+                <h3 className="font-serif text-base font-bold text-[#2C2A27]">Kia Carens — The Value MPV</h3>
                 <span className="text-xs bg-[#F7F4F0] border border-[#E5E0D8] text-[#6B6860] px-2 py-0.5 rounded-full font-medium">₹18–22L</span>
                 <span className="text-xs bg-[#5C6B4F]/10 text-[#5C6B4F] px-2 py-0.5 rounded-full font-medium">⭐3 BNCAP</span>
               </div>
@@ -206,7 +206,7 @@ export default function VenueUpgradeArticle() {
             <div>
               <div className="flex items-baseline gap-2 mb-2">
                 <span className="text-sm font-bold text-[#C4622D]">5</span>
-                <h3 className="text-base font-bold text-[#2C2A27]">Tata Sierra ICE — The Available Surprise</h3>
+                <h3 className="font-serif text-base font-bold text-[#2C2A27]">Tata Sierra ICE — The Available Surprise</h3>
                 <span className="text-xs bg-[#F7F4F0] border border-[#E5E0D8] text-[#6B6860] px-2 py-0.5 rounded-full font-medium">₹11.5–21L</span>
                 <span className="text-xs bg-[#5C6B4F]/10 text-[#5C6B4F] px-2 py-0.5 rounded-full font-medium">⭐5 BNCAP</span>
               </div>
@@ -220,7 +220,7 @@ export default function VenueUpgradeArticle() {
             <div>
               <div className="flex items-baseline gap-2 mb-2">
                 <span className="text-sm font-bold text-[#C4622D]">6</span>
-                <h3 className="text-base font-bold text-[#2C2A27]">Mahindra XUV700 — The SUV Experience</h3>
+                <h3 className="font-serif text-base font-bold text-[#2C2A27]">Mahindra XUV700 — The SUV Experience</h3>
                 <span className="text-xs bg-[#F7F4F0] border border-[#E5E0D8] text-[#6B6860] px-2 py-0.5 rounded-full font-medium">₹24–27L</span>
               </div>
               <div className="text-sm text-[#3D3B37] leading-relaxed space-y-2 pl-6">
@@ -233,7 +233,7 @@ export default function VenueUpgradeArticle() {
             <div>
               <div className="flex items-baseline gap-2 mb-2">
                 <span className="text-sm font-bold text-[#C4622D]">7</span>
-                <h3 className="text-base font-bold text-[#2C2A27]">Tata Harrier ICE — The Highway Specialist</h3>
+                <h3 className="font-serif text-base font-bold text-[#2C2A27]">Tata Harrier ICE — The Highway Specialist</h3>
                 <span className="text-xs bg-[#F7F4F0] border border-[#E5E0D8] text-[#6B6860] px-2 py-0.5 rounded-full font-medium">₹13–25L</span>
                 <span className="text-xs bg-[#5C6B4F]/10 text-[#5C6B4F] px-2 py-0.5 rounded-full font-medium">⭐5 BNCAP</span>
               </div>
@@ -247,7 +247,7 @@ export default function VenueUpgradeArticle() {
             <div>
               <div className="flex items-baseline gap-2 mb-2">
                 <span className="text-sm font-bold text-[#C4622D]">8</span>
-                <h3 className="text-base font-bold text-[#2C2A27]">Maruti XL6 CNG — The Budget Intelligent Choice</h3>
+                <h3 className="font-serif text-base font-bold text-[#2C2A27]">Maruti XL6 CNG — The Budget Intelligent Choice</h3>
                 <span className="text-xs bg-[#F7F4F0] border border-[#E5E0D8] text-[#6B6860] px-2 py-0.5 rounded-full font-medium">₹15–17L</span>
               </div>
               <div className="text-sm text-[#3D3B37] leading-relaxed space-y-2 pl-6">
@@ -260,7 +260,7 @@ export default function VenueUpgradeArticle() {
             <div>
               <div className="flex items-baseline gap-2 mb-2">
                 <span className="text-sm font-bold text-[#C4622D]">9</span>
-                <h3 className="text-base font-bold text-[#2C2A27]">Tata Harrier EV — The Electric Highway Cruiser</h3>
+                <h3 className="font-serif text-base font-bold text-[#2C2A27]">Tata Harrier EV — The Electric Highway Cruiser</h3>
                 <span className="text-xs bg-[#F7F4F0] border border-[#E5E0D8] text-[#6B6860] px-2 py-0.5 rounded-full font-medium">₹21–29L</span>
                 <span className="text-xs bg-[#5C6B4F]/10 text-[#5C6B4F] px-2 py-0.5 rounded-full font-medium">⭐5 BNCAP</span>
               </div>
@@ -274,7 +274,7 @@ export default function VenueUpgradeArticle() {
             <div>
               <div className="flex items-baseline gap-2 mb-2">
                 <span className="text-sm font-bold text-[#C4622D]">10</span>
-                <h3 className="text-base font-bold text-[#2C2A27]">Kia Syros EV — The Electric Alternative</h3>
+                <h3 className="font-serif text-base font-bold text-[#2C2A27]">Kia Syros EV — The Electric Alternative</h3>
                 <span className="text-xs bg-[#F7F4F0] border border-[#E5E0D8] text-[#6B6860] px-2 py-0.5 rounded-full font-medium">₹14–30L</span>
                 <span className="text-xs bg-[#5C6B4F]/10 text-[#5C6B4F] px-2 py-0.5 rounded-full font-medium">Coming Mid-2026</span>
               </div>
@@ -288,7 +288,7 @@ export default function VenueUpgradeArticle() {
             <div>
               <div className="flex items-baseline gap-2 mb-2">
                 <span className="text-sm font-bold text-[#C4622D]">11</span>
-                <h3 className="text-base font-bold text-[#2C2A27]">Hyundai Creta EV — The Electric Creta</h3>
+                <h3 className="font-serif text-base font-bold text-[#2C2A27]">Hyundai Creta EV — The Electric Creta</h3>
                 <span className="text-xs bg-[#F7F4F0] border border-[#E5E0D8] text-[#6B6860] px-2 py-0.5 rounded-full font-medium">₹18–22L</span>
                 <span className="text-xs bg-[#5C6B4F]/10 text-[#5C6B4F] px-2 py-0.5 rounded-full font-medium">Coming Late 2026</span>
               </div>
@@ -302,7 +302,7 @@ export default function VenueUpgradeArticle() {
             <div>
               <div className="flex items-baseline gap-2 mb-2">
                 <span className="text-sm font-bold text-[#C4622D]">12</span>
-                <h3 className="text-base font-bold text-[#2C2A27]">Tata Curvv EV — The Electric Option</h3>
+                <h3 className="font-serif text-base font-bold text-[#2C2A27]">Tata Curvv EV — The Electric Option</h3>
                 <span className="text-xs bg-[#F7F4F0] border border-[#E5E0D8] text-[#6B6860] px-2 py-0.5 rounded-full font-medium">₹15–24L</span>
                 <span className="text-xs bg-[#5C6B4F]/10 text-[#5C6B4F] px-2 py-0.5 rounded-full font-medium">Coming 2026</span>
               </div>
@@ -315,7 +315,7 @@ export default function VenueUpgradeArticle() {
             <div>
               <div className="flex items-baseline gap-2 mb-2">
                 <span className="text-sm font-bold text-[#C4622D]">13</span>
-                <h3 className="text-base font-bold text-[#2C2A27]">Renault Duster 7-Seater — The Wildcard</h3>
+                <h3 className="font-serif text-base font-bold text-[#2C2A27]">Renault Duster 7-Seater — The Wildcard</h3>
                 <span className="text-xs bg-[#F7F4F0] border border-[#E5E0D8] text-[#6B6860] px-2 py-0.5 rounded-full font-medium">₹10–20L</span>
                 <span className="text-xs bg-[#5C6B4F]/10 text-[#5C6B4F] px-2 py-0.5 rounded-full font-medium">Coming Late 2026</span>
               </div>
@@ -331,7 +331,7 @@ export default function VenueUpgradeArticle() {
 
         {/* ── FINANCIAL COMPARISON ── */}
         <section id="financials" className="mb-12">
-          <h2 className="text-xl font-bold text-[#2C2A27] mb-4">Financial Comparison</h2>
+          <h2 className="font-serif text-xl font-bold text-[#2C2A27] mb-4">Financial Comparison</h2>
           <p className="text-xs text-[#6B6860] mb-4">
             Prices are ex-showroom or on-road Bangalore estimates, April 2026.
             Annual usage: 15,000 km at 70% highway, 30% city. Confirm exact prices with dealers before any decision.
@@ -370,7 +370,7 @@ export default function VenueUpgradeArticle() {
 
         {/* ── THREE PATHS ── */}
         <section id="three-paths" className="mb-12">
-          <h2 className="text-xl font-bold text-[#2C2A27] mb-6">Three Paths Forward</h2>
+          <h2 className="font-serif text-xl font-bold text-[#2C2A27] mb-6">Three Paths Forward</h2>
           <div className="space-y-5">
             {[
               {
@@ -410,7 +410,7 @@ export default function VenueUpgradeArticle() {
 
         {/* ── RECOMMENDATION ── */}
         <section id="recommendation" className="mb-12">
-          <h2 className="text-xl font-bold text-[#2C2A27] mb-4">What I'd Do</h2>
+          <h2 className="font-serif text-xl font-bold text-[#2C2A27] mb-4">What I'd Do</h2>
           <div className="space-y-3 text-sm text-[#3D3B37] leading-relaxed">
             <p><strong>Drive the Seltos 2026 GTX turbo DCT first.</strong> It is the most direct upgrade from the Venue DCT — same brand ecosystem familiarity, same fun-to-drive character, significantly more space and safety. At ₹17–20L, it is priced correctly for what it delivers.</p>
             <p><strong>Then drive the Innova Hycross.</strong> Not as the comparison that makes the Seltos feel inadequate. As the comparison that clarifies whether the additional cabin width and hybrid efficiency are worth the size premium to <em>you</em>.</p>

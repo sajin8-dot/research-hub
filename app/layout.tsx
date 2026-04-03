@@ -1,8 +1,21 @@
 import './globals.css'
-import { Geist } from "next/font/google";
+import { Merriweather } from "next/font/google";
+import { Raleway } from "next/font/google";
 import { cn } from "@/lib/utils";
 
-const geist = Geist({subsets:['latin'],variable:'--font-sans'});
+const merriweather = Merriweather({
+  subsets: ['latin'],
+  weight: ['400', '700', '900'],
+  variable: '--font-serif',
+  display: 'swap',
+})
+
+const raleway = Raleway({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-sans',
+  display: 'swap',
+})
 
 export const metadata = {
   title: {
@@ -14,7 +27,7 @@ export const metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={cn("font-sans", geist.variable)}>
+    <html lang="en" className={cn(raleway.variable, merriweather.variable, "font-sans")}>
       <head>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📡</text></svg>" />
       {/* PWA Meta Tags */}
