@@ -2,13 +2,13 @@ import Link from 'next/link'
 
 const articles = [
   {
-    slug: 'car-kodiaq-vs-rivals',
-    title: 'The Kodiaq Question: ₹54L Dream or ₹37L Wisdom?',
-    excerpt: 'Family SUV search for Bangalore. Kodiaq vs Tucson vs Compass vs Tiguan — research, numbers, and a verdict that split the team.',
-    category: 'Car Decision',
-    date: 'April 3, 2026',
+    slug: 'venue-upgrade',
+    title: 'Upgrading From the Venue DCT — The Honest Search',
+    excerpt: 'The Venue DCT has been a great city car. Three kids later, space is the only real filter. The Seltos 2026 changes everything — here is the complete upgrade search.',
+    category: 'Car Search',
+    date: 'April 2026',
     tag: 'decision',
-    verdict: 'Tucson — but Kodiaq deserves another look',
+    verdict: 'Seltos 2026 Turbo DCT — the most honest upgrade from the Venue',
   },
 ]
 
