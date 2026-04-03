@@ -582,6 +582,7 @@ export default function VenueUpgradeArticle() {
               </tr>
             </tbody>
           </table>
+          </div>
 
           <div className="container-article">
           <h2 id="gallery">The Candidates at a Glance</h2>
@@ -652,44 +653,42 @@ export default function VenueUpgradeArticle() {
             </p>
           </div>
 
-          <div className="tool-section">
-            <h3 id="emi-calculator">EMI Calculator</h3>
-          <div className="tool-section">
-            <h3 id="weighted-scores">Weighted Rankings</h3>
-            <p className="tool-desc">
-              No single right answer. Adjust the weights to match your priorities — how much you care about
-              boot space vs power vs safety — and watch the ranking reorder in real time.
-            </p>
-            <WeightedScores />
-          </div>
+          <div className="container-article">
+            <div className="tool-section">
+              <h3 id="emi-calculator">EMI Calculator</h3>
+              <p className="tool-desc">
+                Adjust the loan amount, tenure, and interest rate to see what your monthly EMI would look like.
+                Default: ₹15L at 9.5% p.a. over 5 years — a realistic starting point for a car loan in India.
+              </p>
+              <EMICalculator defaultAmount={1500000} />
+            </div>
 
+            <div className="tool-section">
+              <h3 id="weighted-scores">Weighted Rankings</h3>
+              <p className="tool-desc">
+                No single right answer. Adjust the weights to match your priorities — how much you care about
+                boot space vs power vs safety — and watch the ranking reorder in real time.
+              </p>
+              <WeightedScores />
+            </div>
 
-            <p className="tool-desc">
-              Adjust the loan amount, tenure, and interest rate to see what your monthly EMI would look like.
-              Default: ₹15L at 9.5% p.a. over 5 years — a realistic starting point for a car loan in India.
-            </p>
-            <EMICalculator defaultAmount={1500000} />
-          </div>
+            <div className="tool-section">
+              <h3 id="fuel-cost-comparator">Running Cost Comparison</h3>
+              <p className="tool-desc">
+                Fuel type changes everything. Adjust your monthly driving to see which car costs you the least
+                at the pump — and how much the EV wins on running cost.
+              </p>
+              <FuelCostComparator />
+            </div>
 
-          <div className="tool-section">
-            <h3 id="fuel-cost-comparator">Running Cost Comparison</h3>
-            <p className="tool-desc">
-              Fuel type changes everything. Adjust your monthly driving to see which car costs you the least
-              at the pump — and how much the EV wins on running cost.
-            </p>
-            <FuelCostComparator />
-          </div>
-
-          <div className="tool-section">
-            <h3 id="car-compare">Compare Any Two Cars</h3>
-            <p className="tool-desc">
-              Pick any two candidates from the list and see how they stack up side by side on price,
-              power, features, and practicality.
-            </p>
-            <CarCompareWidget />
-          </div>
-
-
+            <div className="tool-section">
+              <h3 id="car-compare">Compare Any Two Cars</h3>
+              <p className="tool-desc">
+                Pick any two candidates from the list and see how they stack up side by side on price,
+                power, features, and practicality.
+              </p>
+              <CarCompareWidget />
+            </div>
           </div>
           <p className="comparison-note">
             <strong>The honest comparison:</strong> The Seltos 2026 at its
