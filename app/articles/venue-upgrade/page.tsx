@@ -5,6 +5,12 @@ export const metadata = {
   description: 'The Hyundai Venue DCT has been a great city car for five years. Three kids later, space is the only real filter. Here is what an upgrade actually looks like.',
 }
 
+import '../../../components/calculators.css'
+import EMICalculator from '../../../components/calculators/EMICalculator'
+import FuelCostComparator from '../../../components/calculators/FuelCostComparator'
+import CarCompareWidget from '../../../components/widgets/CarCompareWidget'
+
+
 export default function VenueUpgradeArticle() {
   return (
     <main>
@@ -59,6 +65,10 @@ export default function VenueUpgradeArticle() {
             <li><a href="#what-changed">What Changed in 2026</a></li>
             <li><a href="#the-eight">The Candidates</a></li>
             <li><a href="#gallery">Gallery — All 10 Candidates</a></li>
+            <li><a href="#tools">Interactive Tools</a></li>
+            <li><a href="#emi-calculator">EMI Calculator</a></li>
+            <li><a href="#fuel-cost-comparator">Running Cost Comparison</a></li>
+            <li><a href="#car-compare">Compare Any Two Cars</a></li>
             <li><a href="#financials">Financial Comparison</a></li>
             <li><a href="#videos">Video Reviews</a></li>
             <li><a href="#three-paths">Three Paths Forward</a></li>
@@ -627,6 +637,42 @@ export default function VenueUpgradeArticle() {
             </div>
           </div>
           <p className="gallery-credit">Images sourced from CarWale. All photos show the right front three-quarter angle — the most informative angle for exterior comparison.</p>
+
+
+
+          <div className="interactive-tools-intro">
+            <h2 id="tools">Interactive Tools</h2>
+            <p className="tools-subhead">
+              Skip the static tables. These tools let you run the numbers on your specific situation.
+            </p>
+          </div>
+
+          <div className="tool-section">
+            <h3 id="emi-calculator">EMI Calculator</h3>
+            <p className="tool-desc">
+              Adjust the loan amount, tenure, and interest rate to see what your monthly EMI would look like.
+              Default: ₹15L at 9.5% p.a. over 5 years — a realistic starting point for a car loan in India.
+            </p>
+            <EMICalculator defaultAmount={1500000} />
+          </div>
+
+          <div className="tool-section">
+            <h3 id="fuel-cost-comparator">Running Cost Comparison</h3>
+            <p className="tool-desc">
+              Fuel type changes everything. Adjust your monthly driving to see which car costs you the least
+              at the pump — and how much the EV wins on running cost.
+            </p>
+            <FuelCostComparator />
+          </div>
+
+          <div className="tool-section">
+            <h3 id="car-compare">Compare Any Two Cars</h3>
+            <p className="tool-desc">
+              Pick any two candidates from the list and see how they stack up side by side on price,
+              power, features, and practicality.
+            </p>
+            <CarCompareWidget />
+          </div>
 
 
           <p className="comparison-note">

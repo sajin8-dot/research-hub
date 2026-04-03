@@ -1,0 +1,476 @@
+/* ─── EMI Calculator ─── */
+.emi-calc {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 28px 32px;
+  max-width: 680px;
+}
+
+.calc-section {
+  margin-bottom: 28px;
+}
+
+.calc-label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 10px;
+}
+
+.calc-label {
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.calc-value-display {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.calc-slider {
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  background: linear-gradient(
+    to right,
+    var(--accent-rust) 0%,
+    var(--accent-rust) var(--fill-pct, 50%),
+    var(--border) var(--fill-pct, 50%),
+    var(--border) 100%
+  );
+}
+
+.calc-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--accent-rust);
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(196, 98, 45, 0.4);
+  border: 2px solid white;
+}
+
+.calc-range-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 6px;
+  font-size: 0.72rem;
+  color: var(--text-light);
+}
+
+.calc-presets {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.calc-preset {
+  padding: 4px 12px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--bg);
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.calc-preset:hover { border-color: var(--accent-rust); color: var(--accent-rust); }
+.calc-preset.active { background: var(--accent-rust); border-color: var(--accent-rust); color: white; }
+
+.calc-tenure-grid {
+  display: flex;
+  gap: 8px;
+}
+
+.calc-tenure-btn {
+  flex: 1;
+  padding: 8px 4px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--bg);
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.calc-tenure-btn:hover { border-color: var(--accent-rust); color: var(--accent-rust); }
+.calc-tenure-btn.active { background: var(--accent-rust); border-color: var(--accent-rust); color: white; }
+
+/* EMI Results */
+.emi-results {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px;
+  margin-top: 8px;
+}
+
+.emi-monthly {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border-light);
+  margin-bottom: 20px;
+}
+
+.emi-label {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+.emi-amount {
+  font-family: var(--font-display);
+  font-size: 2.4rem;
+  font-weight: 900;
+  color: var(--text);
+  letter-spacing: -0.02em;
+}
+
+.emi-breakdown { display: flex; flex-direction: column; gap: 14px; }
+
+.emi-breakdown-item { display: flex; flex-direction: column; gap: 4px; }
+.emi-breakdown-item.total { padding-top: 10px; border-top: 1px solid var(--border-light); margin-top: 4px; }
+
+.emi-breakdown-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.emi-breakdown-label {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.emi-breakdown-val {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.emi-breakdown-val.accent-rust { color: var(--accent-rust); }
+
+.emi-bar-track {
+  height: 4px;
+  background: var(--border);
+  border-radius: 2px;
+  margin-top: 4px;
+}
+
+.emi-bar-fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.4s ease;
+}
+
+.emi-bar-fill.principal { background: var(--accent-green); }
+.emi-bar-fill.interest { background: var(--accent-rust); }
+
+/* ─── Fuel Cost Comparator ─── */
+.fuel-calc {
+  max-width: 680px;
+}
+
+.fuel-controls {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px 28px;
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.fuel-control { display: flex; flex-direction: column; gap: 0; }
+
+.fuel-filter-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.fuel-filter-btns {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.fuel-filter-btn {
+  padding: 4px 10px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--bg);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.fuel-filter-btn:hover { border-color: var(--accent-rust); color: var(--accent-rust); }
+.fuel-filter-btn.active { background: var(--text); border-color: var(--text); color: white; }
+
+.fuel-toggle {
+  display: flex;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.fuel-toggle-btn {
+  flex: 1;
+  padding: 8px 16px;
+  border: none;
+  background: var(--bg);
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.fuel-toggle-btn.active { background: var(--text); color: white; }
+
+/* Ranking */
+.fuel-ranking { display: flex; flex-direction: column; gap: 10px; }
+
+.fuel-row {
+  display: grid;
+  grid-template-columns: 32px 1fr 1fr 80px;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: 6px;
+  border: 1px solid var(--border-light);
+  background: var(--surface);
+  transition: all 0.15s;
+}
+
+.fuel-row.cheapest {
+  background: #EAF6F0;
+  border-color: #1A8A5C;
+}
+
+.fuel-rank {
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  font-weight: 900;
+  color: var(--text-light);
+}
+
+.fuel-row.cheapest .fuel-rank { color: #1A8A5C; }
+
+.fuel-info { display: flex; flex-direction: column; gap: 3px; }
+
+.fuel-name {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.3;
+}
+
+.fuel-meta { display: flex; align-items: center; gap: 8px; }
+
+.fuel-badge {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: white;
+  padding: 1px 6px;
+  border-radius: 3px;
+}
+
+.fuel-efficiency {
+  font-size: 0.72rem;
+  color: var(--text-light);
+}
+
+.fuel-bar-wrap {
+  height: 6px;
+  background: var(--border);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.fuel-bar {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.5s ease;
+  min-width: 4px;
+}
+
+.fuel-cost {
+  font-family: var(--font-display);
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text);
+  text-align: right;
+}
+
+.fuel-note {
+  font-size: 0.72rem;
+  color: var(--text-light);
+  margin-top: 12px;
+  font-style: italic;
+}
+
+/* ─── Car Compare Widget ─── */
+.compare-widget {
+  max-width: 720px;
+}
+
+.compare-selectors {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.compare-selector { display: flex; flex-direction: column; gap: 6px; }
+
+.compare-selector-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.compare-select {
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text);
+  cursor: pointer;
+  width: 100%;
+}
+
+.compare-vs {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 900;
+  color: var(--text-light);
+  letter-spacing: -0.02em;
+}
+
+.compare-table-wrap {
+  overflow-x: auto;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  margin-bottom: 24px;
+}
+
+.compare-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.compare-table th,
+.compare-table td {
+  padding: 10px 14px;
+  text-align: left;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.compare-table th {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  background: var(--surface);
+}
+
+.compare-table th.winner-col { color: var(--accent-rust); }
+
+.compare-spec-label {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+.compare-cell {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.compare-cell.winner {
+  color: var(--accent-green);
+  background: #f0f5ee;
+}
+
+.compare-features-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.compare-feature-row {
+  display: grid;
+  grid-template-columns: 20px 1fr 20px;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 4px;
+  background: var(--surface);
+  border: 1px solid var(--border-light);
+  font-size: 0.78rem;
+}
+
+.compare-feature-row.both { background: #f0f5ee; border-color: var(--accent-green); }
+.compare-feature-row.a { background: #fef3ee; border-color: var(--accent-rust); opacity: 0.7; }
+.compare-feature-row.b { background: #fef3ee; border-color: var(--accent-rust); opacity: 0.7; }
+
+.compare-feature-check { font-size: 0.88rem; }
+.compare-feature-check.yes { color: var(--accent-green); font-weight: 700; }
+.compare-feature-check.no { color: var(--text-light); }
+
+.compare-feature-name { font-size: 0.78rem; color: var(--text); }
+
+.compare-features-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 8px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  padding: 0 10px;
+}
