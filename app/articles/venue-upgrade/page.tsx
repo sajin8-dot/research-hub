@@ -42,13 +42,13 @@ function CandidateCard({
   children: React.ReactNode
 }) {
   return (
-    <div className="flex flex-col sm:flex-row gap-4 py-6 border-b border-[#E5E0D8] last:border-0">
+    <div className="flex flex-col sm:flex-row gap-5 py-6 border-b border-[#E5E0D8] last:border-0">
       <div className="flex-shrink-0">
         <img
           src={img}
           alt={name}
           loading="lazy"
-          className="w-full sm:w-[180px] h-[130px] object-cover rounded-lg"
+          className="w-full sm:w-[220px] h-[156px] object-contain bg-[#F7F4F0] rounded-lg"
         />
       </div>
       <div className="flex-1 min-w-0">
@@ -58,7 +58,7 @@ function CandidateCard({
             <span className="flex-shrink-0 bg-[#C4622D]/10 text-[#C4622D] text-[10px] font-semibold uppercase tracking-wide px-2 py-0.5 rounded-full">{badge}</span>
           )}
         </div>
-        <div className="flex flex-wrap gap-2 mb-3">
+        <div className="flex flex-wrap gap-2 mb-3 max-w-full">
           <SpecBadge label="ex-showroom" value={price} />
           <SpecBadge label="engine" value={engine} />
           <SpecBadge label="boot" value={boot} />
