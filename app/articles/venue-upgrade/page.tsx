@@ -117,7 +117,7 @@ export default function VenueUpgradeArticle() {
             <h3>#1 · Kia Seltos 2026 — The Honest Upgrade</h3>
             <p className="candidate-price">₹11–20L · 160bhp turbo · 447L boot · ⭐5 BNCAP</p>
             <p><strong>The car that ends this search.</strong> The Seltos 2026 launched January 2 with a comprehensive redesign — new platform, new engines, a significantly larger cabin, and a 5-star BNCAP safety rating.</p>
-            <p>Key numbers vs the Venue: Length +95mm (4,460mm), Wheelbase +80mm (2,690mm), Boot 447L (+97L), 160bhp turbo DCT (+40bhp). The turbo petrol DCT is the variant to prioritse — it gives the Seltos the performance feel that made the Venue enjoyable, at a higher level.</p>
+            <p>Key numbers vs the Venue: Length +95mm (4,460mm), Wheelbase +80mm (2,690mm), Boot 447L (+97L), 160bhp turbo DCT (+40bhp). The turbo petrol DCT is the variant to prioritse — it gives the Seltos the performance feel that made the Venue enjoyable, at a higher level. Critically: at 4.46m it is still city-manageable. The DCT keeps the engaging drive character. You don't lose what you enjoy about the Venue — you gain everything else.</p>
             <p>The dual 12.3-inch curved display, Level 2 ADAS, Bose audio, and 5-star safety make this a generational leap over the Venue at every meaningful dimension. At ₹17–20L for the GTX turbo DCT, it is priced correctly for what it delivers.</p>
 
             <h3>#4 · Hyundai Creta — The Familiar Step Up</h3>
@@ -268,12 +268,12 @@ export default function VenueUpgradeArticle() {
 
             <div className="verdict-lane">
               <h3>#1 — Kia Seltos 2026 GTX Turbo DCT · ₹17–20L</h3>
-              <p>The most honest upgrade from the Venue DCT. Same brand ecosystem familiarity, same fun-to-drive character, significantly more space and safety. 160bhp turbo DCT is a genuine step up from the Venue's 120bhp. 5-star BNCAP, Level 2 ADAS, dual 12.3-inch display — this is a generational leap at every dimension that matters. <strong>Drive it first. If it feels right, end the search here.</strong></p>
+              <p>The most honest upgrade from the Venue DCT — and crucially, it doesn't lose the driving character you enjoy. At 4.46m, it's marginally longer than the Venue but still feels planted and nimble in Bangalore city traffic. The 160bhp turbo DCT is a genuine step up from the Venue's 120bhp — more of the same feeling you like, just better. Same brand ecosystem familiarity, significantly more space and safety. 5-star BNCAP, Level 2 ADAS, dual 12.3-inch display. <strong>Drive it first. If the steering feel is still there, end the search here.</strong></p>
             </div>
 
             <div className="verdict-lane">
               <h3>#2 — Toyota Innova Hycross ZX Hybrid · ₹27–33L</h3>
-              <p>Not a compact SUV — a different class entirely. The space upgrade from the Venue is transformational, not incremental. Three adults in the second row with real armroom. The hybrid does 18–20 kmpl real-world, making it the most sensible long-highway vehicle in this list. <strong>Worth test-driving as the space comparison that clarifies whether the category jump makes sense for your daily use.</strong></p>
+              <p>Not a compact SUV — a different class entirely. The space upgrade from the Venue is transformational, not incremental. Three adults in the second row with real armroom. The hybrid does 18–20 kmpl real-world. <strong>But the trade-off is real and daily: at 4.7m, it's noticeably harder to park and maneuver in Bangalore city traffic than the Venue. The CVT also removes the direct, engaging feel of the DCT you enjoy. Test-drive it — but only as a deliberate choice between space and drivability.</strong></p>
             </div>
 
             <div className="verdict-lane">
@@ -282,7 +282,7 @@ export default function VenueUpgradeArticle() {
             </div>
 
             <h2>What I'd Do</h2>
-            <p><strong>Drive the Seltos 2026 GTX turbo DCT first.</strong> It is the most direct upgrade from the Venue DCT — same brand ecosystem familiarity, same fun-to-drive character, significantly more space and safety. At ₹17–20L, it is priced correctly for what it delivers.</p>
+            <p><strong>Drive the Seltos 2026 GTX turbo DCT first.</strong> It is the most direct upgrade from the Venue DCT — same brand ecosystem familiarity, same fun-to-drive character, significantly more space and safety. At 4.46m it is still city-manageable and the DCT keeps the engaging feel you enjoy in Bangalore traffic. At ₹17–20L, it is priced correctly for what it delivers.</p>
             <p><strong>Then drive the Innova Hycross.</strong> Not as the comparison that makes the Seltos feel inadequate. As the comparison that clarifies whether the additional cabin width and hybrid efficiency are worth the size premium to <em>you</em>.</p>
             <p><strong>The Venue DCT has been a great car.</strong> It earned its upgrade. The Seltos 2026 is the most honest recognition of that investment — a car that takes everything the Venue did well and does it at a higher level, without requiring a category jump.</p>
             <p><strong>What to watch:</strong> The Kia Syros EV (mid-2026) and Creta EV (late 2026) are wildcard entries. If either delivers the range and pricing expected, they could reframe the entire EV vs petrol argument for this use case.</p>
