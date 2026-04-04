@@ -1,7 +1,7 @@
 // Research Hub Service Worker
 // Caches the site for offline use
 
-const CACHE_NAME = 'research-hub-v2';
+const CACHE_NAME = 'research-hub-v3';
 const OFFLINE_URL = '/';
 
 self.addEventListener('install', (event) => {
@@ -55,25 +55,38 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // For same-origin requests, try cache first, fall back to network
+  // For same-origin requests: network-first for HTML navigations, cache-first for assets
+  if (event.request.mode === 'navigate') {
+    // Network-first for HTML pages — always try to get fresh content
+    event.respondWith(
+      fetch(event.request)
+        .then((response) => {
+          if (response.ok) {
+            const clone = response.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
+          }
+          return response;
+        })
+        .catch(() => {
+          return caches.match(event.request).then((cached) => {
+            if (cached) return cached;
+            return caches.match(OFFLINE_URL);
+          });
+        })
+    );
+    return;
+  }
+
+  // Cache-first for static assets (JS, CSS, images)
   event.respondWith(
     caches.match(event.request).then((cached) => {
       if (cached) return cached;
-
       return fetch(event.request)
         .then((response) => {
-          // Don't cache non-ok responses
           if (!response.ok) return response;
           const clone = response.clone();
           caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
           return response;
-        })
-        .catch(() => {
-          // Return offline page for navigation requests
-          if (event.request.mode === 'navigate') {
-            return caches.match(OFFLINE_URL);
-          }
-          return new Response('Offline', { status: 503 });
         });
     })
   );
