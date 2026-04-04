@@ -1,15 +1,21 @@
 import Link from 'next/link'
+import ReactMarkdown from 'react-markdown'
+import fs from 'fs'
+import path from 'path'
 
 export const metadata = {
   title: 'Six Patterns to Future-Proof Your Multi-Agent Stack',
-  description: 'Seb\'s OpenClaw agent architecture is already in the top percentile of enterprise deployments. The next evolution isn\'t about adopting every hyped framework — it\'s about precision engineering. Here\'s what to build, what to skip, and why.',
+  description: "Seb's OpenClaw agent architecture is already in the top percentile of enterprise deployments. The next evolution isn't about adopting every hyped framework — it's about precision engineering. Here's what to build, what to skip, and why.",
 }
 
 export default function MultiAgentOrchestrationArticle() {
+  const markdown = fs.readFileSync(
+    path.join('/data/.openclaw/workspace', 'sebs_stack_article.md'),
+    'utf8'
+  )
+
   return (
     <main>
-
-      {/* ── HERO HEADER ── */}
       <header className="article-header">
         <div className="container">
           <Link href="/" className="back-link">← Back to Research</Link>
@@ -24,13 +30,11 @@ export default function MultiAgentOrchestrationArticle() {
         </div>
       </header>
 
-      {/* ── ARTICLE BODY ── */}
       <div className="container-article">
         <div className="article-body">
-          {/* Article content will be placed here */}
+          <ReactMarkdown>{markdown}</ReactMarkdown>
         </div>
       </div>
-
     </main>
   )
 }
