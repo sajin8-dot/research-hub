@@ -2,6 +2,15 @@ import Link from 'next/link'
 
 const articles = [
   {
+    slug: 'multi-agent-orchestration-patterns',
+    title: 'Six Patterns to Future-Proof Your Multi-Agent Stack',
+    excerpt: 'Pydantic Shields, Hybrid DAGs, Experience Replay, Context Pruning, MCTS, and the Database Coherence Problem. The patterns that earn their complexity cost — and the graveyard of hype to skip entirely.',
+    category: 'AI Architecture',
+    date: 'April 2026',
+    tag: 'deep-research',
+    verdict: 'Top percentile stack. Precision engineering over framework adoption.',
+  },
+  {
     slug: 'venue-upgrade',
     title: 'Upgrading From the Venue DCT — The Honest Search',
     excerpt: 'The Venue DCT has been a great city car. Three kids later, space is the only real filter. The Seltos 2026 changes everything — here is the complete upgrade search.',
