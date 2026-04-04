@@ -1,19 +1,431 @@
 'use client'
 
 import Link from 'next/link'
-import ReactMarkdown from 'react-markdown'
-import { useEffect, useState } from 'react'
+
+const articleContent = `# Six Patterns to Future-Proof Your Multi-Agent Stack
+
+*Seb's OpenClaw agent architecture is already in the top percentile of enterprise deployments. The next evolution isn't about adopting every hyped framework — it's about precision engineering. Here's what to build, what to skip, and why.*
+
+---
+
+## The Top Percentile Stack
+
+Most multi-agent systems are built on hype. Teams reach for LangGraph because it's trending, bolt on a vector database because someone mentioned RAG at a conference, and layer in Temporal because a blog post said "durable execution" sounds important. The result is architectural bloat — systems that are fragile, expensive, and impossible to debug.
+
+Seb's OpenClaw stack doesn't have this problem. By isolating the orchestrator (Pablo), the architect (Shifu), the critic (Anton), the researcher (Rogan), the writer (Cobain), and the builder (Cody) into strict JSON-driven loops, the system has organically replicated what elite frameworks like MetaGPT do intentionally. Anton's dual-stage QC — brief validation followed by output critique — is an Actor-Critic RL pattern that most production stacks don't even attempt.
+
+The game now is ruthlessness. Not adopting more frameworks, but knowing exactly which patterns deserve implementation investment and which are expensive distractions.
+
+---
+
+## Phase 1: Securing the Foundation
+
+### The Pydantic Shield
+
+Every LLM output that enters your system is untrusted. It might be malformed JSON. It might have missing fields. It might hallucinate a value that passes visual inspection but breaks your type system at runtime. Without a validation layer, your downstream agents consume this garbage and propagate it.
+
+The Pydantic Shield solves this. It sits between any LLM output and your orchestration logic, parsing and validating responses against a strict schema before they enter the pipeline.
+
+**How it works:** Instructor (jxnl/instructor) wraps LLM calls with Pydantic models. If validation fails, the library automatically retries with error context — no manual re-prompting. OpenAI's native Structured Outputs API guarantees syntactically valid JSON but lacks cross-field semantic validation. Instructor handles both.
+
+**Token overhead:** Schema-constrained generation adds roughly 10–15% token cost. This sounds expensive. It isn't. A failed parse that reaches Anton — your expensive Minimax M2.7 critic — costs far more than validating upfront with Python.
+
+**The minimal viable implementation:** A Python \`jsonschema\` validation script. No LLM required. Parse the output, validate against the schema, retry locally if it fails. Only route to Anton once the structure is correct.
+
+\`\`\`python
+import jsonschema
+
+def shield_validate(response: str, schema: dict) -> dict:
+    parsed = json.loads(response)
+    jsonschema.validate(parsed, schema)
+    return parsed
+\`\`\`
+
+**Validation → Metrics → Learning:** The Shield's real power emerges when validation outcomes feed into Experience Replay. Every parse failure is a data point. Every success is a signal. Route validation metrics to your Supabase \`reflexion_events\` table — Anton's scoring loop becomes a learning loop automatically.
+
+---
+
+### Executable SOPs: The Hybrid DAG
+
+Natural language workflow definitions (\`SKILL.md\`) drift. When Pablo gets confused, steps get skipped. When conditions are ambiguous, the wrong agent gets routed. The solution isn't better prompting — it's hardcoded structure with dynamic interiors.
+
+A Directed Acyclic Graph (DAG) defines the skeleton. Nodes are agents. Edges are transitions. The structure is immovable; only the routing logic inside conditional edges is dynamic.
+
+**The architecture:** LangGraph's \`StateGraph\` is the right tool. Define your nodes as Python functions. Use conditional edges for dynamic routing — an LLM decides which branch to take based on context, but the branches themselves are fixed.
+
+\`\`\`python
+from langgraph.graph import StateGraph, END
+from langgraph.checkpoint.postgres import PostgresSaver
+from psycopg_pool import ConnectionPool
+from pydantic import BaseModel
+
+class AgentState(BaseModel):
+    messages: list
+    current_agent: str
+    task_type: str
+    validation_passed: bool
+    retry_count: int = 0
+
+# ─── STATIC NODES ───────────────────────────────────────────────
+def pydantic_shield(state: AgentState):
+    """Validate all LLM outputs before they enter the graph."""
+    last_message = state["messages"][-1]
+    try:
+        validated = shield_validate(last_message, REQUIRED_SCHEMA)
+        return {"validation_passed": True, "messages": [validated]}
+    except ValidationError as e:
+        return {"validation_passed": False, "retry_count": state["retry_count"] + 1}
+
+def rogan_research(state: AgentState):
+    """Rogan executes the research branch."""
+    return {"current_agent": "rogan", "messages": [research_and_fetch(state.task_type)]}
+
+def shifu_synthesize(state: AgentState):
+    """Shifu connects findings across branches."""
+    return {"current_agent": "shifu", "messages": [synthesize_cross_thread(state.messages)]}
+
+def error_handler(state: AgentState):
+    """Self-healing: recovery_agent re-prompts with corrected context."""
+    recovery_prompt = build_recovery_prompt(state.messages, state.validation_passed)
+    return {"messages": [recovery_prompt], "retry_count": 0}
+
+# ─── DYNAMIC ROUTING EDGES ─────────────────────────────────────
+def route_after_shield(state: AgentState):
+    if state.validation_passed:
+        return "research"
+    elif state.retry_count >= 3:
+        return "error_handler"
+    else:
+        return "pydantic_shield"
+
+def route_after_research(state: AgentState):
+    if anton_scores_high(state.messages):
+        return "synthesize"
+    else:
+        return "research"
+
+# ─── GRAPH CONSTRUCTION ─────────────────────────────────────────
+workflow = StateGraph(AgentState)
+workflow.add_node("pydantic_shield", pydantic_shield)
+workflow.add_node("research", rogan_research)
+workflow.add_node("synthesize", shifu_synthesize)
+workflow.add_node("error_handler", error_handler)
+
+workflow.set_entry_point("pydantic_shield")
+workflow.add_conditional_edges("pydantic_shield", route_after_shield)
+workflow.add_conditional_edges("research", route_after_research)
+workflow.add_edge("synthesize", END)
+workflow.add_edge("error_handler", END)
+
+pool = ConnectionPool(conninfo=os.environ["SUPABASE_POSTGRES_URL"])
+checkpointer = PostgresSaver(pool)
+checkpointer.setup()
+graph = workflow.compile(checkpointer=checkpointer)
+\`\`\`
+
+**Why this works:** The graph is deterministic. Pablo cannot skip Anton's QC step — the edge from \`synthesize\` goes to Anton, not to delivery. The conditional routing in \`route_after_shield\` and \`route_after_research\` is the only dynamic part, and it's scoped to routing decisions, not workflow integrity.
+
+**Self-healing nodes:** The \`error_handler\` node receives exceptions, re-prompts with corrected context, and resets \`retry_count\` to zero. Build resilient graphs, not atomic ones.
+
+**Human-in-the-loop:** LangGraph's \`interrupt()\` function pauses the graph for human approval at defined checkpoints. Use it before any irreversible action — file deletion, external API call, GitHub push.
+
+---
+
+## Phase 2: Memory as a Weapon
+
+### Experience Replay Buffers
+
+Every time Anton scores an output above 0.95, that interaction is a golden sample. Not just a log entry — a retrievable memory that future agent runs can query.
+
+This is Experience Replay borrowed from Reinforcement Learning. Successful trajectories get stored in a buffer. When a similar task arrives, the agent retrieves relevant samples and uses them as few-shot examples.
+
+**The closed loop:** Supabase \`pgvector\` stores embeddings. \`success_score\` (Anton's score) and \`context_tags\` filter retrieval. A Postgres trigger on the \`tasks\` table fires when a high-scoring result is committed, automatically populating the buffer.
+
+**Schema:**
+\`\`\`sql
+CREATE TABLE experience_buffer (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  embedding vector(1536),
+  code_content JSONB,
+  success_score FLOAT,
+  context_tags TEXT[],
+  task_type TEXT,
+  created_at TIMESTAMPTZ DEFAULT now()
+);
+
+CREATE INDEX ON experience_buffer USING hnsw (embedding vector_cosine_ops);
+\`\`\`
+
+**Query latency:** Under 10ms at 100k items using HNSW indexing. At 1M items, still under 50ms. This is a database that will never be your bottleneck.
+
+**Retrieval:** When Shifu drafts a new brief, it queries the buffer with \`context_tags\` and cosine similarity. Threshold: 0.85 for \`text-embedding-3-small\`. Calibrate for domain-specific embedding models.
+
+**What NOT to do:** Don't implement Prioritized Experience Replay (PER) on day one. Don't tune the cosine threshold without ablation data. FIFO eviction for the MVP is correct. PER is an optimization for later.
+
+---
+
+## Phase 3: Scaling Complexity Responsibly
+
+### Context Pruning
+
+Every token in your context window has a cost. System prompts, conversation history, retrieved documents, tool outputs — they all compete for space with actual reasoning. Context pruning is the discipline of keeping only what advances the task.
+
+**What to prune:** Stale conversation turns, redundant retrieved documents (keep the synthesis, discard individual sources), system prompt boilerplate that the model has already internalized, and intermediate reasoning steps that concluded.
+
+**When to prune:** Set hard token budget thresholds. If \`total_tokens > MAX_CONTEXT * 0.85\`, trigger pruning. Track cumulative context growth and prune at decision points, not continuously.
+
+**How to prune — staged truncation:**
+
+\`\`\`python
+class ContextPruner:
+    def __init__(self, max_tokens: int, model: str = "gpt-4"):
+        self.max_tokens = max_tokens
+        self.budget = int(max_tokens * 0.85)
+
+    def prune(self, messages: list[dict]) -> list[dict]:
+        total = self.token_count(messages)
+        if total <= self.budget:
+            return messages
+        unique = self.deduplicate_sources(messages)
+        if self.within_budget(unique):
+            return unique
+        trimmed = self.trim_to_budget(unique, ratio=0.90)
+        return trimmed
+\`\`\`
+
+**Staged truncation beats blind cut:** A naive first-in-first-out trim destroys recent context. Staged truncation removes duplicates first, then applies recency-weighted trimming. The most recent agent reasoning always survives.
+
+**What GraphRAG gets wrong:** Microsoft's GraphRAG extracts a full entity knowledge graph from every document using LLMs — 75% of total indexing cost goes to this LLM extraction phase. For Seb's OpenClaw stack, SpaCy NER and regex rule-based extraction achieves comparable entity recognition at roughly 10× lower cost. Only use full GraphRAG for corpora exceeding 10k documents where cross-document global theme extraction genuinely matters.
+
+---
+
+### Parallel Rollouts and MCTS
+
+Not every problem needs Monte Carlo Tree Search. MCTS is expensive — you generate N parallel reasoning paths, score each with a reward model, and pursue the highest-scoring branch. The token cost is N× the base cost.
+
+MCTS is only cost-effective when your Chain-of-Thought failure rate exceeds 50%. For easy problems where single-pass generation succeeds 80% of the time, MCTS overhead dominates the gain. Reserve it for genuinely hard reasoning tasks.
+
+**Two distinct patterns, not one:** Tree of Thoughts (ToT) explores reasoning paths using BFS/DFS — it is thought-centric. LATS (Language Agent Tree Search) wraps an agent in MCTS with environment feedback, backpropagation, and a reflection step — it is agent-centric. The architectures are fundamentally different. Don't conflate them.
+
+**Anton as Evaluator Node — complete integration:**
+
+\`\`\`python
+from openai import OpenAI
+
+anton = OpenAI(
+    api_key=os.environ["OPENAI_API_KEY"],
+    base_url="https://openrouter.ai/api/v1"
+)
+
+def mcts_evaluate(state: AgentState, anton_threshold: float = 0.95,
+                  max_depth: int = 10) -> dict:
+    visited_states: set[str] = set()
+    depth = state.get("mcts_depth", 0)
+
+    if depth > max_depth:
+        return {"accept": False, "score": 0.0, "reflection": "Depth limit exceeded"}
+
+    state_hash = hash(str(state["messages"]))
+    if state_hash in visited_states:
+        return {"accept": False, "score": 0.0, "reflection": "Cyclic state detected, pruning"}
+    visited_states.add(state_hash)
+
+    prompt = f"Score this agent output 0-1. Threshold: {anton_threshold}.\n\n{state['messages'][-1]}"
+    response = anton.chat.completions.create(
+        model="openrouter/minimax/minimax-m2.7",
+        max_tokens=200,
+        messages=[{"role": "user", "content": prompt}]
+    )
+    score = float(response.choices[0].message.content.strip())
+
+    if score >= anton_threshold:
+        return {"accept": True, "score": score, "reflection": None}
+    else:
+        reflection = anton.chat.completions.create(
+            model="openrouter/minimax/minimax-m2.7",
+            max_tokens=500,
+            messages=[{"role": "user", "content": f"Critique this output: {state['messages'][-1]}"}]
+        )
+        return {"accept": False, "score": score, "reflection": reflection.choices[0].message.content}
+\`\`\`
+
+**Search trap prevention:** The \`mcts_evaluate\` function implements both mechanisms. Depth limit exits when \`depth > max_depth\`. Cycle detection hashes the state representation and prunes revisits. Both are necessary — depth alone allows infinite unique states, cycles alone allows depth explosion.
+
+---
+
+### Observability: Validation Metrics Into Learning
+
+The Pydantic Shield generates a validation outcome on every LLM output. These outcomes are data. Route them to Supabase.
+
+\`\`\`python
+import supabase
+
+client = supabase.create_client(
+    url=os.environ["SUPABASE_URL"],
+    key=os.environ["SUPABASE_SERVICE_KEY"]
+)
+
+def shield_callback(validation_result: dict) -> None:
+    client.table("reflexion_events").insert({
+        "event_type": "pydantic_shield_validation",
+        "passed": validation_result.get("passed", False),
+        "retry_count": validation_result.get("retry_count", 0),
+        "error_type": validation_result.get("error_type"),
+        "created_at": datetime.utcnow().isoformat()
+    })
+
+    if validation_result.get("anton_score", 0) >= 0.95:
+        client.table("experience_buffer").insert({
+            "embedding": validation_result["embedding"],
+            "code_content": validation_result["output_json"],
+            "success_score": validation_result["anton_score"],
+            "context_tags": ["pydantic_shield", validation_result.get("task_type")],
+            "task_type": validation_result.get("task_type")
+        })
+\`\`\`
+
+Every validation failure is logged. Every Anton score above 0.95 triggers a golden sample save. The loop closes automatically. No manual curation required.
+
+---
+
+## The Database Coherence Problem
+
+Three different branches recommended three different database uses. B3 uses Supabase for Experience Replay. B2 uses PostgresSaver for checkpointing. E1 uses Redis for ephemeral payloads. This creates a fragmentation risk — three storage systems, no coherent strategy.
+
+**The unified architecture:**
+
+| Data Type | Storage | Reason |
+|---|---|---|
+| Orchestration state | Supabase (Postgres) | ACID transactions, Saga coordination |
+| Ephemeral payloads | Redis Streams + Consumer Groups | Low-latency, XACK acknowledgment, PEL recovery |
+| Long-term memory | Supabase pgvector | Queryable, HNSW indexed, durable |
+| LangGraph checkpoints | Supabase PostgresSaver | Shares connection pool |
+
+**Redis discipline:** Redis is for ephemeral data only. Never store canonical state there. Use Redis Streams with Consumer Groups (\`XACK\`, \`XCLAIM\`, Pending Entries List) so that if a worker dies mid-processing, the message is recovered automatically.
+
+**Redis failure modes:** OOM is the most common killer. Deploy Redis Sentinel minimum, Redis Cluster for production HA. Enable \`AOF + RDB\` persistence. A node crash without persistence means your in-flight messages vanish.
+
+**The Outbox Pattern — implementation:**
+
+\`\`\`python
+import psycopg, redis, json
+from datetime import datetime
+
+pg = psycopg.connect(os.environ["SUPABASE_POSTGRES_URL"])
+r = redis.from_url(os.environ["REDIS_URL"])
+
+def saga_step(step_name: str, payload: dict) -> bool:
+    idempotency_key = f"{step_name}:{payload.get('thread_id')}"
+
+    with pg.cursor() as cur:
+        cur.execute(
+            "SELECT 1 FROM outbox WHERE idempotency_key = %s",
+            (idempotency_key,)
+        )
+        if cur.fetchone():
+            return True
+
+        result = execute_step(step_name, payload)
+
+        cur.execute(
+            """INSERT INTO outbox (idempotency_key, payload, status, created_at)
+               VALUES (%s, %s, 'pending', %s)""",
+            (idempotency_key, json.dumps(payload), datetime.utcnow())
+        )
+        pg.commit()
+
+    r.lpush("saga:pending", json.dumps({"key": idempotency_key, "payload": payload}))
+    return result
+
+def outbox_worker():
+    while True:
+        msg = r.brpop("saga:pending", timeout=5)
+        if msg:
+            data = json.loads(msg[1])
+            r.set(f"saga:state:{data['key']}", json.dumps(data["payload"]))
+            with pg.cursor() as cur:
+                cur.execute(
+                    "UPDATE outbox SET status = 'processed' WHERE idempotency_key = %s",
+                    (data["key"],)
+                )
+                pg.commit()
+\`\`\`
+
+**Idempotency key pattern:** Every saga step writes to the outbox with a composite key of \`step_name + thread_id\`. If the worker crashes after writing to Postgres but before writing to Redis, the CDC worker picks up the pending row on restart. If it crashes after writing to Redis, the Postgres idempotency check prevents double-execution on retry.
+
+**Redis Streams consumer group setup:**
+
+\`\`\`python
+import redis
+
+r = redis.from_url(os.environ["REDIS_URL"])
+group_name = "agent-workers"
+stream_name = "agent:tasks"
+
+try:
+    r.xgroup_create(stream_name, group_name, id="0", mkstream=True)
+except redis.ResponseError:
+    pass
+
+def process_task():
+    results = r.xreadgroup(
+        group_name, "worker-1",
+        {stream_name: ">"},
+        count=1, block=5000
+    )
+    if not results:
+        return
+    stream, messages = results[0]
+    for msg_id, data in messages:
+        try:
+            task = json.loads(data["task"])
+            execute_task(task)
+            r.xack(stream_name, group_name, msg_id)
+        except Exception:
+            r.xack(stream_name, group_name, msg_id)
+\`\`\`
+
+---
+
+## The Graveyard of Hype: What Not to Build
+
+**Multi-agent conversational rollercoasters (AutoGen / ChatDev patterns):** AutoGen and ChatDev popularized a pattern where agents take turns in free-form conversation — Agent A says something, Agent B responds, Agent C adjudicates, and the conversation continues until a consensus emerges. This pattern sounds natural. In practice it is expensive, slow, and architecturally undisciplined. There is no defined exit condition, no structural routing, and no guarantee that the "conversation" advances toward the goal rather than cycling. Seb's DAG-based architecture — where Pablo routes to Rogan or Shifu or Cobain based on explicit conditions — is structurally superior to any free-form conversational multi-agent pattern.
+
+**Centralized orchestration hub as anti-pattern:** A common failure mode is building a central "super-agent" that routes every decision, holds all state, and coordinates all sub-agents. This creates a monolithic bottleneck — the hub becomes the single point of failure, the performance ceiling, and the scaling limit. Seb's stack avoids this by distributing state across Supabase (orchestration), Redis (ephemeral), and pgvector (memory).
+
+**GraphRAG:** Microsoft's GraphRAG methodology extracts entities and relationships using LLMs — 75% of total indexing cost goes to LLM entity extraction. For Seb's stack, Supabase relational tables with heuristic extraction (regex, SpaCy NER) achieves comparable context pruning at roughly 10× lower cost. Only reach for GraphRAG when you have 10k+ documents AND need global theme extraction.
+
+**SQLite for production multi-agent:** SQLite serializes writes. Concurrent agents hit \`SQLITE_BUSY\` locks constantly. It is not viable for any multi-agent system with parallel execution. Postgres or Supabase only.
+
+**Two-Phase Commit (2PC):** 2PC is a synchronous blocking protocol. In distributed agent systems with network latency and independent failure domains, 2PC is a distributed systems antipattern. Use the Saga pattern instead.
+
+**Heavy Temporal.io checkpointing:** Temporal provides durable workflow execution with event sourcing. For a local OpenClaw stack, it is significant over-engineering. LangGraph's \`PostgresSaver\` provides sufficient checkpointing with a fraction of the operational complexity.
+
+**Full LLM-based entity extraction:** Extract entities using SpaCy or regex. Reserve LLM extraction for cases where context and nuance genuinely matter. The token cost difference is an order of magnitude.
+
+---
+
+## The Engineering Mandate
+
+Seb's stack is already exceptional. The agents, the protocols, the JSON-driven handoffs — this is sophisticated architecture that most teams never reach.
+
+The opportunity now is precision, not expansion.
+
+**Build in Phase 1:** The Pydantic Shield (immediate token savings, zero LLM overhead) and the Hybrid DAG backbone (hardcoded routing, Pablo cannot skip steps).
+
+**Build in Phase 2:** Experience Replay Buffers via Supabase pgvector. Golden samples from Anton's high-scoring outputs become the foundation of a self-improving system.
+
+**Build in Phase 3:** Parallel Rollouts reserved exclusively for creative generation tasks — deck copy, visual briefs, brand writing. Never for code, logic, or research extraction. The token cost is only justified where creative diversity has direct value.
+
+**Never build:** GraphRAG, SQLite production multi-agent, 2PC, Temporal for checkpointing, full LLM entity extraction.
+
+The best AI systems are not the ones with the most frameworks. They are the ones with the clearest thinking about which framework earns its complexity cost.
+
+---
+
+*Research completed April 2026. Deep research conducted via recursive multi-agent loop across 4 iterations, with 18 specific gap questions interrogated and answered. Anton QC at every loop. Shifu synthesis. Architecture validated against LangGraph, Temporal, DSPy, Voyager, and MetaGPT source systems.*`
 
 export default function MultiAgentOrchestrationArticle() {
-  const [content, setContent] = useState('')
-
-  useEffect(() => {
-    fetch('/articles/multi-agent-orchestration-patterns.md')
-      .then(res => res.text())
-      .then(text => setContent(text))
-      .catch(console.error)
-  }, [])
-
   return (
     <main>
       <header className="article-header">
@@ -32,13 +444,64 @@ export default function MultiAgentOrchestrationArticle() {
 
       <div className="container-article">
         <div className="article-body">
-          {content ? (
-            <ReactMarkdown>{content}</ReactMarkdown>
-          ) : (
-            <p style={{ opacity: 0.5 }}>Loading...</p>
-          )}
+          <article className="prose">
+            <div dangerouslySetInnerHTML={{ __html: formatMarkdown(articleContent) }} />
+          </article>
         </div>
       </div>
     </main>
   )
+}
+
+function formatMarkdown(md: string): string {
+  let html = md
+  
+  // Code blocks
+  html = html.replace(/```(\w+)?\n([\s\S]*?)```/g, (_, lang, code) => 
+    `<pre class="code-block"><code>${escapeHtml(code.trim())}</code></pre>`
+  )
+  
+  // Inline code
+  html = html.replace(/`([^`]+)`/g, '<code class="inline-code">$1</code>')
+  
+  // Tables
+  html = html.replace(/\|(.+)\|\n\|[-| ]+\|\n((?:\|.+\|\n?)+)/g, (_, header, body) => {
+    const headers = header.split('|').filter(h => h.trim()).map(h => `<th>${h.trim()}</th>`).join('')
+    const rows = body.trim().split('\n').map(row => {
+      const cells = row.split('|').filter(c => c.trim()).map(c => `<td>${c.trim()}</td>`).join('')
+      return `<tr>${cells}</tr>`
+    }).join('')
+    return `<table><thead><tr>${headers}</tr></thead><tbody>${rows}</tbody></table>`
+  })
+  
+  // Headers
+  html = html.replace(/^#### (.+)$/gm, '<h4>$1</h4>')
+  html = html.replace(/^### (.+)$/gm, '<h3>$1</h3>')
+  html = html.replace(/^## (.+)$/gm, '<h2>$1</h2>')
+  html = html.replace(/^# (.+)$/gm, '<h1>$1</h1>')
+  
+  // Horizontal rules
+  html = html.replace(/^---$/gm, '<hr/>')
+  
+  // Bold
+  html = html.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+  
+  // Italic
+  html = html.replace(/\*([^*]+)\*/g, '<em>$1</em>')
+  
+  // Paragraphs (double newlines)
+  html = html.replace(/\n\n/g, '</p><p>')
+  html = `<p>${html}</p>`
+  
+  // Remove empty paragraphs
+  html = html.replace(/<p>\s*<\/p>/g, '')
+  
+  return html
+}
+
+function escapeHtml(text: string): string {
+  return text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
 }
