@@ -1,18 +1,18 @@
+'use client'
+
 import Link from 'next/link'
 import ReactMarkdown from 'react-markdown'
-import fs from 'fs'
-import path from 'path'
-
-export const metadata = {
-  title: 'Six Patterns to Future-Proof Your Multi-Agent Stack',
-  description: "Seb's OpenClaw agent architecture is already in the top percentile of enterprise deployments. The next evolution isn't about adopting every hyped framework — it's about precision engineering. Here's what to build, what to skip, and why.",
-}
+import { useEffect, useState } from 'react'
 
 export default function MultiAgentOrchestrationArticle() {
-  const markdown = fs.readFileSync(
-    path.join('/data/.openclaw/workspace', 'sebs_stack_article.md'),
-    'utf8'
-  )
+  const [content, setContent] = useState('')
+
+  useEffect(() => {
+    fetch('/articles/multi-agent-orchestration-patterns.md')
+      .then(res => res.text())
+      .then(text => setContent(text))
+      .catch(console.error)
+  }, [])
 
   return (
     <main>
@@ -32,7 +32,11 @@ export default function MultiAgentOrchestrationArticle() {
 
       <div className="container-article">
         <div className="article-body">
-          <ReactMarkdown>{markdown}</ReactMarkdown>
+          {content ? (
+            <ReactMarkdown>{content}</ReactMarkdown>
+          ) : (
+            <p style={{ opacity: 0.5 }}>Loading...</p>
+          )}
         </div>
       </div>
     </main>
