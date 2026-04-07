@@ -11,6 +11,15 @@ const articles = [
     verdict: 'Top percentile stack. Precision engineering over framework adoption.',
   },
   {
+    slug: 'typography-stack-web-presentations-2026',
+    title: 'The Typography Stack for Web Presentations in 2026',
+    excerpt: 'How to assemble a modern typography stack for web presentations: CSS‑native features, lightweight JavaScript utilities, and framework‑specific integrations.',
+    category: 'Web Development',
+    date: 'April 2026',
+    tag: 'deep-research',
+    verdict: 'reveal.js + Fitty + GSAP + Fontsource + clamp() — the stack that gives control without bloat.',
+  },
+  {
     slug: 'venue-upgrade',
     title: 'Upgrading From the Venue DCT — The Honest Search',
     excerpt: 'The Venue DCT has been a great city car. Three kids later, space is the only real filter. The Seltos 2026 changes everything — here is the complete upgrade search.',
